@@ -271,3 +271,7 @@ td{color:#d8cbb4}
 @media(max-width:980px){.product-stage{min-height:445px}.stage-card{width:clamp(135px,27vw,205px)}.stage-back{width:clamp(150px,30vw,225px)}}
 @media(max-width:560px){.product-stage{min-height:355px;margin-inline:-6px}.stage-card{width:clamp(112px,35vw,155px)}.stage-back{width:clamp(124px,39vw,172px)}.stage-customer{left:1%;top:58px}.stage-business{right:1%;top:72px}.stage-back{top:25px}.product-stage figcaption{font-size:.6rem}}
 
+
+.rules-modifiers{margin-top:15px;padding-top:12px;border-top:1px solid #c9b88f}
+.rules-modifiers p{margin:5px 0;color:#62553f;font-size:.69rem;line-height:1.45}
+@media(max-width:560px){.product-stage{min-height:390px}}
