@@ -32,3 +32,7 @@ Committing the source does not itself enable GitHub Pages.
 - The 73.6% survey statistic is from the project's own 87 respondents and is not a representative national estimate.
 - Institutional pricing is not represented as a confirmed offer.
 - No Cambridge International endorsement or affiliation is claimed.
+
+
+## Supplied card sheet
+The image is enhanced with mild sharpening and assembled in the browser from small text parts under `assets/card-sheet-parts/`. This avoids binary upload size limits while preserving the complete screenshot and card designs. The browser creates a temporary AVIF image URL after all parts load.
