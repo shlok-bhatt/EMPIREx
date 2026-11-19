@@ -1,40 +1,280 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#21150f">
-<meta name="description" content="EMPIREx is a strategy card game that turns enterprise ideas into decisions, consequences and competition. Build Smart. Think Fast. Rule the Market.">
-<title>EMPIREx — Build Smart. Think Fast. Rule the Market.</title>
-<style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
-:root{--bg:#1c130f;--bg2:#271a13;--panel:#302117;--cream:#f6f0df;--gold:#c9a34d;--gold2:#e7c978;--muted:#b9aa91;--line:rgba(224,190,115,.22);--blue:#2767b4;--red:#c83e39;--orange:#e47b28;--yellow:#d5b23e;--green:#3c8b57}
-*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:86px}body{margin:0;background:var(--bg);color:var(--cream);font-family:'DM Sans',sans-serif;line-height:1.6}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(1160px,calc(100% - 44px));margin:auto}.eyebrow{color:var(--gold2);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;font-weight:700}.serif,h1,h2,h3{font-family:'Playfair Display',Georgia,serif;font-weight:500}h1{font-size:clamp(3.2rem,8vw,7.1rem);line-height:.98;letter-spacing:-.055em;margin:20px 0}h2{font-size:clamp(2.2rem,4.4vw,4rem);line-height:1.08;letter-spacing:-.035em;margin:12px 0 20px}h3{font-size:1.55rem;line-height:1.2;margin:0 0 10px}p{color:#c9bda9}.gold{color:var(--gold2)}.muted{color:var(--muted)}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 22px;border:1px solid var(--gold);background:var(--gold);color:#24180e;font-weight:700;letter-spacing:.02em;transition:.2s;border-radius:2px}.btn:hover{background:var(--gold2);transform:translateY(-2px)}.btn.secondary{background:transparent;color:var(--cream);border-color:var(--line)}.btn.secondary:hover{border-color:var(--gold);color:var(--gold2)}.topbar{position:sticky;top:0;z-index:20;background:rgba(28,19,15,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}nav{height:76px;display:flex;align-items:center;justify-content:space-between}.brand{font-family:'Playfair Display',serif;font-size:1.7rem;letter-spacing:.06em;color:var(--gold2)}.brand small{font:600 .58rem 'DM Sans';letter-spacing:.28em;color:var(--muted);display:block;margin-top:-5px}.navlinks{display:flex;gap:25px;align-items:center;font-size:.83rem;color:#d5c9b6}.navlinks a:hover{color:var(--gold2)}.navlinks .navcta{border:1px solid var(--gold);padding:9px 14px;color:var(--gold2)}.menu{display:none;background:none;border:1px solid var(--line);color:var(--cream);padding:8px 12px}.hero{position:relative;overflow:hidden;padding:95px 0 84px;background:radial-gradient(ellipse at 78% 38%,rgba(161,112,40,.18),transparent 42%),linear-gradient(115deg,#1c130f 15%,#26180f 100%)}.hero:after{content:"";position:absolute;width:520px;height:520px;border:1px solid rgba(211,174,93,.13);border-radius:50%;right:-130px;top:10px;box-shadow:0 0 0 38px rgba(211,174,93,.025),0 0 0 90px rgba(211,174,93,.02)}.hero-grid{display:grid;grid-template-columns:1.03fr .97fr;gap:40px;align-items:center;position:relative;z-index:1}.hero-copy{max-width:650px}.hero-copy .lead{font-size:1.15rem;max-width:520px;color:#d0c3ae}.hero-actions{display:flex;gap:13px;flex-wrap:wrap;margin:30px 0 20px}.micro{font-size:.78rem;color:#a99a82}.showcase{position:relative;min-height:440px;display:flex;align-items:center;justify-content:center}.showcase-glow{position:absolute;width:390px;height:390px;border-radius:50%;background:radial-gradient(circle,rgba(191,147,63,.24),rgba(191,147,63,0) 68%)}.deck{position:relative;width:255px;height:360px;border:2px solid #9d7734;border-radius:13px;background:radial-gradient(circle at 50% 42%,#4a2c16,#210f0b 65%);box-shadow:0 30px 70px #090604, inset 0 0 0 5px #2b1a10,inset 0 0 0 7px #b48a3c;display:flex;align-items:center;justify-content:center;transform:rotate(-7deg);z-index:2}.deck:before{content:"";position:absolute;inset:16px;border:1px solid rgba(222,186,102,.5);border-radius:6px}.deck-logo{text-align:center;color:#e5c36f;font-family:'Playfair Display',serif;font-size:2.15rem;letter-spacing:.04em;text-shadow:0 2px 10px #000}.deck-logo small{display:block;font:600 .52rem 'DM Sans';letter-spacing:.38em;margin-top:8px}.float-card{position:absolute;width:160px;height:228px;background:#f7f2e3;border:7px double #c79c3f;border-radius:9px;box-shadow:0 15px 35px #090604;z-index:3;padding:14px;color:#3b2b1d;text-align:center}.float-card.one{right:4px;top:25px;transform:rotate(10deg)}.float-card.two{left:0;bottom:12px;transform:rotate(-13deg);border-color:#3577b9}.float-card .strip{font-size:.48rem;font-weight:800;letter-spacing:.12em;background:#d5b13d;color:#382812;padding:4px;margin:-4px -3px 13px}.float-card strong{display:block;font:700 1rem 'Playfair Display';line-height:1.1}.float-card .symbol{font-size:3.3rem;margin:14px 0;color:#b88b35}.float-card p{font-size:.56rem;line-height:1.3;color:#4d4336}.stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:#211710}.statrow{display:grid;grid-template-columns:repeat(3,1fr);padding:22px 0}.stat{text-align:center;border-right:1px solid var(--line)}.stat:last-child{border:0}.stat b{display:block;color:var(--gold2);font:500 1.55rem 'Playfair Display'}.stat span{font-size:.76rem;color:var(--muted)}section{padding:100px 0}.section-head{max-width:690px;margin-bottom:48px}.section-head p{font-size:1.04rem}.intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:75px;align-items:start}.quote{font:500 1.7rem/1.35 'Playfair Display';color:var(--gold2);border-left:2px solid var(--gold);padding-left:25px;margin:0}.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:17px}.feature{background:linear-gradient(145deg,#342419,#261a13);border:1px solid var(--line);padding:26px;min-height:205px}.feature .num{font-size:.7rem;color:var(--gold2);letter-spacing:.15em;margin-bottom:24px}.feature p{font-size:.9rem;margin-bottom:0}.categories{display:grid;grid-template-columns:repeat(6,1fr);gap:10px}.cat{padding:15px 10px;text-align:center;border:1px solid var(--line);background:#281c14;font-size:.78rem;font-weight:700}.dot{display:block;width:12px;height:12px;border-radius:50%;margin:0 auto 10px}.customer{background:var(--blue)}.action{background:var(--red)}.event{background:var(--orange)}.ability{background:var(--yellow)}.goal{background:#79bd43}.business{background:#8b5936}.gameplay{background:#f2ecdb;color:#2d241a}.gameplay p{color:#5d5142}.game-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:60px;align-items:center}.steps{display:grid;gap:13px}.step{display:grid;grid-template-columns:44px 1fr;gap:16px;padding:16px 0;border-bottom:1px solid #d9cfba}.stepnum{width:34px;height:34px;border-radius:50%;background:#4b4438;color:#fff;display:grid;place-items:center;font-weight:700}.step h3{font:700 .93rem 'DM Sans';margin:2px 0 4px}.step p{font-size:.83rem;margin:0}.formula{background:#e9dfc8;padding:22px;border:1px solid #c7b58e;margin-top:20px;text-align:center}.formula b{font:600 1.3rem 'Playfair Display';color:#4a361e}.formula small{display:block;color:#726047;margin-top:5px}.skills{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.skill{padding:18px;border:1px solid var(--line);background:#291d15;color:#e6d8c2;font-size:.9rem}.skill:before{content:"✦";color:var(--gold);margin-right:9px}.evidence{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}.bigstat{font:500 clamp(4rem,9vw,7rem)/1 'Playfair Display';color:var(--gold2);letter-spacing:-.06em}.evidence-card{background:#2d2017;border:1px solid var(--line);padding:30px}.bar{height:9px;background:#4a3928;margin:16px 0 8px}.bar span{display:block;height:100%;width:73.6%;background:var(--gold)}.evidence small{color:var(--muted)}.product{background:linear-gradient(135deg,#291b12,#1b120e);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.product-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}.product-visual{padding:20px;background:#21160f;border:1px solid var(--line)}.product-visual img{width:100%;display:block;border:1px solid rgba(213,177,93,.3)}.pricebox{border:1px solid var(--gold);padding:28px;margin-top:25px;display:flex;align-items:end;justify-content:space-between;gap:15px}.pricebox .mrp{color:var(--muted);font-size:.82rem}.pricebox .mrp s{color:#a99575}.price{font:600 2.5rem 'Playfair Display';color:var(--gold2)}.pricebox small{display:block;color:var(--muted);font-size:.72rem}.educators{display:grid;grid-template-columns:1fr 1fr;gap:50px}.edu-panel{padding:32px;border:1px solid var(--line);background:#291d15}.tiers{width:100%;border-collapse:collapse;margin-top:20px;font-size:.85rem}.tiers th,.tiers td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--line)}.tiers th{color:var(--gold2);font-size:.72rem;text-transform:uppercase;letter-spacing:.1em}.note{font-size:.76rem;color:#a99a82}.team{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.person{padding:25px;border:1px solid var(--line);background:#291d15}.person .initial{width:48px;height:48px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold2);font:600 1.1rem 'Playfair Display';margin-bottom:20px}.person span{color:var(--gold2);font-size:.74rem;letter-spacing:.1em;text-transform:uppercase}.faq{max-width:850px}.faq details{border-bottom:1px solid var(--line);padding:18px 0}.faq summary{cursor:pointer;list-style:none;font-weight:600}.faq summary:after{content:"+";float:right;color:var(--gold2);font-size:1.2rem}.faq details[open] summary:after{content:"−"}.faq details p{font-size:.9rem;max-width:740px}.contact{background:#2a1b12}.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px}.emails{display:grid;gap:12px}.email{padding:15px;border:1px solid var(--line);background:#21160f}.email b{display:block;font-size:.85rem}.email a{color:var(--gold2);font-size:.86rem;overflow-wrap:anywhere}.footer{padding:30px 0;border-top:1px solid var(--line);background:#170f0c}.footrow{display:flex;justify-content:space-between;gap:20px;align-items:center}.footrow p{font-size:.76rem;margin:0}.footlinks{display:flex;gap:18px;font-size:.78rem;color:var(--muted)}.disclaimer{font-size:.72rem;color:#9c8b72;max-width:850px;margin-top:18px}
-@media(max-width:850px){.navlinks{display:none;position:absolute;top:76px;left:0;right:0;background:#211710;padding:22px;flex-direction:column;align-items:flex-start;border-bottom:1px solid var(--line)}.navlinks.open{display:flex}.menu{display:block}.hero-grid,.intro-grid,.game-grid,.evidence,.product-grid,.educators,.contact-grid{grid-template-columns:1fr;gap:35px}.showcase{min-height:390px}.cards-grid{grid-template-columns:repeat(2,1fr)}.categories{grid-template-columns:repeat(3,1fr)}.skills{grid-template-columns:repeat(2,1fr)}.team{grid-template-columns:1fr}.hero{padding:70px 0}.statrow{grid-template-columns:1fr;gap:14px}.stat{border-right:0;border-bottom:1px solid var(--line);padding:12px}.stat:last-child{border:0}section{padding:75px 0}}
-@media(max-width:520px){.wrap{width:min(100% - 30px,1160px)}h1{font-size:3.5rem}.cards-grid{grid-template-columns:1fr}.float-card{width:135px;height:205px}.deck{width:215px;height:310px}.showcase{min-height:350px}.pricebox{align-items:flex-start;flex-direction:column}.footrow{align-items:flex-start;flex-direction:column}.footlinks{flex-wrap:wrap}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1b120e">
+  <meta name="description" content="EMPIREx is a physical enterprise card game that puts business decisions, customer needs and changing market conditions into play. Build Smart. Think Fast. Rule the Market.">
+  <meta property="og:title" content="EMPIREx — Build Smart. Think Fast. Rule the Market.">
+  <meta property="og:description" content="A practical, decision-based enterprise card game for secondary-school learning.">
+  <meta property="og:type" content="website">
+  <title>EMPIREx — Build Smart. Think Fast. Rule the Market.</title>
+  <link rel="preload" as="image" href="assets/empirex-product-preview.webp">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-<header class="topbar"><div class="wrap"><nav><a class="brand" href="#home">EMPIREx<small>BUILD SMART. THINK FAST.</small></a><button class="menu" id="menu" aria-label="Open navigation">MENU</button><div class="navlinks" id="navlinks"><a href="#game">The Game</a><a href="#how">How to Play</a><a href="#educators">For Schools</a><a href="#story">Our Story</a><a href="#faq">FAQs</a><a class="navcta" href="#contact">Enquire</a></div></nav></div></header>
-<main>
-<section class="hero" id="home"><div class="wrap hero-grid"><div class="hero-copy"><div class="eyebrow">A new way to practise enterprise</div><h1>Think like a founder.<br><span class="gold">Play to win.</span></h1><p class="lead">What if students didn't just learn entrepreneurship — what if they had to practise it? EMPIREx turns business concepts into decisions, consequences and competition.</p><div class="hero-actions"><a class="btn" href="#game">Discover the game <span>↗</span></a><a class="btn secondary" href="#how">See how it works</a></div><div class="micro">A physical, decision-based enterprise card game for curious minds.</div></div><div class="showcase" aria-label="Illustrative EMPIREx card deck artwork"><div class="showcase-glow"></div><div class="deck"><div class="deck-logo">EMPIRE<small>BUILD • DECIDE • SCORE</small></div></div><div class="float-card one"><div class="strip">BUSINESS</div><strong>FASHION</strong><div class="symbol">★</div><p>Build a business. Match your strategy to the market.</p></div><div class="float-card two"><div class="strip" style="background:#2767b4;color:white">CUSTOMER</div><strong>SENIOR<br>CITIZENS</strong><div class="symbol" style="color:#2767b4">♙♙</div><p>Understand customer needs and make smart choices.</p></div></div></div></section>
-<div class="stats"><div class="wrap statrow"><div class="stat"><b>PLAY</b><span>Interactive enterprise decisions</span></div><div class="stat"><b>DECIDE</b><span>Respond to changing situations</span></div><div class="stat"><b>SCORE</b><span>See the impact of your strategy</span></div></div></div>
-<section><div class="wrap intro-grid"><div><div class="eyebrow">The opportunity</div><h2>Knowing business is one thing. <span class="gold">Running it is another.</span></h2></div><div><p>Students may study enterprise concepts, but meaningful opportunities to repeatedly practise realistic business decisions can be limited. EMPIREx is designed to make that practice active, social and memorable.</p><p>Players respond to customer profiles, market conditions and business opportunities. Every choice becomes part of a strategy — and every round brings a new situation to consider.</p><p class="quote">“Don't just learn the language of business. Make the decisions.”</p></div></div></section>
-<section style="background:#211710"><div class="wrap"><div class="section-head"><div class="eyebrow">Why EMPIREx</div><h2>Enterprise thinking, <span class="gold">made playable.</span></h2><p>A classroom-friendly card game built around the choices that shape a business.</p></div><div class="cards-grid"><article class="feature"><div class="num">01 / DECISION-MAKING</div><h3>Choose your move</h3><p>Select actions and build a response to the customer and market in front of you.</p></article><article class="feature"><div class="num">02 / CONSEQUENCES</div><h3>Choices have impact</h3><p>See how customer needs, events and business strengths influence your result.</p></article><article class="feature"><div class="num">03 / ADAPTATION</div><h3>Respond to change</h3><p>Market conditions can shift. A strong strategy needs more than one plan.</p></article><article class="feature"><div class="num">04 / COMPETITION</div><h3>Compete through strategy</h3><p>Build your Enterprise Points by making decisions that fit the situation.</p></article><article class="feature"><div class="num">05 / LEARNING</div><h3>Practise together</h3><p>Discuss ideas, compare approaches and learn from the outcomes of each round.</p></article><article class="feature"><div class="num">06 / REPLAYABILITY</div><h3>New situations, new plans</h3><p>Different cards and market conditions encourage players to rethink their approach.</p></article></div></div></section>
-<section id="game"><div class="wrap"><div class="section-head"><div class="eyebrow">Inside the experience</div><h2>One deck. <span class="gold">Multiple ways to think.</span></h2><p>Each card type contributes a different part of the business challenge. The category colours help players recognise the cards at a glance.</p></div><div class="categories"><div class="cat"><i class="dot customer"></i>Customer</div><div class="cat"><i class="dot action"></i>Action</div><div class="cat"><i class="dot event"></i>Events</div><div class="cat"><i class="dot ability"></i>Ability</div><div class="cat"><i class="dot goal"></i>Secret Goal</div><div class="cat"><i class="dot business"></i>Business</div></div><div class="intro-grid" style="margin-top:38px"><div><h3>Understand the customer.</h3><p>Customer Profile cards introduce different customer groups and the needs that businesses must consider.</p><h3 style="margin-top:28px">React to the market.</h3><p>Event cards introduce changing conditions, while Market Pulse cards add another decision point to the round.</p></div><div><h3>Build your business approach.</h3><p>Business, Ability and Action cards represent different ways to develop and apply an enterprise strategy.</p><h3 style="margin-top:28px">Pursue a personal objective.</h3><p>Secret Goal cards give players an additional target to work towards as the game progresses.</p></div></div></div></section>
-<section class="gameplay" id="how"><div class="wrap game-grid"><div><div class="eyebrow" style="color:#8a672b">The round</div><h2>Play. Decide. <span style="color:#98722f">Score.</span></h2><p>The supplied Quick Rules card presents a four-stage round. Here is the flow in a clear format.</p><div class="formula"><b>Round EP = max(0, C + E + B + A)</b><small>Customer + Event + Business + Action modifiers</small></div></div><div class="steps"><div class="step"><div class="stepnum">1</div><div><h3>Reveal</h3><p>Reveal a Customer and an Event. Place one Market Pulse face down.</p></div></div><div class="step"><div class="stepnum">2</div><div><h3>Choose</h3><p>Take three Actions from different categories. Choose one face down.</p></div></div><div class="step"><div class="stepnum">3</div><div><h3>Turn</h3><p>Reveal all Actions, then reveal the Market Pulse.</p></div></div><div class="step"><div class="stepnum">4</div><div><h3>Score</h3><p>Use the Customer Profile and Event modifier to calculate the round's Enterprise Points.</p></div></div><p class="note">This summary follows the Quick Rules shown in the supplied product image. Refer to the final printed rules for complete gameplay instructions and any clarifications.</p></div></div></section>
-<section><div class="wrap"><div class="section-head"><div class="eyebrow">Skills in action</div><h2>More than a game. <span class="gold">A way to practise.</span></h2><p>EMPIREx is designed to encourage practical thinking through an interactive business context.</p></div><div class="skills"><div class="skill">Problem-solving</div><div class="skill">Strategic thinking</div><div class="skill">Decision-making</div><div class="skill">Customer understanding</div><div class="skill">Adaptability</div><div class="skill">Communication</div><div class="skill">Team discussion</div><div class="skill">Commercial awareness</div></div></div></section>
-<section style="background:#211710"><div class="wrap evidence"><div><div class="eyebrow">Research behind the idea</div><h2>Practice matters.</h2><p>In an initial survey of 87 respondents, 64 said practical opportunities to apply business and entrepreneurship learning were available only sometimes, rarely or never.</p><p class="note">This is a finding from the project's own survey, not a representative estimate for all students or schools.</p></div><div class="evidence-card"><div class="bigstat">73.6%</div><h3>64 out of 87 respondents</h3><p>Reported practical opportunities only sometimes, rarely or never.</p><div class="bar"><span></span></div><small>Initial project survey • 87 responses</small></div></div></section>
-<section class="product"><div class="wrap product-grid"><div class="product-visual"><div class="eyebrow" style="margin:0 0 12px">A closer look</div><div style="aspect-ratio:1.9;background:linear-gradient(135deg,#120c09,#342015);display:grid;place-items:center;border:1px solid rgba(205,164,77,.35);padding:18px"><div style="display:flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap"><div style="width:92px;height:140px;background:#f6f0df;border:5px double #2d6eae;border-radius:5px;color:#392b1e;display:grid;place-items:center;text-align:center;font:700 11px 'Playfair Display';padding:8px">CUSTOMER<br><span style="font-size:28px;color:#2767b4">♙</span>SENIOR CITIZENS</div><div style="width:92px;height:140px;background:#f6f0df;border:5px double #c43b35;border-radius:5px;color:#392b1e;display:grid;place-items:center;text-align:center;font:700 11px 'Playfair Display';padding:8px">ACTION<br><span style="font-size:28px;color:#c43b35">✦</span>BRAND AD</div><div style="width:92px;height:140px;background:#f6f0df;border:5px double #dc792d;border-radius:5px;color:#392b1e;display:grid;place-items:center;text-align:center;font:700 11px 'Playfair Display';padding:8px">EVENT<br><span style="font-size:28px;color:#dc792d">↗</span>INFLATION</div></div></div><p class="note">Illustrative web artwork inspired by the supplied card designs; the uploaded product image remains the reference for actual card appearance.</p></div><div><div class="eyebrow">The EMPIREx deck</div><h2>Bring enterprise decisions <span class="gold">to the table.</span></h2><p>A physical card game designed to make enterprise practice engaging, competitive and repeatable in a classroom or group setting.</p><ul style="color:#d3c5af;padding-left:20px"><li>Customer profiles and market events</li><li>Business, Ability and Action cards</li><li>Secret Goals and Market Pulse cards</li><li>Enterprise Points-based scoring</li></ul><div class="pricebox"><div><div class="mrp">MRP <s>₹599</s></div><div class="price">₹549</div><small>Introductory selling price</small></div><a class="btn" href="#contact">Enquire about EMPIREx ↗</a></div><p class="note">Price shown for investor presentation. Purchase, payment and fulfilment arrangements are not enabled on this showcase website.</p></div></div></section>
-<section id="educators"><div class="wrap"><div class="section-head"><div class="eyebrow">For educators and institutions</div><h2>Make enterprise <span class="gold">interactive.</span></h2><p>EMPIREx can be used as a supplementary activity to encourage students to apply enterprise ideas, discuss decisions and reflect on outcomes.</p></div><div class="educators"><div><h3>Possible classroom use</h3><p>Use the game as a group activity, an enrichment exercise or a discussion starter alongside existing enterprise learning. Teachers can invite students to explain why they chose an action and how a changing market situation affected their strategy.</p><p class="note">EMPIREx is a supplementary learning activity. It is not a replacement for curriculum teaching, assessment or teacher guidance.</p></div><div class="edu-panel"><div class="eyebrow">Institutional enquiries</div><h3>Planning for a class or school?</h3><p>Contact the team to discuss school requirements, quantities and a possible institutional quotation.</p><table class="tiers"><thead><tr><th>Quantity</th><th>Proposed price / deck</th></tr></thead><tbody><tr><td>10–24 decks</td><td>₹529</td></tr><tr><td>25–49 decks</td><td>₹519</td></tr><tr><td>50–99 decks</td><td>₹509</td></tr><tr><td>100+ decks</td><td>Request a quotation</td></tr></tbody></table><p class="note">Indicative proposed institutional pricing only; subject to confirmation by the EMPIREx team. Not a confirmed offer or order commitment.</p><a class="btn secondary" href="mailto:shlok.bhatt@shikhaacademy.org?subject=EMPIREx%20School%20Enquiry">Discuss a school order ↗</a></div></div></div></section>
-<section id="story" style="background:#211710"><div class="wrap"><div class="section-head"><div class="eyebrow">Our story</div><h2>Built around a simple question.</h2><p>What if students didn't just learn entrepreneurship — what if they had to practise it?</p><p>EMPIREx was developed as a student-led enterprise project to create a practical, physical game that puts business decisions at the centre of the experience.</p></div><div class="team"><article class="person"><div class="initial">SB</div><h3>Shlok Bhatt</h3><span>Chief Executive Officer</span><p>Project leadership and overall direction.</p></article><article class="person"><div class="initial">SM</div><h3>Sahil Maurya</h3><span>CDO & COO</span><p>Design and operations.</p></article><article class="person"><div class="initial">AB</div><h3>Anuj Bhagat</h3><span>CFO & CMO</span><p>Finance and marketing.</p></article></div></div></section>
-<section id="faq"><div class="wrap faq"><div class="section-head"><div class="eyebrow">Questions</div><h2>Frequently asked.</h2></div><details><summary>What is EMPIREx?</summary><p>EMPIREx is a physical enterprise card game that gives players opportunities to practise business decisions through customer profiles, actions, events and scoring.</p></details><details><summary>Who is the game designed for?</summary><p>It is designed for secondary-school students and group learning. Please contact the team for guidance on suitability for a particular class or setting.</p></details><details><summary>Does EMPIREx replace enterprise lessons?</summary><p>No. It is intended as a supplementary activity that supports practical application and discussion alongside teaching.</p></details><details><summary>How does scoring work?</summary><p>The Quick Rules card shows a round score based on Customer, Event, Business and Action values: Round EP = max(0, C + E + B + A). The printed rules provide the detailed scoring instructions.</p></details><details><summary>What is the price?</summary><p>The investor showcase currently displays an MRP of ₹599 and an introductory selling price of ₹549. Institutional prices shown are proposed and require confirmation.</p></details><details><summary>Can a school enquire about bulk quantities?</summary><p>Yes. Schools and institutions can contact the team to discuss quantities and request a quotation.</p></details><details><summary>Can I purchase directly through this website?</summary><p>Not currently. This website is an investor and information showcase. Contact the team for enquiries; online checkout and payment are not enabled.</p></details><details><summary>When will the game launch?</summary><p>The public launch date will be announced after the product refinements are completed.</p></details></div></section>
-<section class="contact" id="contact"><div class="wrap contact-grid"><div><div class="eyebrow">Get in touch</div><h2>Let's talk <span class="gold">EMPIREx.</span></h2><p>For product information, school enquiries, institutional quotations or investor discussions, contact the team.</p><p class="note">This showcase does not collect or store enquiry form submissions. Use the email links to contact the team directly.</p></div><div class="emails"><div class="email"><b>Shlok Bhatt · CEO</b><a href="mailto:shlok.bhatt@shikhaacademy.org">shlok.bhatt@shikhaacademy.org</a></div><div class="email"><b>Sahil Maurya · CDO & COO</b><a href="mailto:sahil.maurya@shikhaacademy.org">sahil.maurya@shikhaacademy.org</a></div><div class="email"><b>Anuj Bhagat · CFO & CMO</b><a href="mailto:anuj.bhagat@shikhaacademy.org">anuj.bhagat@shikhaacademy.org</a></div><a class="btn" href="mailto:shlok.bhatt@shikhaacademy.org,anuj.bhagat@shikhaacademy.org,sahil.maurya@shikhaacademy.org?subject=EMPIREx%20Enquiry">Email the EMPIREx team ↗</a></div></div></section>
-</main>
-<footer class="footer"><div class="wrap"><div class="footrow"><a class="brand" href="#home">EMPIREx<small>BUILD SMART. THINK FAST. RULE THE MARKET.</small></a><div class="footlinks"><a href="#game">The Game</a><a href="#educators">Schools</a><a href="#faq">FAQs</a><a href="#contact">Contact</a></div><p>© <span id="year"></span> EMPIREx</p></div><p class="disclaimer">EMPIREx is a student-led enterprise project. Product details, proposed institutional pricing and launch information may be updated as refinements are completed. No affiliation or endorsement by Cambridge International is claimed.</p></div></footer>
-<script>
-const menu=document.getElementById('menu'),links=document.getElementById('navlinks');
-menu.addEventListener('click',()=>{const open=links.classList.toggle('open');menu.setAttribute('aria-expanded',String(open));});
-links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');menu.setAttribute('aria-expanded','false');}));
-document.getElementById('year').textContent=new Date().getFullYear();
-</script>
-</body></html>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="wordmark" href="#top" aria-label="EMPIREx home">EMPIRE<span>x</span><small>BUILD SMART. THINK FAST. RULE THE MARKET.</small></a>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-nav" aria-label="Open navigation">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="primary-nav" id="primary-nav" aria-label="Main navigation">
+        <a href="#game">The Game</a>
+        <a href="#how">How It Works</a>
+        <a href="#schools">For Schools</a>
+        <a href="#story">Our Story</a>
+        <a href="#faq">FAQs</a>
+        <a class="nav-cta" href="#contact">Contact the Team <span aria-hidden="true">↗</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-orbit orbit-one"></div><div class="hero-orbit orbit-two"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><span class="eyebrow-line"></span> A new way to practise enterprise</p>
+          <h1>Business decisions.<br><em>In your hands.</em></h1>
+          <p class="hero-lead">What if students didn't just learn entrepreneurship — what if they had to practise it? EMPIREx turns enterprise concepts into choices, changing situations and competitive play.</p>
+          <div class="hero-actions">
+            <a class="button button-gold" href="#game">Explore EMPIREx <span aria-hidden="true">↗</span></a>
+            <a class="button button-outline" href="#how">See how it works</a>
+          </div>
+          <p class="hero-note">A physical, decision-based card game designed for secondary-school learning.</p>
+        </div>
+        <figure class="product-frame">
+          <div class="frame-topline"><span>THE EMPIREx DECK</span><span>PRODUCT DESIGN PREVIEW</span></div>
+          <img src="assets/empirex-product-preview.webp" width="1197" height="595" alt="EMPIREx card design preview showing Customer, Action, Event, Ability, Secret Goal and Business cards, Market Pulse profiles and the Quick Rules card.">
+          <figcaption>Actual card artwork supplied by the EMPIREx team.</figcaption>
+        </figure>
+      </div>
+      <div class="container hero-bottom">
+        <span>PLAY WITH PURPOSE</span><i></i><span>THINK STRATEGICALLY</span><i></i><span>ADAPT TO THE MARKET</span>
+      </div>
+    </section>
+
+    <section class="intro-section section-pad">
+      <div class="container intro-grid">
+        <div>
+          <p class="eyebrow">The opportunity</p>
+          <h2>Knowing business is one thing.<br><span>Practising it is another.</span></h2>
+        </div>
+        <div class="intro-copy">
+          <p>Students may learn enterprise concepts in class, but meaningful opportunities to repeatedly practise realistic business decisions can be limited. EMPIREx is designed to make that practice active, social and memorable.</p>
+          <p>Players consider customer needs, respond to market conditions and choose business actions. The aim is not simply to know a definition — it is to think about what a business should do next.</p>
+          <p class="pull-quote">“Don't just learn the language of business. Make the decisions.”</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="game-section section-pad" id="game">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Inside the experience</p>
+          <h2>Six card types.<br><span>One business challenge.</span></h2>
+          <p>Each category brings a different element into the round. The distinct card colours make the deck easy to navigate during play.</p>
+        </div>
+        <div class="category-grid">
+          <article class="category-card customer"><div class="category-top"><span>01</span><b>CUSTOMER</b></div><h3>Know who you're serving.</h3><p>Customer Profile cards introduce different customer groups and the needs a business must consider.</p></article>
+          <article class="category-card action"><div class="category-top"><span>02</span><b>ACTION</b></div><h3>Choose what to do.</h3><p>Action cards represent business moves that players select as part of their strategy.</p></article>
+          <article class="category-card events"><div class="category-top"><span>03</span><b>EVENTS</b></div><h3>Respond to change.</h3><p>Event cards introduce market conditions that can affect business decisions.</p></article>
+          <article class="category-card ability"><div class="category-top"><span>04</span><b>ABILITY</b></div><h3>Use your strengths.</h3><p>Ability cards bring additional capabilities and effects into the game.</p></article>
+          <article class="category-card secret"><div class="category-top"><span>05</span><b>SECRET GOAL</b></div><h3>Work towards a target.</h3><p>Secret Goal cards give players an additional objective to pursue.</p></article>
+          <article class="category-card business"><div class="category-top"><span>06</span><b>BUSINESS</b></div><h3>Build your approach.</h3><p>Business cards establish a business identity and its area of specialisation.</p></article>
+        </div>
+        <div class="market-pulse">
+          <div class="market-copy">
+            <p class="eyebrow">A changing market</p>
+            <h3>Market Pulse</h3>
+            <p>The supplied design includes three Market Pulse profiles — A, B and C. The Quick Rules place one Pulse face down before the Actions are revealed.</p>
+          </div>
+          <div class="pulse-cards" aria-label="Market Pulse profile illustrations">
+            <div class="pulse-card"><span>A</span><small>PROFILE A</small></div>
+            <div class="pulse-card"><span>B</span><small>PROFILE B</small></div>
+            <div class="pulse-card"><span>C</span><small>PROFILE C</small></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="how-section section-pad" id="how">
+      <div class="container how-grid">
+        <div class="how-intro">
+          <p class="eyebrow">The round flow</p>
+          <h2>Play.<br><span>Decide.</span><br>Score.</h2>
+          <p>The supplied Quick Rules card presents a four-stage round. This summary follows the sequence shown on that card.</p>
+          <div class="score-formula"><small>ROUND ENTERPRISE POINTS</small><strong>max(0, C + E + B + A)</strong><span>Customer + Event + Business + Action</span></div>
+        </div>
+        <div class="steps">
+          <article class="step"><span class="step-no">01</span><div><h3>Reveal</h3><p>Reveal a Customer and an Event. Put one Market Pulse face down.</p></div></article>
+          <article class="step"><span class="step-no">02</span><div><h3>Choose</h3><p>Take three Actions from different categories. Choose one face down.</p></div></article>
+          <article class="step"><span class="step-no">03</span><div><h3>Turn</h3><p>Reveal all Actions, then reveal the Market Pulse.</p></div></article>
+          <article class="step"><span class="step-no">04</span><div><h3>Score</h3><p>Use the Customer Profile and Event modifier to calculate the round score.</p></div></article>
+          <p class="rules-note">For complete gameplay instructions, card-specific effects and any clarifications, use the final printed rules supplied with the game.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="purpose-section section-pad">
+      <div class="container purpose-grid">
+        <div class="purpose-copy">
+          <p class="eyebrow">Learning through play</p>
+          <h2>Make the decision.<br><span>Understand the outcome.</span></h2>
+          <p>EMPIREx is intended as a supplementary activity that encourages students to apply enterprise ideas, explain their choices and learn from changing situations.</p>
+          <a class="text-link" href="#schools">Explore classroom use <span aria-hidden="true">→</span></a>
+        </div>
+        <div class="skills-grid">
+          <div class="skill"><span>01</span>Problem-solving</div>
+          <div class="skill"><span>02</span>Decision-making</div>
+          <div class="skill"><span>03</span>Strategic thinking</div>
+          <div class="skill"><span>04</span>Customer understanding</div>
+          <div class="skill"><span>05</span>Adaptability</div>
+          <div class="skill"><span>06</span>Communication</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="research-section section-pad" id="research">
+      <div class="container research-grid">
+        <div>
+          <p class="eyebrow">Research behind the idea</p>
+          <h2>The need for practice<br><span>was visible in our survey.</span></h2>
+          <p>In the team's initial survey of 87 respondents, 64 said practical opportunities to apply business and entrepreneurship learning were available only sometimes, rarely or never.</p>
+          <p class="research-caveat">This is a finding from the project's own survey. It should not be interpreted as a representative estimate for all students or schools.</p>
+        </div>
+        <div class="research-stat">
+          <div class="stat-number">73.6<small>%</small></div>
+          <h3>64 of 87 respondents</h3>
+          <p>Reported practical opportunities only sometimes, rarely or never.</p>
+          <div class="stat-track"><span></span></div>
+          <small class="stat-source">EMPIREx initial survey · 87 responses</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="schools-section section-pad" id="schools">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">For educators and schools</p>
+          <h2>Bring enterprise<br><span>into the room.</span></h2>
+          <p>EMPIREx can be used as a group activity, enrichment exercise or discussion starter alongside existing enterprise learning.</p>
+        </div>
+        <div class="school-grid">
+          <div class="school-copy">
+            <h3>A practical classroom companion.</h3>
+            <p>Teachers can invite students to explain why they selected an action, how customer needs shaped their approach and what changed when the Market Pulse was revealed.</p>
+            <p>It is designed to support application and discussion — not to replace curriculum teaching, assessment or teacher guidance.</p>
+            <a class="button button-outline" href="mailto:shlok.bhatt@shikhaacademy.org?subject=EMPIREx%20School%20Enquiry">Discuss a school enquiry <span aria-hidden="true">↗</span></a>
+          </div>
+          <div class="pricing-panel">
+            <p class="eyebrow">Indicative institutional pricing</p>
+            <h3>Bulk order proposal</h3>
+            <table>
+              <thead><tr><th scope="col">Quantity</th><th scope="col">Proposed price / deck</th></tr></thead>
+              <tbody>
+                <tr><td>10–24 decks</td><td>₹529</td></tr>
+                <tr><td>25–49 decks</td><td>₹519</td></tr>
+                <tr><td>50–99 decks</td><td>₹509</td></tr>
+                <tr><td>100+ decks</td><td>Request a quotation</td></tr>
+              </tbody>
+            </table>
+            <p class="pricing-note">These are proposed rates for discussion, not a confirmed offer. Final institutional pricing is subject to approval and written confirmation by the EMPIREx team.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="price-section section-pad">
+      <div class="container price-grid">
+        <div>
+          <p class="eyebrow">The product</p>
+          <h2>A deck built for<br><span>active thinking.</span></h2>
+          <p>A physical enterprise card game that brings customer profiles, business actions, market events and Enterprise Points into one interactive experience.</p>
+          <ul class="product-points">
+            <li>Six distinct card categories</li>
+            <li>Three Market Pulse profiles shown in the design</li>
+            <li>A four-stage round flow</li>
+            <li>Enterprise Points-based scoring</li>
+          </ul>
+        </div>
+        <div class="price-card">
+          <div class="price-brand">EMPIREx</div>
+          <p class="price-caption">INTRODUCTORY SELLING PRICE</p>
+          <div class="selling-price">₹549</div>
+          <p class="mrp">MRP <s>₹599</s></p>
+          <div class="price-rule"></div>
+          <p class="price-small">For product information and current availability, please contact the team directly.</p>
+          <a class="button button-gold" href="#contact">Enquire about EMPIREx <span aria-hidden="true">↗</span></a>
+          <p class="no-checkout">This is an investor showcase. Online checkout and payment are not enabled.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section section-pad" id="story">
+      <div class="container">
+        <div class="story-intro">
+          <p class="eyebrow">Our story</p>
+          <h2>Built around one question.</h2>
+          <p>What if students didn't just learn entrepreneurship — what if they had to practise it?</p>
+          <p>EMPIREx was developed as a student-led enterprise project to make practical business decision-making more interactive through a physical card game.</p>
+        </div>
+        <div class="team-grid">
+          <article class="team-card"><span class="team-initials">SB</span><h3>Shlok Bhatt</h3><p>Chief Executive Officer</p></article>
+          <article class="team-card"><span class="team-initials">SM</span><h3>Sahil Maurya</h3><p>Chief Design Officer & Chief Operating Officer</p></article>
+          <article class="team-card"><span class="team-initials">AB</span><h3>Anuj Bhagat</h3><p>Chief Financial Officer & Chief Marketing Officer</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq-section section-pad" id="faq">
+      <div class="container faq-grid">
+        <div class="section-heading">
+          <p class="eyebrow">Good to know</p>
+          <h2>Questions,<br><span>answered.</span></h2>
+          <p>Some details are still being refined. The team can confirm current product and institutional information directly.</p>
+        </div>
+        <div class="faq-list">
+          <details><summary>What is EMPIREx?</summary><p>EMPIREx is a physical enterprise card game designed to help students practise business decisions through customer profiles, actions, events and Enterprise Points scoring.</p></details>
+          <details><summary>Who is it designed for?</summary><p>It is designed for secondary-school learning and group play. Contact the team for guidance on using it in a particular class or setting.</p></details>
+          <details><summary>Does it replace enterprise lessons?</summary><p>No. EMPIREx is intended as a supplementary activity to support practical application and discussion alongside teaching.</p></details>
+          <details><summary>How does a round work?</summary><p>The Quick Rules show four stages: Reveal, Choose, Turn and Score. The round score uses Customer, Event, Business and Action values, with a minimum of zero EP.</p></details>
+          <details><summary>What is the current price?</summary><p>The investor showcase displays an MRP of ₹599 and an introductory selling price of ₹549. Proposed institutional prices are indicative and require confirmation.</p></details>
+          <details><summary>Can schools enquire about bulk orders?</summary><p>Yes. Schools can contact the team to discuss quantities and request an institutional quotation.</p></details>
+          <details><summary>Can I purchase directly through this website?</summary><p>No. This website is an information and investor showcase. Online checkout and payment are not enabled; please contact the team for enquiries.</p></details>
+          <details><summary>When will EMPIREx launch?</summary><p>The public launch date will be announced after the current product refinements are completed.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section section-pad" id="contact">
+      <div class="container contact-grid">
+        <div>
+          <p class="eyebrow">Start a conversation</p>
+          <h2>Let's talk<br><span>EMPIREx.</span></h2>
+          <p>For product information, school enquiries, institutional quotations or investor discussions, contact the team.</p>
+          <p class="contact-note">Email links open your email application. This showcase does not collect enquiry form submissions.</p>
+        </div>
+        <div class="contact-list">
+          <a class="contact-item" href="mailto:shlok.bhatt@shikhaacademy.org"><span><b>Shlok Bhatt</b><small>CEO</small></span><span class="contact-email">shlok.bhatt@shikhaacademy.org</span><span aria-hidden="true">↗</span></a>
+          <a class="contact-item" href="mailto:sahil.maurya@shikhaacademy.org"><span><b>Sahil Maurya</b><small>CDO & COO</small></span><span class="contact-email">sahil.maurya@shikhaacademy.org</span><span aria-hidden="true">↗</span></a>
+          <a class="contact-item" href="mailto:anuj.bhagat@shikhaacademy.org"><span><b>Anuj Bhagat</b><small>CFO & CMO</small></span><span class="contact-email">anuj.bhagat@shikhaacademy.org</span><span aria-hidden="true">↗</span></a>
+          <a class="button button-gold team-email" href="mailto:shlok.bhatt@shikhaacademy.org,anuj.bhagat@shikhaacademy.org,sahil.maurya@shikhaacademy.org?subject=EMPIREx%20Enquiry">Email the EMPIREx team <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-main">
+      <a class="wordmark footer-wordmark" href="#top">EMPIRE<span>x</span><small>BUILD SMART. THINK FAST. RULE THE MARKET.</small></a>
+      <div class="footer-links"><a href="#game">The Game</a><a href="#schools">For Schools</a><a href="#faq">FAQs</a><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a></div>
+      <p class="copyright">© <span id="year"></span> EMPIREx</p>
+    </div>
+    <div class="container footer-note">EMPIREx is a student-led enterprise project. Product details, proposed institutional pricing and launch information may be updated as refinements are completed. No Cambridge International endorsement or affiliation is claimed.</div>
+  </footer>
+</body>
+</html>
