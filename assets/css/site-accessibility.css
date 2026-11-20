@@ -1,7 +1,0 @@
-/* Accessibility and image-resilience refinements */
-:focus-visible{outline:3px solid #e4c991;outline-offset:3px}
-.image-load-note{font-size:.78rem;line-height:1.5}
-.canvas-fallback{background:#f8f5ef;border:1px dashed #89612c;border-radius:3px;color:#514334}
-.image-sheet-fallback{padding:28px 18px;background:#1b120c;border:1px solid rgba(222,184,119,.35);color:#f3e3c9;text-align:center}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
-
