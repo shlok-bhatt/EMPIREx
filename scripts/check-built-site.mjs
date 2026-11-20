@@ -53,7 +53,7 @@ for (const route of routes) {
 const shopFile = outputFileFor("/shop/");
 if (existsSync(shopFile)) {
   const shop = readFileSync(shopFile, "utf8");
-  for (const text of ["Investor demonstration only.", "Add to demo cart", "checkout-preview", "Not collected in this prototype", "Review demo summary", "No order has been placed"]) {
+  for (const text of ["Investor demonstration only.", "Try the demo cart", "checkout-preview", "Not collected in this prototype", "Review demo summary", "No order has been placed"]) {
     if (!shop.includes(text)) fail("Shop: required prototype notice or screen missing: " + text);
   }
   if (/<form\b|<input\b|<select\b|<textarea\b/i.test(shop)) fail("Shop: the investor prototype must not collect customer data");
