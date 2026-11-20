@@ -386,3 +386,34 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #9b
 .shop-gallery span b {
   color: #704719;
 }
+
+
+/* WCAG contrast corrections for the final rendered surfaces. */
+.flagship-price-section .small-note,
+.price-cta .small-note {
+  color: #d8cbb8 !important;
+}
+
+.guide-sequence-list .rule-step .sequence-stage {
+  color: #704719 !important;
+}
+
+.section-dark .example-box .eyebrow {
+  color: #704719 !important;
+}
+
+.section-dark .example-box > p {
+  color: #62564a !important;
+}
+
+.section-dark .pulse-card p {
+  color: #62564a !important;
+}
+
+.future-section-dark .section-heading h2 {
+  color: #fff1dc;
+}
+
+.future-section-dark .section-heading h2 em {
+  color: #e4c991;
+}
