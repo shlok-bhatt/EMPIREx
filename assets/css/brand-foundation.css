@@ -206,3 +206,23 @@ summary:focus-visible {
     scroll-behavior: auto !important;
   }
 }
+
+/* Keyboard-accessible bypass for repeated site navigation. */
+.skip-link {
+  position: absolute;
+  z-index: 1000;
+  top: 12px;
+  left: 12px;
+  padding: 10px 16px;
+  color: var(--ink);
+  background: var(--white);
+  border: 2px solid var(--goldDark);
+  border-radius: var(--radius-sm);
+  font: 700 0.875rem/1.4 var(--sans);
+  transform: translateY(-160%);
+  transition: transform var(--motion-fast) var(--motion-ease);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
