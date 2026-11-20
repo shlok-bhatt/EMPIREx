@@ -154,7 +154,7 @@ const marketPage = read("market-pulse.html");
 for (const marketPhrase of [
   "market-pulse-a.svg", "market-pulse-b.svg", "market-pulse-c.svg",
   "face down", "every player has revealed their Action",
-  "matching Customer profile", "return all three Market Pulse cards and shuffle"
+  "matching Customer scoring profile", "return all three Market Pulse cards and shuffle"
 ]) {
   if (!marketPage.includes(marketPhrase)) report("market-pulse.html: required selector or reveal detail is missing: " + marketPhrase);
 }
