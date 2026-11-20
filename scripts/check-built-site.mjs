@@ -58,7 +58,7 @@ if (existsSync(howToFile)) {
   const html = readFileSync(howToFile, "utf8");
   const countSteps = (html.match(/<article class="rule-step">/g) || []).length;
   if (countSteps !== 8) fail("How to Play: expected eight ordered round steps, found " + countSteps);
-  for (const phrase of ["max(0, C + E)", "Customer score", "Event modifier", "Business bonus", "Ability bonus", "Perfect Match", "Return all three Market Pulse cards and shuffle", "Highest total EP wins"]) {
+  for (const phrase of ["max(0, C + E)", "Ability card and keep it visible", "Customer score", "Event modifier", "Business bonus", "Ability bonus", "Perfect Match", "Return all three Market Pulse cards and shuffle", "Highest total EP wins"]) {
     if (!html.includes(phrase)) fail("How to Play: missing rendered rule or scoring content: " + phrase);
   }
   if (!html.includes("/EMPIREx/assets/css/product-experience.css")) fail("How to Play: Phase 4 stylesheet is missing");
