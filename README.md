@@ -52,7 +52,7 @@ _includes/
   header.html          # Shared wordmark and primary navigation
   footer.html          # Shared footer and links
   card-grid.html       # Data-driven card-family gallery
-  card-showcase.html   # Data-driven image showcase for the Home and Cards pages
+  card-showcase.html   # Data-driven image showcase for the Cards page
   team-grid.html       # Data-driven team profiles
   home-hero-gallery.html # Data-driven cards featured in the homepage hero
   home-round-steps.html # Four-step homepage round overview
