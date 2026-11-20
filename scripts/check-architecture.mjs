@@ -144,7 +144,7 @@ if ((howToPage.match(/<article class="rule-step">/g) || []).length !== 8) {
   report("how-to-play.html: the round guide must contain exactly eight ordered steps");
 }
 for (const rulePhrase of [
-  "max(0, C + E)", "three Action options from three different categories",
+  "max(0, C + E)", "three Action options from three different categories", "Ability card and keep it visible",
   "Keep the Market Pulse card hidden until every Action has been revealed",
   "matching Customer scoring profile", "announced before scoring",
   "Return all three Market Pulse cards and shuffle", "After Round 7",
