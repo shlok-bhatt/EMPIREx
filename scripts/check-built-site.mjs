@@ -52,6 +52,56 @@ if (existsSync(homePath)) {
   if (!homeHtml.includes("/EMPIREx/assets/css/homepage.css")) fail("Home page: homepage stylesheet is missing from the rendered page");
 }
 
+
+const howToFile = outputFileFor("/how-to-play/");
+if (existsSync(howToFile)) {
+  const html = readFileSync(howToFile, "utf8");
+  const countSteps = (html.match(/<article class="rule-step">/g) || []).length;
+  if (countSteps !== 8) fail("How to Play: expected eight ordered round steps, found " + countSteps);
+  for (const phrase of ["max(0, C + E)", "Customer score", "Event modifier", "Business bonus", "Ability bonus", "Perfect Match", "Return all three Market Pulse cards and shuffle", "Highest total EP wins"]) {
+    if (!html.includes(phrase)) fail("How to Play: missing rendered rule or scoring content: " + phrase);
+  }
+  if (!html.includes("/EMPIREx/assets/css/product-experience.css")) fail("How to Play: Phase 4 stylesheet is missing");
+}
+
+const cardsFile = outputFileFor("/categories/");
+if (existsSync(cardsFile)) {
+  const html = readFileSync(cardsFile, "utf8");
+  if ((html.match(/class="showcase-card"/g) || []).length !== 6) fail("Cards page: expected six original artwork showcase links");
+  if ((html.match(/class="category-tile"/g) || []).length !== 6) fail("Cards page: expected six card-family detail tiles");
+  for (const key of ["market-pulse-a.svg", "market-pulse-b.svg", "market-pulse-c.svg"]) {
+    if (!html.includes(key)) fail("Cards page: missing Market Pulse selector artwork " + key);
+  }
+  if (!html.includes("separate three-card selector")) fail("Cards page: Market Pulse must be distinguished from the six main card families");
+}
+
+const pulseFile = outputFileFor("/market-pulse/");
+if (existsSync(pulseFile)) {
+  const html = readFileSync(pulseFile, "utf8");
+  if ((html.match(/class="market-pulse-selector"/g) || []).length !== 3) fail("Market Pulse: expected three selector cards");
+  if ((html.match(/<article><span>0[1-5]<\/span>/g) || []).length !== 5) fail("Market Pulse: expected five steps in the reveal sequence");
+  for (const phrase of ["face down", "revealed together", "Customer scoring profile", "return all three Market Pulse cards"]) {
+    if (!html.includes(phrase)) fail("Market Pulse: missing required reveal rule: " + phrase);
+  }
+  if (!html.includes("/EMPIREx/assets/css/product-experience.css")) fail("Market Pulse: Phase 4 stylesheet is missing");
+}
+
+const cardRoutes = [
+  ["/customer/", "Customer"], ["/action/", "Action"], ["/event/", "Event"],
+  ["/ability/", "Ability"], ["/secret-goal/", "Secret Goal"], ["/business/", "Business"]
+];
+for (const [route, title] of cardRoutes) {
+  const file = outputFileFor(route);
+  if (!existsSync(file)) continue;
+  const html = readFileSync(file, "utf8");
+  if (!html.includes("<h1>" + title + " <em>cards.</em></h1>")) fail(route + ": expected the correct card-family heading");
+  if (!html.includes("card-experience-grid") || !html.includes("Rule to remember")) fail(route + ": shared card detail layout is incomplete");
+  const mechanicCount = (html.match(/class="card-mechanics-list"/g) || []).length;
+  if (mechanicCount !== 1) fail(route + ": shared card mechanics list is missing");
+  if (!html.includes("Read the complete round rules")) fail(route + ": link to the full game rules is missing");
+  if (!html.includes("/EMPIREx/assets/css/product-experience.css")) fail(route + ": Phase 4 stylesheet is missing");
+}
+
 const localTargets = new Set();
 for (const route of routes) {
   const htmlPath = outputFileFor(route);
