@@ -33,7 +33,7 @@
 
     const cartButtons = root.querySelectorAll("[data-add-to-cart]");
     cartButtons.forEach((button) => {
-      button.setAttribute("aria-label", quantity > 0 ? "Add another EMPIREx demo item to cart" : "Add EMPIREx to demo cart");
+      button.setAttribute("aria-label", quantity > 0 ? "Add to demo cart — add another EMPIREx item" : "Add to demo cart — add EMPIREx");
     });
   };
 
