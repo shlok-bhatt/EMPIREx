@@ -71,7 +71,7 @@ if (!/mrp:\s*["']₹\d+["']/.test(siteData) || !/introductory:\s*["']₹\d+["']/
 
 const navigation = read("_data/navigation.yml");
 const primaryBlock = (navigation.match(/primary:\s*([\s\S]*?)\n\nfooter:/) || [])[1] || "";
-const primaryKeys = [...primaryBlock.matchAll(/^\s+- key:\s*([\w-]+)/gm)].map((match) => match[1]);
+const primaryKeys = [...primaryBlock.matchAll(/^[ \t]*-\s+key:\s*([\w-]+)/gm)].map((match) => match[1]);
 const navigationUrls = [...navigation.matchAll(/^\s+url:\s*(\/[^\s]+)/gm)].map((match) => match[1]);
 for (const url of navigationUrls) {
   if (!routes.has(url)) report("_data/navigation.yml: navigation URL has no matching page route: " + url);
