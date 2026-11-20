@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shlok-bhatt.github.io/EMPIREx/sitemap.xml

@@ -1,9 +1,10 @@
 name: EMPIREx
 wordmark: EMPIRE
 tagline: "BUILD SMART. THINK FAST. RULE THE MARKET."
-asset_version: "20261120g"
+asset_version: "20261120j"
 copyright: "© 2026 EMPIREx"
 disclaimer: "Student-led enterprise project. No Cambridge International endorsement or affiliation is claimed."
 pricing:
   mrp: "₹599"
   introductory: "₹549"
+  introductory_value: 549

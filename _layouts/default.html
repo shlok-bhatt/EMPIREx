@@ -12,6 +12,9 @@ layout: null
   <main id="main-content">
     {{ content }}
   </main>
+  {% unless page.hide_shop_promo or page.noindex %}
+    {% include shop-promo.html %}
+  {% endunless %}
   {% include footer.html %}
 </body>
 </html>

@@ -1,0 +1,21 @@
+name: "EMPIREx — Enterprise Card Game"
+short_name: "EMPIREx"
+category: "Physical enterprise card game"
+description: "A student-created, face-to-face card game that gives learners opportunities to practise enterprise decisions through customer situations, business actions and changing market conditions."
+audience: "Secondary-school learners"
+age_range: "13–17"
+format: "Physical card game"
+game_rounds: "7"
+main_card_families:
+  - Customer
+  - Action
+  - Event
+  - Ability
+  - Secret Goal
+  - Business
+market_pulse_selectors:
+  - A
+  - B
+  - C
+specification_status: "Final packaged quantities, card dimensions, materials, packaging and recommended player count must be confirmed against the production version before publication."
+purchase_status: "Investor demonstration only. Online orders and payments are not enabled."

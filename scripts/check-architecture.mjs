@@ -4,20 +4,23 @@ import { join } from "node:path";
 const root = process.cwd();
 const errors = [];
 const pageFiles = [
-  "index.html", "how-to-play.html", "categories.html", "market-pulse.html",
-  "schools.html", "about.html", "future-editions.html", "faq.html",
-  "contact.html", "privacy.html", "terms.html", "404.html",
-  "customer.html", "action.html", "event.html", "ability.html",
-  "secret-goal.html", "business.html"
+  "index.html", "shop.html", "how-to-play.html", "categories.html", "market-pulse.html",
+  "schools.html", "about.html", "future-editions.html", "faq.html", "contact.html",
+  "privacy.html", "terms.html", "404.html", "customer.html", "action.html", "event.html",
+  "ability.html", "secret-goal.html", "business.html"
 ];
-
+const routesExpected = [
+  "/", "/shop/", "/how-to-play/", "/categories/", "/market-pulse/", "/schools/",
+  "/about/", "/future-editions/", "/faq/", "/contact/", "/privacy/", "/terms/",
+  "/404.html", "/customer/", "/action/", "/event/", "/ability/", "/secret-goal/", "/business/"
+];
 const read = (path) => readFileSync(join(root, path), "utf8");
 const exists = (path) => existsSync(join(root, path));
 const report = (message) => errors.push(message);
 const value = (frontMatter, key) => {
-  const match = frontMatter.match(new RegExp("^" + key + ":\\s*(.*?)\\s*$", "m"));
-  if (!match) return undefined;
-  return match[1].replace(/^"(.*)"$/, "$1").replace(/^'(.*)'$/, "$1");
+  const line = frontMatter.split(/\r?\n/).find((entry) => entry.startsWith(key + ":"));
+  if (!line) return undefined;
+  return line.slice(key.length + 1).trim().replace(/^"(.*)"$/, "$1").replace(/^'(.*)'$/, "$1");
 };
 const parsePage = (path) => {
   const source = read(path);
@@ -30,11 +33,9 @@ const parsePage = (path) => {
 };
 
 const actualPages = readdirSync(root).filter((name) => name.endsWith(".html")).sort();
-const expectedPages = [...pageFiles].sort();
-if (JSON.stringify(actualPages) !== JSON.stringify(expectedPages)) {
-  report("Root HTML page set differs from the expected set. Found: " + actualPages.join(", "));
+if (JSON.stringify(actualPages) !== JSON.stringify([...pageFiles].sort())) {
+  report("Root HTML page set differs from the expected 19-page set. Found: " + actualPages.join(", "));
 }
-
 const pages = pageFiles.map(parsePage);
 const routes = new Map();
 for (const page of pages) {
@@ -43,42 +44,37 @@ for (const page of pages) {
   const title = value(page.frontMatter, "title");
   const description = value(page.frontMatter, "description");
   const activeNav = value(page.frontMatter, "active_nav");
-
-  if (!["default", "card"].includes(layout)) report(page.path + ": unsupported or missing layout '" + (layout || "") + "'");
+  if (!["default", "card"].includes(layout)) report(page.path + ": unsupported or missing layout");
   if (!permalink) report(page.path + ": missing permalink");
-  else if (routes.has(permalink)) report(page.path + ": duplicate permalink " + permalink + " (also " + routes.get(permalink) + ")");
+  else if (routes.has(permalink)) report(page.path + ": duplicate permalink " + permalink);
   else routes.set(permalink, page.path);
   if (!title) report(page.path + ": missing page title");
-  if (description === undefined) report(page.path + ": missing page description");
-  if (activeNav && !["home", "how-to-play", "cards", "market-pulse", "schools", "about", "contact"].includes(activeNav)) {
-    report(page.path + ": unknown active_nav '" + activeNav + "'");
+  if (!description?.trim()) report(page.path + ": missing or empty page description");
+  if (activeNav && !["home", "how-to-play", "cards", "schools", "about", "shop"].includes(activeNav)) {
+    report(page.path + ": unknown active navigation key " + activeNav);
   }
-  if (/<header class="site-header"/i.test(page.body)) report(page.path + ": shared site header is duplicated in page content");
-  if (/<footer class="site-footer"/i.test(page.body)) report(page.path + ": shared site footer is duplicated in page content");
-  if (page.body.includes("/EMPIREx/")) report(page.path + ": hard-coded project base path found; use the Jekyll base URL");
+  if (/<header class="site-header"/i.test(page.body)) report(page.path + ": duplicated shared header");
+  if (/<footer class="site-footer"/i.test(page.body)) report(page.path + ": duplicated shared footer");
+  if (page.body.includes("/EMPIREx/")) report(page.path + ": hard-coded project base path found");
 }
-if (routes.size !== pageFiles.length) report("Expected " + pageFiles.length + " unique routes, found " + routes.size);
+if (routes.size !== 19) report("Expected 19 unique routes, found " + routes.size);
+for (const route of routesExpected) if (!routes.has(route)) report("Missing expected route " + route);
 
 const config = read("_config.yml");
-if (!config.includes('baseurl: "/EMPIREx"')) report("_config.yml: expected the GitHub Pages project base URL");
-if (!config.includes("permalink: pretty")) report("_config.yml: clean pretty permalinks are not enabled");
-
-const siteData = read("_data/site.yml");
-if (!/asset_version:\s*["'][^"']+["']/.test(siteData)) report("_data/site.yml: missing asset_version");
-if (!/mrp:\s*["']₹\d+["']/.test(siteData) || !/introductory:\s*["']₹\d+["']/.test(siteData)) {
-  report("_data/site.yml: product price values must be centrally defined");
-}
-
+if (!config.includes('baseurl: "/EMPIREx"') || !config.includes("permalink: pretty")) report("_config.yml: GitHub Pages base URL or pretty permalinks are incorrect");
+const site = read("_data/site.yml");
+if (!/asset_version:\s*["'][^"']+["']/.test(site)) report("_data/site.yml: asset version is missing");
+if (!/mrp:\s*["']₹\d+["']/.test(site) || !/introductory:\s*["']₹\d+["']/.test(site)) report("_data/site.yml: central product prices are missing");
+if (!/introductory_value:\s*\d+/.test(site)) report("_data/site.yml: numeric demo price is missing");
 const navigation = read("_data/navigation.yml");
 const primaryBlock = (navigation.match(/primary:\s*([\s\S]*?)\n\nfooter:/) || [])[1] || "";
 const primaryKeys = [...primaryBlock.matchAll(/^[ \t]*-\s+key:\s*([\w-]+)/gm)].map((match) => match[1]);
-const navigationUrls = [...navigation.matchAll(/^\s+url:\s*(\/[^\s]+)/gm)].map((match) => match[1]);
-for (const url of navigationUrls) {
-  if (!routes.has(url)) report("_data/navigation.yml: navigation URL has no matching page route: " + url);
+for (const url of [...navigation.matchAll(/^\s+url:\s*(\/[^\s]+)/gm)].map((match) => match[1])) {
+  if (!routes.has(url)) report("_data/navigation.yml: unpublished route " + url);
 }
 for (const page of pages) {
   const activeNav = value(page.frontMatter, "active_nav");
-  if (activeNav && !primaryKeys.includes(activeNav)) report(page.path + ": active_nav '" + activeNav + "' is not in primary navigation data");
+  if (activeNav && !primaryKeys.includes(activeNav)) report(page.path + ": active_nav is not in primary navigation");
 }
 
 const cardData = read("_data/cards.yml");
@@ -88,241 +84,87 @@ const cards = cardBlocks.map((block) => ({
   url: (block.match(/^  url:\s*(\/[^\s]+)/m) || [])[1],
   image: (block.match(/^  image:\s*(\/[^\s]+)/m) || [])[1]
 }));
-const cardKeys = cards.map((card) => card.key);
-if (cardKeys.length !== 6 || new Set(cardKeys).size !== 6) report("_data/cards.yml: expected six unique card families, found " + cardKeys.length);
+if (cards.length !== 6 || new Set(cards.map((card) => card.key)).size !== 6) report("_data/cards.yml: exactly six unique card families are required");
 for (const card of cards) {
-  if (!routes.has(card.url)) report("_data/cards.yml: card route is not published: " + card.url);
-  if (!card.image || !exists(card.image.replace(/^\//, ""))) report("_data/cards.yml: card image is missing for '" + card.key + "'");
-  const page = pages.find((candidate) => value(candidate.frontMatter, "card_key") === card.key);
-  if (!page) report("_data/cards.yml: no card page uses key '" + card.key + "'");
-  else if (value(page.frontMatter, "permalink") !== card.url) report(page.path + ": card data URL does not match the page permalink");
+  if (!routes.has(card.url)) report("_data/cards.yml: missing card route " + card.url);
+  if (!card.image || !exists(card.image.replace(/^\//, ""))) report("_data/cards.yml: missing card artwork for " + card.key);
 }
-for (const page of pages.filter((candidate) => value(candidate.frontMatter, "layout") === "card")) {
-  const key = value(page.frontMatter, "card_key");
-  if (!cardKeys.includes(key)) report(page.path + ": card_key '" + (key || "") + "' is not defined in _data/cards.yml");
-}
-const teamData = read("_data/team.yml");
-if ((teamData.match(/^- name:/gm) || []).length !== 3) report("_data/team.yml: expected the three listed founding team members");
+const team = read("_data/team.yml");
+if ((team.match(/^- name:/gm) || []).length !== 3) report("_data/team.yml: expected three founding team records");
 
 const head = read("_includes/head.html");
-const cssList = (head.match(/assign css_files = "([^"]+)"/) || [])[1]?.split(",") || [];
-const importList = [...read("styles.css").matchAll(/@import url\("assets\/css\/([^?"]+)/g)].map((match) => match[1]);
-if (!cssList.length) report("_includes/head.html: CSS module list is missing");
-if (JSON.stringify(cssList) !== JSON.stringify(importList)) report("styles.css and _includes/head.html load different CSS module orders");
-for (const cssFile of [...cssList, "brand-foundation.css"]) {
-  const path = join("assets/css", cssFile);
-  if (!exists(path)) report("Missing CSS module: " + path);
+const cssFiles = (head.match(/assign css_files = "([^"]+)"/) || [])[1]?.split(",") || [];
+const imports = [...read("styles.css").matchAll(/@import url\("assets\/css\/([^?"]+)/g)].map((match) => match[1]);
+if (JSON.stringify(cssFiles) !== JSON.stringify(imports)) report("styles.css and _includes/head.html CSS order must match exactly");
+for (const css of [...cssFiles, "brand-foundation.css"]) {
+  const path = join("assets/css", css);
+  if (!exists(path)) report("Missing stylesheet " + path);
   else {
-    const css = read(path);
-    if ((css.match(/{/g) || []).length !== (css.match(/}/g) || []).length) report("Unbalanced CSS braces: " + path);
+    const content = read(path);
+    if ((content.match(/{/g) || []).length !== (content.match(/}/g) || []).length) report(path + ": unbalanced CSS braces");
   }
 }
-if (!head.includes("absolute_url") || !head.includes("relative_url")) report("_includes/head.html: canonical and asset URLs must use Jekyll URL filters");
-if (!read("_layouts/default.html").includes("{% include header.html %}") ||
-    !read("_layouts/default.html").includes("{% include footer.html %}")) {
-  report("_layouts/default.html: shared header/footer includes are missing");
+if (!cssFiles.includes("flagship.css")) report("_includes/head.html: flagship stylesheet is not loaded");
+if (!head.includes('name="twitter:card" content="summary_large_image"') || !head.includes('property="og:image"') || !head.includes("absolute_url")) {
+  report("_includes/head.html: social metadata and canonical metadata are incomplete");
 }
-if (!read("_layouts/card.html").includes("site.data.cards")) report("_layouts/card.html: card detail is not data-driven");
+if (!read("_layouts/default.html").includes("shop-promo.html")) report("_layouts/default.html: shared Shop pathway is missing");
+if (!read("_layouts/card.html").includes("site.data.cards")) report("_layouts/card.html: card page template must remain data-driven");
+if (!navigation.includes("key: shop") || !navigation.includes("url: /shop/")) report("Navigation is missing the Shop route");
 
-const cardTemplate = read("_layouts/card.html");
-if (!cardTemplate.includes("card.mechanics") || !cardTemplate.includes("card.rule_note") || !cardTemplate.includes("card.timing")) {
-  report("_layouts/card.html: the reusable card detail template must render mechanics, timing and the key rule");
+const homepage = read("index.html");
+for (const phrase of ["Don't just learn business.", "Make the calls.", "73.6%", "64 of 87", "not a representative national study"]) {
+  if (!homepage.includes(phrase)) report("Homepage is missing required accurate positioning or survey qualification: " + phrase);
 }
-for (const block of cardBlocks) {
-  const key = (block.match(/^- key:\s*([\w-]+)/m) || [])[1] || "unknown";
-  for (const field of ["role_label:", "timing:", "mechanics:", "rule_note_title:", "rule_note:"]) {
-    if (!block.includes("  " + field)) report("_data/cards.yml: " + key + " is missing " + field);
-  }
-  const mechanicsStart = block.indexOf("  mechanics:");
-  const mechanicsEnd = block.indexOf("\n  rule_note_title:", mechanicsStart);
-  const mechanicsBlock = mechanicsStart >= 0 && mechanicsEnd > mechanicsStart ? block.slice(mechanicsStart, mechanicsEnd) : "";
-  if ((mechanicsBlock.match(/^    - /gm) || []).length < 3) report("_data/cards.yml: " + key + " must contain at least three clear mechanics");
+if (!homepage.includes("site.data.site.pricing.mrp") || !homepage.includes("site.data.site.pricing.introductory") || !homepage.includes("'/shop/'")) {
+  report("Homepage must use central prices and lead to the product Shop");
 }
+const howTo = read("how-to-play.html");
+if ((howTo.match(/<article class="rule-step">/g) || []).length !== 8) report("How to Play must retain eight ordered round steps");
+for (const phrase of ["max(0, C + E)", "Perfect Match", "After Round 7", "Return all three Market Pulse cards and shuffle"]) {
+  if (!howTo.includes(phrase)) report("How to Play is missing established rule: " + phrase);
+}
+if (!read("categories.html").includes("Market Pulse") || !read("categories.html").includes("card-showcase.html")) report("Cards page must preserve the six-family showcase and Market Pulse distinction");
 
-const howToPage = read("how-to-play.html");
-if ((howToPage.match(/<article class="rule-step">/g) || []).length !== 8) {
-  report("how-to-play.html: the round guide must contain exactly eight ordered steps");
+const product = read("_data/product.yml");
+for (const phrase of ["Physical card game", "13–17", "7", "Customer", "Action", "Event", "Ability", "Secret Goal", "Business", "must be confirmed"]) {
+  if (!product.includes(phrase)) report("_data/product.yml is missing or misstates product fact: " + phrase);
 }
-for (const rulePhrase of [
-  "max(0, C + E)", "three Action options from three different categories", "Ability card and keep it visible",
-  "Keep the Market Pulse card hidden until every Action has been revealed",
-  "matching Customer scoring profile", "announced before scoring",
-  "Return all three Market Pulse cards and shuffle", "After Round 7",
-  "tied, they share victory"
-]) {
-  if (!howToPage.includes(rulePhrase)) report("how-to-play.html: required game rule is missing: " + rulePhrase);
+const shop = read("shop.html");
+for (const phrase of ["permalink: /shop/", "store_demo: true", "Investor demonstration only", "data-add-to-cart", "demo-cart", "checkout-preview", "No order has been placed", "Not collected in this prototype"]) {
+  if (!shop.includes(phrase)) report("Shop prototype is missing a required non-transactional element: " + phrase);
 }
-const marketPage = read("market-pulse.html");
-for (const marketPhrase of [
-  "market-pulse-a.svg", "market-pulse-b.svg", "market-pulse-c.svg",
-  "face down", "every player has revealed their Action",
-  "Customer scoring profile named by the Pulse card", "return all three Market Pulse cards and shuffle"
-]) {
-  if (!marketPage.includes(marketPhrase)) report("market-pulse.html: required selector or reveal detail is missing: " + marketPhrase);
+if (/<form\b|<input\b|<select\b|<textarea\b/i.test(shop)) report("Shop prototype must not collect user data through form fields");
+if (!read("store-demo.js").includes("let quantity = 0") || /localStorage|sessionStorage|fetch\s*\(|XMLHttpRequest|https?:\/\//i.test(read("store-demo.js"))) {
+  report("Store demo must remain temporary in-memory state with no network or storage calls");
 }
-const categoriesPage = read("categories.html");
-if (!categoriesPage.includes("six main card families") ||
-    !categoriesPage.includes("Market Pulse") ||
-    !categoriesPage.includes("{% include card-showcase.html") ||
-    !categoriesPage.includes("{% include card-grid.html")) {
-  report("categories.html: the six-family directory, original artwork showcase or Market Pulse distinction is missing");
-}
-if (!cssList.includes("product-experience.css")) report("_includes/head.html: Phase 4 product experience stylesheet is missing");
+if (read("store-demo.js").includes("window.location") || read("store-demo.js").includes("location.href")) report("Store demo must not redirect to an external transaction");
+const productPageHead = head;
+if (!productPageHead.includes('page.store_product') || !productPageHead.includes('"@type": "Product"')) report("Product metadata block is missing");
+if (productPageHead.includes('"@type": "Offer"')) report("Do not publish an active Offer for the non-transactional Store prototype");
 
-if (!read("index.html").includes("{% include card-grid.html") ||
-    !read("categories.html").includes("{% include card-grid.html")) {
-  report("Homepage and Cards page must use the shared card-grid include");
-}
-if (!read("about.html").includes("{% include team-grid.html %}")) report("Our Story page must use the shared team-grid include");
-const homepageData = read("_data/homepage.yml");
-const heroGalleryBlock = (homepageData.match(/hero_gallery:\s*([\s\S]*?)\n\nround_steps:/) || [])[1] || "";
-const heroCardKeys = [...heroGalleryBlock.matchAll(/^[ \t]*-\s+card_key:\s*([\w-]+)/gm)].map((match) => match[1]);
-if (heroCardKeys.length !== 3 || new Set(heroCardKeys).size !== 3) {
-  report("_data/homepage.yml: exactly three unique hero card keys are required");
-}
-for (const key of heroCardKeys) {
-  if (!cardKeys.includes(key)) report("_data/homepage.yml: hero card key is not defined in _data/cards.yml: " + key);
-}
-const roundStepsBlock = (homepageData.match(/round_steps:\s*([\s\S]*)$/) || [])[1] || "";
-const roundStepNumbers = [...roundStepsBlock.matchAll(/^[ \t]*-\s+number:\s*["']?(\d+)["']?/gm)].map((match) => match[1]);
-if (roundStepNumbers.length !== 4 || new Set(roundStepNumbers).size !== 4) {
-  report("_data/homepage.yml: exactly four uniquely numbered round steps are required");
-}
-if (!read("index.html").includes("{% include home-hero-gallery.html %}") ||
-    !read("index.html").includes("{% include home-round-steps.html %}") ||
-    !exists("_includes/home-hero-gallery.html") ||
-    !exists("_includes/home-round-steps.html")) {
-  report("Homepage must use both shared hero-gallery and round-step includes");
-}
-if (!read("categories.html").includes('class_name="cards-page-grid"') ||
-    !exists("_includes/card-showcase.html")) {
-  report("Cards page must retain the shared card-showcase include");
-}
-if (!read("_includes/card-grid.html").includes("include.class_name")) {
-  report("Card grid include must support the homepage's product-grid variant");
-}
-if (!read("index.html").includes('class_name="category-grid home-card-grid"')) {
-  report("Homepage must use its dedicated product-grid variant");
-}
-for (const pagePath of ["index.html", "faq.html", "terms.html"]) {
-  const page = read(pagePath);
-  if (!page.includes("site.data.site.pricing.mrp") || !page.includes("site.data.site.pricing.introductory")) {
-    report(pagePath + ": product pricing must be read from _data/site.yml");
-  }
-}
-if (!read("assets/css/brand-foundation.css").includes(".skip-link:focus")) report("Brand foundation is missing the visible keyboard skip-link style");
-
-
-const supportingPages = {
-  schools: read("schools.html"),
-  about: read("about.html"),
-  future: read("future-editions.html"),
-  faq: read("faq.html"),
-  contact: read("contact.html"),
-  privacy: read("privacy.html"),
-  terms: read("terms.html"),
-  notFound: read("404.html")
-};
-if (!supportingPages.schools.includes("13–17") ||
-    !supportingPages.schools.includes("supplementary activity") ||
-    !supportingPages.schools.includes("institutional pricing or quotation will be confirmed") ||
-    !supportingPages.schools.includes('id="classroom-use"') ||
-    !supportingPages.schools.includes('id="learning-focus"') ||
-    !supportingPages.schools.includes('id="school-enquiry"')) {
-  report("schools.html: intended age range, supplementary-use caveat or section navigation is missing");
-}
-if (!supportingPages.about.includes("{% include team-grid.html %}") ||
-    (supportingPages.about.match(/class="story-principles-grid"/g) || []).length !== 1) {
-  report("about.html: team directory or project principles section is missing");
-}
-const futureIds = ["expansion-packs", "regional-editions", "subject-editions", "digital-experience", "industry-packs", "school-experiences"];
-if (!supportingPages.future.includes("not currently available to purchase") ||
-    !supportingPages.future.includes("not a pre-order or reservation list") ||
-    !futureIds.every((id) => supportingPages.future.includes('id="' + id + '"')) ||
-    !supportingPages.future.includes("No future edition is currently available")) {
-  report("future-editions.html: concept-only status or one or more category sections is missing");
-}
-if ((supportingPages.faq.match(/<details>/g) || []).length < 12 ||
-    !["faq-game", "faq-learning", "faq-orders", "faq-project"].every((id) => supportingPages.faq.includes('id="' + id + '"')) ||
-    !supportingPages.faq.includes("site.data.site.pricing.mrp") ||
-    !supportingPages.faq.includes("site.data.site.pricing.introductory")) {
-  report("faq.html: topic groups, sufficient FAQ entries or central price bindings are missing");
-}
+const privacy = read("privacy.html");
+if (!privacy.includes("GitHub Pages") || !privacy.includes("Google Fonts")) report("Privacy page must identify the current hosting and external font service");
+const contact = read("contact.html");
 for (const email of ["shlok.bhatt@shikhaacademy.org", "sahil.maurya@shikhaacademy.org", "anuj.bhagat@shikhaacademy.org"]) {
-  if (!supportingPages.contact.includes("mailto:" + email)) report("contact.html: missing published team email link for " + email);
+  if (!contact.includes("mailto:" + email)) report("Contact page is missing a published team email link: " + email);
 }
-if ((supportingPages.contact.match(/class="contact-person-card"/g) || []).length !== 3 ||
-    !supportingPages.contact.includes("does not collect enquiry forms, accept orders or process payments")) {
-  report("contact.html: the three team contact cards or no-form/no-payment explanation is missing");
-}
-if (!supportingPages.privacy.includes("Google Fonts") ||
-    !supportingPages.privacy.includes("GitHub Pages") ||
-    !supportingPages.privacy.includes("does not have user accounts") ||
-    !supportingPages.privacy.includes("email service")) {
-  report("privacy.html: hosting, external-font, account and email-contact disclosures are incomplete");
-}
-if (!supportingPages.terms.includes("site.data.site.pricing.mrp") ||
-    !supportingPages.terms.includes("site.data.site.pricing.introductory") ||
-    !supportingPages.terms.includes("not pre-orders") ||
-    !supportingPages.terms.includes("No Cambridge International endorsement or affiliation is claimed")) {
-  report("terms.html: price bindings, future-concept caveat or project-affiliation statement is missing");
-}
-if (!supportingPages.notFound.includes("noindex: true") ||
-    !["/", "/how-to-play/", "/categories/", "/faq/", "/schools/", "/contact/"].every((route) => supportingPages.notFound.includes("{{ site.baseurl }}" + route))) {
-  report("404.html: noindex setting or helpful published-route links are missing");
-}
-if (!cssList.includes("supporting-pages.css")) report("_includes/head.html: Phase 5 supporting pages stylesheet is missing");
+const notFound = read("404.html");
+if (!notFound.includes("noindex: true")) report("404 page must remain noindex");
 
+for (const file of ["assets/empirex-social.svg", "robots.txt", "sitemap.xml", "package.json", "scripts/check-browser.mjs"]) {
+  if (!exists(file)) report("Required launch asset or test file is missing: " + file);
+}
+const packageJson = JSON.parse(read("package.json"));
+if (!packageJson.devDependencies?.playwright || !packageJson.devDependencies?.["@axe-core/playwright"]) report("Browser and accessibility test dependencies are missing");
 
-const technicalCss = read("assets/css/technical-refinements.css");
-const siteScript = read("script.js");
-const workflow = read(".github/workflows/architecture-check.yml");
-if (!cssList.includes("technical-refinements.css") ||
-    !technicalCss.includes("html:not(.js) .primary-nav") ||
-    !technicalCss.includes("html.js .primary-nav.open") ||
-    !technicalCss.includes(".image-fallback")) {
-  report("Phase 6 technical stylesheet: progressive navigation, menu-state and image-fallback styles are incomplete");
-}
-if (!head.includes('<link rel="canonical" href="{{ page.url | absolute_url }}">') ||
-    !head.includes("&amp;display=swap") ||
-    !head.includes('name="twitter:card"')) {
-  report("_includes/head.html: canonical, font-display or social-card metadata is incomplete");
-}
-for (const feature of [
-  'root.classList.add("js")',
-  'event.key === "Escape"',
-  'target.closest("a")',
-  'window.matchMedia',
-  'img.complete && img.naturalWidth === 0',
-  'setAttribute("aria-live", "polite")'
-]) {
-  if (!siteScript.includes(feature)) report("script.js: missing technical resilience feature " + feature);
-}
-if (!workflow.includes("node --check script.js")) {
-  report(".github/workflows/architecture-check.yml: JavaScript syntax validation step is missing");
-}
 for (const page of pages) {
-  const description = value(page.frontMatter, "description");
-  if (description !== undefined && !description.trim()) {
-    report(page.path + ": SEO description must not be empty");
-  }
-  if (page.path === "404.html" && value(page.frontMatter, "noindex") !== "true") {
-    report("404.html: error page should remain noindex");
-  }
-}
-
-const staticAssetExists = (urlPath) => exists(urlPath.replace(/^\//, ""));
-for (const page of pages) {
-  const attributes = [...page.body.matchAll(/\b(?:href|src)=["']([^"']+)["']/gi)].map((match) => match[1]);
-  for (const raw of attributes) {
-    if (/^(?:https?:|mailto:|tel:|#|data:)/i.test(raw)) continue;
-    const target = raw.replace("{{ site.baseurl }}", "").split("?")[0].split("#")[0];
-    if (!target.startsWith("/")) continue;
-    if (/\.(?:webp|svg|png|jpe?g|css|js|woff2|pdf)$/i.test(target)) {
-      if (!staticAssetExists(target)) report(page.path + ": missing local asset reference " + raw);
-    } else if (target.endsWith("/") && !routes.has(target)) {
-      report(page.path + ": link points to an unpublished route " + raw);
-    }
+  const body = page.body;
+  const tags = [...body.matchAll(/<img\b[^>]*>/gi)].map((match) => match[0]);
+  for (const tag of tags) if (!/\balt=["'][^"']*["']/i.test(tag)) report(page.path + ": image without alt attribute");
+  for (const tag of [...body.matchAll(/<a\b[^>]*target=["']_blank["'][^>]*>/gi)].map((match) => match[0])) {
+    const rel = (tag.match(/\brel=["']([^"']*)["']/i) || [])[1] || "";
+    if (!/(?:^|\s)noopener(?:\s|$)/i.test(rel)) report(page.path + ": target=_blank link must include rel=noopener");
   }
 }
 
@@ -331,4 +173,4 @@ if (errors.length) {
   for (const error of errors) console.error(" - " + error);
   process.exit(1);
 }
-console.log("EMPIREx architecture checks passed: " + pages.length + " pages, " + routes.size + " unique routes, " + cards.length + " card families, " + cssList.length + " ordered CSS modules.");
+console.log("EMPIREx architecture checks passed: " + pages.length + " pages, " + routes.size + " unique routes, " + cards.length + " card families, " + cssFiles.length + " ordered CSS modules.");

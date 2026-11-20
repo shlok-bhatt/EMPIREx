@@ -8,3 +8,9 @@ exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
+  - package.json
+  - package-lock.json
+  - node_modules
+  - scripts
+  - .github
+  - _artifacts

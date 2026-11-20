@@ -1,0 +1,12 @@
+{
+  "name": "empirex-website",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check:browser": "node scripts/check-browser.mjs _site"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "playwright": "1.65.1"
+  }
+}
