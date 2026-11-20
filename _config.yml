@@ -1,0 +1,9 @@
+title: EMPIREx
+url: "https://shlok-bhatt.github.io"
+baseurl: "/EMPIREx"
+permalink: pretty
+markdown: kramdown
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock

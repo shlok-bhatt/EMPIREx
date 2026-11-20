@@ -1,1 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="440" height="765" viewBox="523 97 187 324" role="img" aria-label="event card artwork"><image x="0" y="0" width="1627" height="915" href="../empirex-card-showcase.avif" xlink:href="../empirex-card-showcase.avif" preserveAspectRatio="none"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="765" viewBox="0 0 440 765" role="img" aria-label="EVENT: INFLATION">
+ <defs><linearGradient id="paper" x2="0" y2="1"><stop stop-color="#fffef9"/><stop offset="1" stop-color="#f4eee2"/></linearGradient><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#24180f" flood-opacity=".16"/></filter></defs>
+ <rect x="4" y="4" width="432" height="757" rx="23" fill="#eb7a27"/><rect x="13" y="13" width="414" height="739" rx="19" fill="url(#paper)" stroke="#fff" stroke-width="6"/><rect x="22" y="22" width="396" height="721" rx="14" fill="none" stroke="#eb7a27" stroke-width="3"/>
+ <path d="M105 26h230l-18 46H123Z" fill="#383a3c"/><text x="220" y="57" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="21" font-weight="800" letter-spacing="1.4" fill="#fff">EVENT</text>
+ <text x="220" y="119" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="35" font-weight="900" letter-spacing=".2" fill="#34271d">INFLATION</text>
+ <rect x="40" y="143" width="360" height="329" rx="13" fill="#fff3e9" stroke="#eb7a27" stroke-opacity=".3" stroke-width="2" filter="url(#shadow)"/>
+ <g>
+  <rect x="58" y="245" width="310" height="65" rx="8" fill="#b77b43" stroke="#64452b" stroke-width="5"/>
+  <rect x="83" y="185" width="78" height="60" rx="7" fill="#e8d9b4" stroke="#806342" stroke-width="4"/>
+  <rect x="174" y="168" width="81" height="77" rx="7" fill="#e8d9b4" stroke="#806342" stroke-width="4"/>
+  <rect x="268" y="190" width="75" height="55" rx="7" fill="#e8d9b4" stroke="#806342" stroke-width="4"/>
+  <g fill="#d65c34"><rect x="94" y="199" width="17" height="38"/><rect x="119" y="207" width="27" height="30"/><rect x="188" y="184" width="22" height="53"/><rect x="218" y="194" width="25" height="43"/><rect x="281" y="204" width="19" height="33"/><rect x="307" y="198" width="25" height="39"/></g>
+  <path d="M83 152l63-47 49 28 62-53 87-42" fill="none" stroke="#d34932" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M325 36l28-4-7 29" fill="none" stroke="#d34932" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <g fill="#e1b653" stroke="#8a632f" stroke-width="3"><ellipse cx="112" cy="320" rx="34" ry="10"/><rect x="78" y="302" width="68" height="18"/><ellipse cx="78" cy="302" rx="34" ry="10"/><ellipse cx="284" cy="320" rx="31" ry="10"/><rect x="253" y="299" width="62" height="21"/><ellipse cx="253" cy="299" rx="31" ry="10"/></g>
+ </g>
+ <g><rect x="75" y="488" width="290" height="38" rx="9" fill="#eb7a27"/><text x="220" y="513" font-size="15" font-weight="700" fill="#fff" text-anchor="middle">MARKET EVENT</text></g>
+ <rect x="39" y="578" width="362" height="139" rx="12" fill="#fff3e9" stroke="#eb7a27" stroke-width="2"/>
+ <rect x="57" y="594" width="326" height="31" rx="7" fill="#eb7a27"/>
+ <text x="220" y="615" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="800" letter-spacing=".8" fill="#fff">MARKET EVENT</text>
+ <text x="220" y="651" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="15.2" font-weight="600" fill="#3c3026"></text>
+ <text x="220" y="650" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" fill="#40352a">Rising prices increase costs and affect</text><text x="220" y="668" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" fill="#40352a">customers’ purchasing power. Businesses</text><text x="220" y="686" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" fill="#40352a">must carefully manage prices and</text><text x="220" y="704" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="14" fill="#40352a">resources.</text>
+ <text x="220" y="731" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="9" font-weight="700" letter-spacing="1.5" fill="#eb7a27">EMPIREX · BUILD SMART. THINK FAST.</text>
+ </svg>
