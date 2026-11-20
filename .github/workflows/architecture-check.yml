@@ -25,6 +25,9 @@ jobs:
       - name: Install Jekyll
         run: gem install jekyll -v 4.3.4 --no-document
 
+      - name: Add Ruby user executables to PATH
+        run: echo "$(ruby -e 'puts Gem.user_dir')/bin" >> "$GITHUB_PATH"
+
       - name: Build the GitHub Pages site
         run: jekyll build --baseurl "/EMPIREx"
 
