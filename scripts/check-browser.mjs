@@ -25,7 +25,7 @@ const server = createServer((request, response) => {
     if (pathname === base) pathname = "/";
     else if (pathname.startsWith(base + "/")) pathname = pathname.slice(base.length);
     let file = resolve(root, "." + pathname);
-    if (!file.startsWith(root + sep) && file !== join(root, "index.html")) {
+    if (file !== root && !file.startsWith(root + sep)) {
       response.writeHead(403); response.end("Forbidden"); return;
     }
     if (existsSync(file) && !extname(file)) file = join(file, "index.html");
