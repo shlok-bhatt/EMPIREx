@@ -93,7 +93,21 @@ try {
     const serious = axeResults.violations.filter((violation) => ["critical", "serious"].includes(violation.impact));
     audit.push({
       route,
-      violations: axeResults.violations.map((v) => ({ id: v.id, impact: v.impact, description: v.help, nodes: v.nodes.length }))
+      violations: axeResults.violations.map((v) => ({
+        id: v.id,
+        impact: v.impact,
+        description: v.help,
+        nodes: v.nodes.map((node) => ({
+          target: node.target,
+          html: node.html,
+          failureSummary: node.failureSummary,
+          checks: [...node.any, ...node.all, ...node.none].map((check) => ({
+            id: check.id,
+            message: check.message,
+            data: check.data
+          }))
+        }))
+      }))
     });
     for (const violation of serious) {
       addError(route + ": accessibility " + violation.impact + " — " + violation.id + " (" + violation.nodes.length + " elements)");
