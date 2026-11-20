@@ -10,13 +10,10 @@ A responsive, multi-page product and enquiry website for the EMPIREx physical en
 - Market Pulse, For Schools, Our Story, FAQs, Contact, Privacy and Website Terms
 
 ## Card imagery
-The six main card-family previews are self-contained SVG files in `assets/cards/`. Each file contains its artwork and text directly; it does not depend on an external AVIF, embedded image, canvas, or JavaScript image assembly. The full showcase is `assets/empirex-card-showcase.svg`, which displays the six individual vector previews. Open an individual card image to inspect it at full vector resolution.
+The six main card-family previews are standalone SVG files in `assets/cards/`. Each contains its own vector artwork and text. The Home and Cards pages load each card directly as an individual image; no AVIF, nested SVG image loading, canvas, or JavaScript image assembly is required. Each individual card page also opens its own standalone SVG for full-size viewing.
 
 ## Clean page URLs
-GitHub Pages uses Jekyll front matter and `_config.yml` to publish pages with clean trailing-slash paths, such as `/how-to-play/` and `/categories/`. Internal navigation points to those clean routes.
-
-## Local preview
-Serve the repository through Jekyll with the configured base URL. For a plain local static server, replace the Liquid base URL in each page head with the local root.
+GitHub Pages uses Jekyll front matter and `_config.yml` to publish clean trailing-slash paths, such as `/how-to-play/` and `/categories/`. Internal navigation points to those clean routes.
 
 ## Product information
 - Displayed individual price: ₹599 MRP and ₹549 introductory selling price.
