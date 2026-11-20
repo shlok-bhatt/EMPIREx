@@ -125,7 +125,7 @@ const aboutHtml = existsSync(outputFileFor("/about/")) ? readFileSync(outputFile
 if (aboutHtml && (aboutHtml.match(/class="team-card"/g) || []).length !== 3) fail("About: expected all three founding team profiles");
 const futureHtml = existsSync(outputFileFor("/future-editions/")) ? readFileSync(outputFileFor("/future-editions/"), "utf8") : "";
 if (futureHtml) {
-  if ((futureHtml.match(/class="future-card(?:\\s|")/g) || []).length !== 30) fail("Future editions: expected 30 concept cards across the six sections");
+  if ((futureHtml.match(/class="future-card(?:\s|")/g) || []).length !== 30) fail("Future editions: expected 30 concept cards across the six sections");
   for (const id of ["expansion-packs", "regional-editions", "subject-editions", "digital-experience", "industry-packs", "school-experiences"]) {
     if (!futureHtml.includes('id="' + id + '"')) fail("Future editions: missing section " + id);
   }
