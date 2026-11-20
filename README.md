@@ -68,6 +68,7 @@ assets/css/
   homepage.css         # Homepage hero, product gallery and page sections
   product-experience.css # Phase 4 rules, card detail and Market Pulse layouts
   supporting-pages.css  # Phase 5 schools, story, FAQs, contact and policy layouts
+  technical-refinements.css # Phase 6 accessibility and progressive-enhancement overrides
   brand-foundation.css # Phase 1 design tokens and brand refinements
 
 styles.css             # Backwards-compatible CSS import entry point
@@ -84,10 +85,10 @@ script.js              # Navigation and image-fallback behaviour
 - **Founding team names, roles and descriptions:** edit `_data/team.yml`.
 - **Homepage featured cards and round steps:** edit `_data/homepage.yml`; each hero card key must match an entry in `_data/cards.yml`.
 - **Card-family page structure:** edit `_layouts/card.html`.
-- **Shared page shell and metadata:** edit `_layouts/default.html` and `_includes/head.html`.
+- **Shared page shell and metadata:** edit `_layouts/default.html` and `_includes/head.html`; canonical links, social metadata, font loading and CSS/JS assets are managed there.
 - **Shared header/footer:** edit their matching files in `_includes/`.
 - **Page-specific content:** edit the relevant root-level HTML file while preserving its front matter and published permalink.
-- **Global styling:** edit the ordered CSS modules in `assets/css/`. The Phase 4 product-page experience is in `product-experience.css`; keep its position aligned between `_includes/head.html` and `styles.css`.
+- **Global styling:** edit the ordered CSS modules in `assets/css/`. Keep `_includes/head.html` and `styles.css` imports in the same order. The Phase 4 product-page experience is in `product-experience.css`; keep its position aligned between `_includes/head.html` and `styles.css`.
 - **Homepage layout and visual styles:** edit `index.html` and `assets/css/homepage.css`; keep the product artwork linked to the original card assets.
 - **How to Play and Market Pulse:** edit `how-to-play.html` and `market-pulse.html`; keep the reveal order and scoring sequence aligned with the published game rules.
 - **For Schools:** edit `schools.html`; describe classroom use as supplementary and do not imply institutional pricing or availability is confirmed.
@@ -96,6 +97,8 @@ script.js              # Navigation and image-fallback behaviour
 - **FAQs and contact:** edit `faq.html` and `contact.html`; keep prices centralised and use the published team email links.
 - **Privacy and terms:** edit `privacy.html` and `terms.html` when the website's hosting, external services, contact method or product arrangements change.
 - **Not found page:** edit `404.html`; keep its helpful route links aligned with published page permalinks.
+- **Navigation behaviour and image fallbacks:** edit `script.js`; preserve the no-JavaScript navigation fallback and keyboard-close behaviour.
+- **Technical checks:** update `.github/workflows/architecture-check.yml` and the `scripts/check-*.mjs` files whenever a new build or quality requirement is introduced.
 - **Cards directory:** edit `categories.html` and the reusable gallery includes in `_includes/`.
 - **Individual card-family content:** edit `_data/cards.yml`; the six detail pages are rendered by `_layouts/card.html`. Keep each card's timing, mechanics and rule note consistent with the game.
 
@@ -129,4 +132,4 @@ The six card detail pages use `layout: card` and a `card_key` that matches an en
 
 ## Automated checks
 
-Pull requests and pushes to `main` run the Architecture Checks workflow. It validates the page/front-matter set, unique permalinks, central navigation and card data, supporting-page sections, card assets, CSS module order, and shared-layout structure. The workflow then builds the Jekyll site with the project base URL and checks the generated routes, metadata, page-specific content, shared landmarks, and local links/assets.
+Pull requests and pushes to `main` run the Architecture Checks workflow. It validates the page/front-matter set, unique permalinks, central navigation and card data, supporting-page sections, card assets, CSS module order, shared-layout structure, JavaScript syntax, page metadata, image alternative text and safe external-link attributes. The workflow then builds the Jekyll site with the project base URL and checks the generated routes, metadata, page-specific content, shared landmarks, and local links/assets.
