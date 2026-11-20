@@ -51,6 +51,7 @@ _includes/
   header.html          # Shared wordmark and primary navigation
   footer.html          # Shared footer and links
   card-grid.html       # Data-driven card-family gallery
+  card-showcase.html   # Data-driven image showcase for the Home and Cards pages
   team-grid.html       # Data-driven team profiles
 
 _layouts/
@@ -73,6 +74,7 @@ script.js              # Navigation and image-fallback behaviour
 - **Footer links:** edit the footer list in `_data/navigation.yml`.
 - **Brand name, tagline, disclaimer and asset version:** edit `_data/site.yml`.
 - **Card-family names, artwork, descriptions and prompts:** edit `_data/cards.yml`.
+- **Product prices:** edit the `pricing` values in `_data/site.yml`; homepage, FAQs and terms read from these shared values.
 - **Founding team names, roles and descriptions:** edit `_data/team.yml`.
 - **Card-family page structure:** edit `_layouts/card.html`.
 - **Shared page shell and metadata:** edit `_layouts/default.html` and `_includes/head.html`.
@@ -107,3 +109,7 @@ The six card detail pages use `layout: card` and a `card_key` that matches an en
 3. Preserve product rules and pricing accuracy; do not introduce unverified claims.
 4. Keep CSS modules in the defined load order.
 5. Check navigation, image paths, metadata and mobile layouts after content or architecture changes.
+
+## Automated checks
+
+Pull requests and pushes to `main` run the Architecture Checks workflow. It validates the page/front-matter set, unique permalinks, central navigation and card data, referenced card assets, CSS module order, and shared-layout structure. The workflow then builds the Jekyll site with the project base URL and checks the generated routes, metadata, shared landmarks, and local links/assets.
