@@ -315,3 +315,74 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #9b
  .flagship-card{transform:none}
  .shop-gallery>a:hover{transform:none}
 }
+
+
+/* Phase 7 accessibility refinement — audited against axe-core WCAG 2.2 AA. */
+:root {
+  --goldDark: #704719;
+  --mutedLight: #62564a;
+}
+.eyebrow { color: #704719; }
+.section-dark .eyebrow,
+.hero .eyebrow,
+.page-hero .eyebrow,
+.closing-cta .eyebrow,
+.future-section-dark .eyebrow,
+.shop-hero .eyebrow,
+.shop-how-section .eyebrow,
+.checkout-summary .eyebrow,
+.price-cta .eyebrow {
+  color: var(--goldLight);
+}
+.text-link { color: #704719; }
+.section-dark .text-link,
+.future-section-dark .text-link,
+.guide-market-link .text-link,
+.market-pulse-links-section .text-link,
+.not-found-section .text-link {
+  color: var(--goldLight);
+}
+.primary-nav .nav-cta,
+.primary-nav .nav-cta[aria-current="page"] {
+  color: #211811;
+  background: #c59b5d;
+}
+.site-shop-promo .eyebrow,
+.shop-spec-panel .eyebrow,
+.shop-gallery-section .eyebrow,
+.flagship-round-section .eyebrow {
+  color: #704719;
+}
+.price-cta .small-note,
+.flagship-price-section .small-note {
+  color: #d8cbb8;
+}
+.card-directory-section article p,
+.card-directory-section .category-tile p,
+.future-card-light .future-card-number,
+.future-feature-list > div > span,
+.future-lead,
+.future-digital-copy .future-feature-list > div > span {
+  color: #704719;
+}
+.future-section-dark h1 em,
+.future-section-dark h2 em,
+.future-section-dark .section-heading h2 em,
+.future-section-dark .future-digital h2 em {
+  color: #e4c991;
+}
+.future-section-dark .section-heading > p,
+.future-section-dark .future-section-intro,
+.future-section-dark .future-footnote {
+  color: #d4c6b1;
+}
+.example-box .eyebrow { color: #704719; }
+.example-box > p { color: #62564a; }
+.demo-cart-product strong,
+.demo-cart-total strong,
+.demo-cart-remove,
+.shop-family-row > span:first-child,
+.shop-family-row > span:last-child,
+.shop-gallery span b {
+  color: #704719;
+}
