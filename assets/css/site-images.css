@@ -1,0 +1,7 @@
+/* Static high-resolution image assets */
+img.image-master{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:#160f0a}
+.image-fallback{margin:10px 0 0;padding:12px 14px;background:#fff2df;border:1px solid #89612c;color:#332518;font-size:.82rem;line-height:1.5}
+.image-zoom-link{display:inline-block;margin-top:10px;color:#f0d5a5;font-size:.78rem;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.card-preview-frame img.card-preview-image{display:block}
+.category-tile .tile-image img.card-preview-image{display:block}
+
