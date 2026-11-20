@@ -19,9 +19,8 @@
 <title>{{ page.title | default: site.title | escape }}</title>
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 <link rel="icon" href="{{ '/favicon.svg' | relative_url }}?v={{ site.data.site.asset_version }}">
-{% assign css_files = "site-core.css,site-components.css,site-future.css,homepage.css,product-experience.css,supporting-pages.css,technical-refinements.css,flagship.css" | split: "," %}
+{% assign css_files = "site-core.css,site-components.css,site-future.css,homepage.css,product-experience.css,supporting-pages.css,technical-refinements.css,brand-foundation.css,flagship.css" | split: "," %}
 {% for css_file in css_files %}<link rel="stylesheet" href="{{ '/assets/css/' | append: css_file | relative_url }}?v={{ site.data.site.asset_version }}">{% endfor %}
-<link rel="stylesheet" href="{{ '/assets/css/brand-foundation.css' | relative_url }}?v={{ site.data.site.asset_version }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
