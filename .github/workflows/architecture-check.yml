@@ -1,0 +1,32 @@
+name: EMPIREx architecture checks
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Jekyll architecture and rendered site
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Check source architecture
+        run: node scripts/check-architecture.mjs
+
+      - name: Install Jekyll
+        run: gem install jekyll -v 4.3.4 --no-document
+
+      - name: Build the GitHub Pages site
+        run: jekyll build --baseurl "/EMPIREx"
+
+      - name: Validate generated routes, layout and links
+        run: node scripts/check-built-site.mjs _site
