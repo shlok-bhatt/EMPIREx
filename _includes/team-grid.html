@@ -1,0 +1,9 @@
+<div class="team-grid">
+  {% for member in site.data.team %}
+    <article class="team-card">
+      <span class="team-role">{{ member.role | escape }}</span>
+      <h3>{{ member.name | escape }}</h3>
+      <p>{{ member.responsibility | escape }}</p>
+    </article>
+  {% endfor %}
+</div>
