@@ -8,9 +8,16 @@
   tagline: Know who you are serving.
   page_title: "Customer Cards | EMPIREx"
   description: "Customer card role and original artwork in the EMPIREx enterprise card game."
-  hero_copy: "The Customer card sets the customer group for the round. The active Customer scoring profile shows how well each Action category fits that group. Customer scores are 0, 1, 3 or 5 EP."
-  detail_copy: "The Customer card sets the customer group for the round. The active Customer scoring profile shows how well each Action category fits that group. Customer scores are 0, 1, 3 or 5 EP."
-  detail_extra: "A score of exactly 5 before the Event modifier is a Perfect Match. It does not give extra EP by itself, but it may count towards a relevant Secret Goal."
+  role_label: "Round situation"
+  timing: "One Customer card is revealed at the start of each round."
+  hero_copy: "The Customer card sets the customer group for the round. Once Market Pulse is revealed, the matching Customer scoring profile shows how well each Action category fits that group."
+  detail_copy: "Customer cards keep each round focused on the people a business is trying to serve. The selected Action is scored against the active Customer profile."
+  mechanics:
+    - "Reveal one Customer card for the round."
+    - "After the Market Pulse card is revealed, use the matching Customer scoring profile."
+    - "Find the score for the chosen Action category: 0, 1, 3 or 5 EP."
+  rule_note_title: "Perfect Match"
+  rule_note: "A Customer score of exactly 5 before the Event modifier is a Perfect Match. It gives no extra EP by itself, but may count towards a relevant Secret Goal."
   prompt: "Which business decision best fits this customer's needs?"
 - key: action
   number: "02"
@@ -22,8 +29,17 @@
   tagline: Choose a practical business decision.
   page_title: "Action Cards | EMPIREx"
   description: "Action card role and original artwork in the EMPIREx enterprise card game."
-  hero_copy: "Each player receives three Action options from three different categories and secretly chooses one. All selected Actions are revealed together. The chosen category determines the Customer score lookup and which Event, Business or Ability effects may apply."
-  detail_copy: "Each player receives three Action options from three different categories and secretly chooses one. All selected Actions are revealed together. The chosen category determines the Customer score lookup and which Event, Business or Ability effects may apply."
+  role_label: "Player decision"
+  timing: "Each player chooses one Action secretly; all selected Actions are revealed together."
+  hero_copy: "Each player receives three Action options from three different categories and secretly chooses one. The selected category drives the Customer score lookup and determines which Event, Business or Ability effects may apply."
+  detail_copy: "Action cards represent the business decisions players make in response to the Customer and Event revealed for a round."
+  mechanics:
+    - "Each player receives three Action options from three different categories."
+    - "Choose one option secretly and keep it face down until every player is ready."
+    - "Reveal all selected Actions together, before the Market Pulse card is turned over."
+    - "Use the selected Action category for the Customer score and relevant scoring modifiers or bonuses."
+  rule_note_title: "One choice each round"
+  rule_note: "Each player scores the category of the one Action they selected for that round."
   prompt: "Which available action offers the strongest response?"
 - key: event
   number: "03"
@@ -35,8 +51,16 @@
   tagline: Respond to changing market conditions.
   page_title: "Event Cards | EMPIREx"
   description: "Event card role and original artwork in the EMPIREx enterprise card game."
-  hero_copy: "An Event card introduces a market situation that may affect the score for an Action category. The modifier shown for a category is +1, −1 or 0. The Inflation example gives +1 EP to Finance, −1 EP to Sales & Promotions and no change to other Action categories."
-  detail_copy: "An Event card introduces a market situation that may affect the score for an Action category. The modifier shown for a category is +1, −1 or 0. The Inflation example gives +1 EP to Finance, −1 EP to Sales & Promotions and no change to other Action categories."
+  role_label: "Market condition"
+  timing: "One Event card is revealed at the start of each round and applied during scoring."
+  hero_copy: "An Event card introduces a market situation that may change the score for an Action category. Its modifier for the chosen category is +1, −1 or 0 EP."
+  detail_copy: "Event cards make market conditions matter. The modifier depends on the category of the Action selected by each player."
+  mechanics:
+    - "Reveal one Event card for the round."
+    - "Check the modifier shown for the selected Action category."
+    - "Apply the Event modifier to the Customer score before using the zero floor in the scoring formula."
+  rule_note_title: "Example: Inflation"
+  rule_note: "The Inflation example gives +1 EP to Finance, −1 EP to Sales & Promotions and 0 EP to every other Action category."
   prompt: "How should the business adapt when the market changes?"
 - key: ability
   number: "04"
@@ -48,8 +72,16 @@
   tagline: Use a special capability at the right moment.
   page_title: "Ability Cards | EMPIREx"
   description: "Ability card role and original artwork in the EMPIREx enterprise card game."
-  hero_copy: "An Ability card gives a player a special advantage linked to two eligible Action categories. When the chosen Action is in either eligible category, announce the Ability before scoring, add +2 EP, and turn the card sideways. This bonus can be used once per game."
-  detail_copy: "An Ability card gives a player a special advantage linked to two eligible Action categories. When the chosen Action is in either eligible category, announce the Ability before scoring, add +2 EP, and turn the card sideways. This bonus can be used once per game."
+  role_label: "One-time advantage"
+  timing: "Received at setup; may be used in one eligible round."
+  hero_copy: "An Ability card gives a player a special advantage linked to two eligible Action categories. When the chosen Action matches either category, the player may announce the Ability before scoring and add +2 EP once per game."
+  detail_copy: "Ability cards reward careful timing. A player must decide whether the current Action is the right moment to use the card's one-time advantage."
+  mechanics:
+    - "Check the two Action categories listed as eligible on the Ability card."
+    - "When the selected Action belongs to either eligible category, announce the Ability before scoring."
+    - "Add +2 EP and turn the Ability card sideways to show it has been used."
+  rule_note_title: "Use it once"
+  rule_note: "The +2 EP Ability bonus can be used only once per game. It must be announced before scoring."
   prompt: "Is this the right round to use your one-time advantage?"
 - key: secret-goal
   number: "05"
@@ -61,8 +93,16 @@
   tagline: Work towards a hidden objective.
   page_title: "Secret Goal Cards | EMPIREx"
   description: "Secret Goal card role and original artwork in the EMPIREx enterprise card game."
-  hero_copy: "Each player receives one Secret Goal at the start of the game and keeps it private while playing. After Round 7, reveal the Goal. If its stated condition is complete, add +8 EP once. The Marketing Master example requires Marketing Actions in at least two different rounds."
-  detail_copy: "Each player receives one Secret Goal at the start of the game and keeps it private while playing. After Round 7, reveal the Goal. If its stated condition is complete, add +8 EP once. The Marketing Master example requires Marketing Actions in at least two different rounds."
+  role_label: "Hidden objective"
+  timing: "Received at setup; checked after Round 7."
+  hero_copy: "Each player receives one Secret Goal at the start of the game and keeps it private. After Round 7, reveal the Goal. If its stated condition is complete, add +8 EP once."
+  detail_copy: "Secret Goals give each player a private objective to work towards while making decisions across the seven rounds."
+  mechanics:
+    - "Take one Secret Goal at the start of the game and keep it hidden."
+    - "Work towards the condition while playing the seven rounds."
+    - "After Round 7, reveal the Goal. A completed condition adds +8 EP once."
+  rule_note_title: "Example: Marketing Master"
+  rule_note: "The Marketing Master example requires Marketing Actions in at least two different rounds."
   prompt: "Can you complete your hidden objective without revealing it?"
 - key: business
   number: "06"
@@ -74,6 +114,14 @@
   tagline: Build around a business speciality.
   page_title: "Business Cards | EMPIREx"
   description: "Business card role and original artwork in the EMPIREx enterprise card game."
-  hero_copy: "A Business card gives each player a business identity and a named speciality. When the Action category selected in a round matches the speciality on the Business card, add +1 EP for that round. The Fashion example shown in the card sheet has Marketing as its speciality."
-  detail_copy: "A Business card gives each player a business identity and a named speciality. When the Action category selected in a round matches the speciality on the Business card, add +1 EP for that round. The Fashion example shown in the card sheet has Marketing as its speciality."
+  role_label: "Business identity"
+  timing: "Received at setup and kept visible throughout the game."
+  hero_copy: "A Business card gives each player a business identity and a named speciality. When the selected Action category matches that speciality, add +1 EP for the round."
+  detail_copy: "Business cards give players a specialism to consider when choosing an Action. A matching category earns a repeatable round bonus."
+  mechanics:
+    - "Take one Business card at setup and keep it visible."
+    - "Check the speciality named on the card."
+    - "When the selected Action category matches that speciality, add +1 EP for that round."
+  rule_note_title: "Example: Fashion"
+  rule_note: "The Fashion example shown in the card sheet has Marketing as its speciality."
   prompt: "Can you use your business speciality to gain an advantage?"
