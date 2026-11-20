@@ -102,6 +102,58 @@ for (const [route, title] of cardRoutes) {
   if (!html.includes("/EMPIREx/assets/css/product-experience.css")) fail(route + ": Phase 4 stylesheet is missing");
 }
 
+
+const supportingRoutes = [
+  ["/schools/", "Schools"], ["/about/", "About"], ["/future-editions/", "Future editions"],
+  ["/faq/", "FAQs"], ["/contact/", "Contact"], ["/privacy/", "Privacy"],
+  ["/terms/", "Terms"], ["/404.html", "Not found"]
+];
+for (const [route, label] of supportingRoutes) {
+  const file = outputFileFor(route);
+  if (!existsSync(file)) continue;
+  const html = readFileSync(file, "utf8");
+  if ((html.match(/<h1\b/gi) || []).length !== 1) fail(label + ": expected exactly one H1 heading");
+  if (!html.includes("/EMPIREx/assets/css/supporting-pages.css")) fail(label + ": Phase 5 supporting stylesheet is missing");
+}
+const schoolsHtml = existsSync(outputFileFor("/schools/")) ? readFileSync(outputFileFor("/schools/"), "utf8") : "";
+if (schoolsHtml) {
+  if (!schoolsHtml.includes("13–17") || !schoolsHtml.includes("supplementary activity")) fail("Schools: intended learner range or supplementary-use explanation is missing");
+  if ((schoolsHtml.match(/class="school-use-card"/g) || []).length !== 3) fail("Schools: expected three classroom-use steps");
+  if ((schoolsHtml.match(/class="school-focus-grid"/g) || []).length !== 1) fail("Schools: possible learning focus section is missing");
+}
+const aboutHtml = existsSync(outputFileFor("/about/")) ? readFileSync(outputFileFor("/about/"), "utf8") : "";
+if (aboutHtml && (aboutHtml.match(/class="team-card"/g) || []).length !== 3) fail("About: expected all three founding team profiles");
+const futureHtml = existsSync(outputFileFor("/future-editions/")) ? readFileSync(outputFileFor("/future-editions/"), "utf8") : "";
+if (futureHtml) {
+  if ((futureHtml.match(/class="future-card(?:\s|")/g) || []).length !== 30) fail("Future editions: expected 30 concept cards across the six sections");
+  for (const id of ["expansion-packs", "regional-editions", "subject-editions", "digital-experience", "industry-packs", "school-experiences"]) {
+    if (!futureHtml.includes('id="' + id + '"')) fail("Future editions: missing section " + id);
+  }
+  if (!futureHtml.includes("not a pre-order or reservation list")) fail("Future editions: the concept-only and no-preorder explanation is missing");
+}
+const faqHtml = existsSync(outputFileFor("/faq/")) ? readFileSync(outputFileFor("/faq/"), "utf8") : "";
+if (faqHtml) {
+  if ((faqHtml.match(/<details>/g) || []).length < 12) fail("FAQs: expected at least twelve question-and-answer entries");
+  if ((faqHtml.match(/class="faq-group"/g) || []).length !== 4) fail("FAQs: expected four topic groups");
+}
+const contactHtml = existsSync(outputFileFor("/contact/")) ? readFileSync(outputFileFor("/contact/"), "utf8") : "";
+if (contactHtml) {
+  if ((contactHtml.match(/class="contact-person-card"/g) || []).length !== 3) fail("Contact: expected three team contact cards");
+  for (const email of ["shlok.bhatt@shikhaacademy.org", "sahil.maurya@shikhaacademy.org", "anuj.bhagat@shikhaacademy.org"]) {
+    if (!contactHtml.includes("mailto:" + email)) fail("Contact: missing mailto link for " + email);
+  }
+}
+const privacyHtml = existsSync(outputFileFor("/privacy/")) ? readFileSync(outputFileFor("/privacy/"), "utf8") : "";
+if (privacyHtml && (!privacyHtml.includes("Google Fonts") || !privacyHtml.includes("GitHub Pages") || !privacyHtml.includes("does not have user accounts"))) {
+  fail("Privacy: hosting, external font and account disclosures are missing");
+}
+const termsHtml = existsSync(outputFileFor("/terms/")) ? readFileSync(outputFileFor("/terms/"), "utf8") : "";
+if (termsHtml && (!termsHtml.includes("₹599") || !termsHtml.includes("₹549") || !termsHtml.includes("not pre-orders"))) {
+  fail("Terms: central prices or future-concept purchasing caveat are missing");
+}
+const notFoundHtml = existsSync(outputFileFor("/404.html")) ? readFileSync(outputFileFor("/404.html"), "utf8") : "";
+if (notFoundHtml && (notFoundHtml.match(/class="not-found-link-grid"/g) || []).length !== 1) fail("404: helpful navigation grid is missing");
+
 const localTargets = new Set();
 for (const route of routes) {
   const htmlPath = outputFileFor(route);

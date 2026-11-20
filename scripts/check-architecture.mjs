@@ -212,6 +212,67 @@ for (const pagePath of ["index.html", "faq.html", "terms.html"]) {
 }
 if (!read("assets/css/brand-foundation.css").includes(".skip-link:focus")) report("Brand foundation is missing the visible keyboard skip-link style");
 
+
+const supportingPages = {
+  schools: read("schools.html"),
+  about: read("about.html"),
+  future: read("future-editions.html"),
+  faq: read("faq.html"),
+  contact: read("contact.html"),
+  privacy: read("privacy.html"),
+  terms: read("terms.html"),
+  notFound: read("404.html")
+};
+if (!supportingPages.schools.includes("13–17") ||
+    !supportingPages.schools.includes("supplementary activity") ||
+    !supportingPages.schools.includes("institutional pricing or quotation will be confirmed") ||
+    !supportingPages.schools.includes('id="classroom-use"') ||
+    !supportingPages.schools.includes('id="learning-focus"') ||
+    !supportingPages.schools.includes('id="school-enquiry"')) {
+  report("schools.html: intended age range, supplementary-use caveat or section navigation is missing");
+}
+if (!supportingPages.about.includes("{% include team-grid.html %}") ||
+    (supportingPages.about.match(/class="story-principles-grid"/g) || []).length !== 1) {
+  report("about.html: team directory or project principles section is missing");
+}
+const futureIds = ["expansion-packs", "regional-editions", "subject-editions", "digital-experience", "industry-packs", "school-experiences"];
+if (!supportingPages.future.includes("not currently available to purchase") ||
+    !supportingPages.future.includes("not a pre-order or reservation list") ||
+    !futureIds.every((id) => supportingPages.future.includes('id="' + id + '"')) ||
+    !supportingPages.future.includes("No future edition is currently available")) {
+  report("future-editions.html: concept-only status or one or more category sections is missing");
+}
+if ((supportingPages.faq.match(/<details>/g) || []).length < 12 ||
+    !["faq-game", "faq-learning", "faq-orders", "faq-project"].every((id) => supportingPages.faq.includes('id="' + id + '"')) ||
+    !supportingPages.faq.includes("site.data.site.pricing.mrp") ||
+    !supportingPages.faq.includes("site.data.site.pricing.introductory")) {
+  report("faq.html: topic groups, sufficient FAQ entries or central price bindings are missing");
+}
+for (const email of ["shlok.bhatt@shikhaacademy.org", "sahil.maurya@shikhaacademy.org", "anuj.bhagat@shikhaacademy.org"]) {
+  if (!supportingPages.contact.includes("mailto:" + email)) report("contact.html: missing published team email link for " + email);
+}
+if ((supportingPages.contact.match(/class="contact-person-card"/g) || []).length !== 3 ||
+    !supportingPages.contact.includes("does not collect enquiry forms, accept orders or process payments")) {
+  report("contact.html: the three team contact cards or no-form/no-payment explanation is missing");
+}
+if (!supportingPages.privacy.includes("Google Fonts") ||
+    !supportingPages.privacy.includes("GitHub Pages") ||
+    !supportingPages.privacy.includes("does not have user accounts") ||
+    !supportingPages.privacy.includes("email service")) {
+  report("privacy.html: hosting, external-font, account and email-contact disclosures are incomplete");
+}
+if (!supportingPages.terms.includes("site.data.site.pricing.mrp") ||
+    !supportingPages.terms.includes("site.data.site.pricing.introductory") ||
+    !supportingPages.terms.includes("not pre-orders") ||
+    !supportingPages.terms.includes("No Cambridge International endorsement or affiliation is claimed")) {
+  report("terms.html: price bindings, future-concept caveat or project-affiliation statement is missing");
+}
+if (!supportingPages.notFound.includes("noindex: true") ||
+    !["/", "/how-to-play/", "/categories/", "/faq/", "/schools/", "/contact/"].every((route) => supportingPages.notFound.includes("{{ site.baseurl }}" + route))) {
+  report("404.html: noindex setting or helpful published-route links are missing");
+}
+if (!cssList.includes("supporting-pages.css")) report("_includes/head.html: Phase 5 supporting pages stylesheet is missing");
+
 const staticAssetExists = (urlPath) => exists(urlPath.replace(/^\//, ""));
 for (const page of pages) {
   const attributes = [...page.body.matchAll(/\b(?:href|src)=["']([^"']+)["']/gi)].map((match) => match[1]);
