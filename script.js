@@ -23,7 +23,7 @@ const noteNodes=[...document.querySelectorAll("[data-image-load-note]")];
 function displayError(error){
  console.error("EMPIREx card image could not be displayed:",error);
  imgs.forEach(img=>img.classList.add("image-load-error"));
- canvases.forEach(canvas=>canvas.classList.add("image-load-error"));
+ canvases.forEach(canvas=>{canvas.classList.add("image-load-error");const fallback=document.createElement("span");fallback.className="canvas-fallback";fallback.textContent="Card preview unavailable in this browser.";canvas.parentNode.appendChild(fallback);});
  noteNodes.forEach(note=>{note.hidden=false;note.textContent="The card image could not be loaded. Refresh the page or try a browser that supports AVIF images.";});
 }
 async function loadCardSheet(){
