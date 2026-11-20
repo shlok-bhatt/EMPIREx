@@ -1,0 +1,15 @@
+<div class="home-hero-gallery" aria-label="Preview of three EMPIREx card families">
+  {% for item in site.data.homepage.hero_gallery.cards %}
+    {% assign card = site.data.cards | where: "key", item.card_key | first %}
+    {% if card %}
+      <a class="home-feature-card" href="{{ card.url | relative_url }}" aria-label="Explore {{ card.title | escape }} cards">
+        <span class="home-feature-card-index">0{{ forloop.index }}</span>
+        <span class="home-feature-card-art">
+          <img data-site-image src="{{ card.image | relative_url }}?v={{ card.image_version }}" alt="{{ card.image_alt | escape }}" width="440" height="765" loading="eager" decoding="async" fetchpriority="high">
+        </span>
+        <span class="home-feature-card-name">{{ card.title | escape }}</span>
+        <span class="home-feature-card-role">{{ item.role | escape }}</span>
+      </a>
+    {% endif %}
+  {% endfor %}
+</div>
