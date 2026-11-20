@@ -129,11 +129,11 @@ if (!cardTemplate.includes("card.mechanics") || !cardTemplate.includes("card.rul
   report("_layouts/card.html: the reusable card detail template must render mechanics, timing and the key rule");
 }
 for (const block of cardBlocks) {
-  const key = (block.match(/^- key:\\s*([\\w-]+)/m) || [])[1] || "unknown";
+  const key = (block.match(/^- key:\s*([\w-]+)/m) || [])[1] || "unknown";
   for (const field of ["role_label:", "timing:", "mechanics:", "rule_note_title:", "rule_note:"]) {
     if (!block.includes("  " + field)) report("_data/cards.yml: " + key + " is missing " + field);
   }
-  const mechanics = (block.match(/  mechanics:\\n([\\s\\S]*?)(?=^  [\\w_]+:|$)/m) || [])[1] || "";
+  const mechanics = (block.match(/  mechanics:\n([\s\S]*?)(?=^  [\w_]+:|$)/m) || [])[1] || "";
   if ((mechanics.match(/^    - /gm) || []).length < 3) report("_data/cards.yml: " + key + " must contain at least three clear mechanics");
 }
 
