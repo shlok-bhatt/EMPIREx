@@ -19,6 +19,9 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
+      - name: Check JavaScript syntax
+        run: node --check script.js
+
       - name: Check source architecture
         run: node scripts/check-architecture.mjs
 
