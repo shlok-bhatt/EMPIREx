@@ -143,7 +143,11 @@ h2 em {
 .closing-cta h1 em,
 .closing-cta h2 em,
 .future-section-dark h1 em,
-.future-section-dark h2 em {
+.future-section-dark h2 em,
+.future-link-banner h1 em,
+.future-link-banner h2 em,
+.future-master h1 em,
+.future-master h2 em {
   color: var(--goldLight);
 }
 
@@ -181,6 +185,8 @@ summary:focus-visible {
 .page-hero a:focus-visible,
 .section-dark a:focus-visible,
 .closing-cta a:focus-visible,
+.future-link-banner a:focus-visible,
+.future-master a:focus-visible,
 .menu-toggle:focus-visible {
   outline-color: var(--goldLight);
 }
