@@ -112,7 +112,7 @@ for (const [route, label] of supportingRoutes) {
   const file = outputFileFor(route);
   if (!existsSync(file)) continue;
   const html = readFileSync(file, "utf8");
-  if ((html.match(/<h1\\b/gi) || []).length !== 1) fail(label + ": expected exactly one H1 heading");
+  if ((html.match(/<h1\b/gi) || []).length !== 1) fail(label + ": expected exactly one H1 heading");
   if (!html.includes("/EMPIREx/assets/css/supporting-pages.css")) fail(label + ": Phase 5 supporting stylesheet is missing");
 }
 const schoolsHtml = existsSync(outputFileFor("/schools/")) ? readFileSync(outputFileFor("/schools/"), "utf8") : "";
