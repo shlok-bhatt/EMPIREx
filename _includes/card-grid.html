@@ -1,0 +1,15 @@
+<div class="category-grid" aria-label="EMPIREx card families">
+  {% for card in site.data.cards %}
+    <a class="category-tile" href="{{ card.url | relative_url }}">
+      <div class="tile-image">
+        <img data-site-image class="card-preview-image" src="{{ card.image | relative_url }}?v={{ card.image_version }}" alt="{{ card.image_alt | escape }}" width="440" height="765" loading="lazy" decoding="async">
+      </div>
+      <div class="tile-body">
+        <span class="tile-index">{{ card.number }} / CARD FAMILY</span>
+        <h3>{{ card.title | escape }}</h3>
+        <p>{{ card.tagline | escape }}</p>
+        <span class="tile-link">Explore {{ card.title | escape }} cards ↗</span>
+      </div>
+    </a>
+  {% endfor %}
+</div>
