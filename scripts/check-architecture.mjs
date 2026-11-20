@@ -273,6 +273,44 @@ if (!supportingPages.notFound.includes("noindex: true") ||
 }
 if (!cssList.includes("supporting-pages.css")) report("_includes/head.html: Phase 5 supporting pages stylesheet is missing");
 
+
+const technicalCss = read("assets/css/technical-refinements.css");
+const siteScript = read("script.js");
+const workflow = read(".github/workflows/architecture-check.yml");
+if (!cssList.includes("technical-refinements.css") ||
+    !technicalCss.includes("html:not(.js) .primary-nav") ||
+    !technicalCss.includes("html.js .primary-nav.open") ||
+    !technicalCss.includes(".image-fallback")) {
+  report("Phase 6 technical stylesheet: progressive navigation, menu-state and image-fallback styles are incomplete");
+}
+if (!head.includes('<link rel="canonical" href="{{ page.url | absolute_url }}">') ||
+    !head.includes("&amp;display=swap") ||
+    !head.includes('name="twitter:card"')) {
+  report("_includes/head.html: canonical, font-display or social-card metadata is incomplete");
+}
+for (const feature of [
+  'root.classList.add("js")',
+  'event.key === "Escape"',
+  'target.closest("a")',
+  'window.matchMedia',
+  'img.complete && img.naturalWidth === 0',
+  'setAttribute("aria-live", "polite")'
+]) {
+  if (!siteScript.includes(feature)) report("script.js: missing technical resilience feature " + feature);
+}
+if (!workflow.includes("node --check script.js")) {
+  report(".github/workflows/architecture-check.yml: JavaScript syntax validation step is missing");
+}
+for (const page of pages) {
+  const description = value(page.frontMatter, "description");
+  if (description !== undefined && !description.trim()) {
+    report(page.path + ": SEO description must not be empty");
+  }
+  if (page.path === "404.html" && value(page.frontMatter, "noindex") !== "true") {
+    report("404.html: error page should remain noindex");
+  }
+}
+
 const staticAssetExists = (urlPath) => exists(urlPath.replace(/^\//, ""));
 for (const page of pages) {
   const attributes = [...page.body.matchAll(/\b(?:href|src)=["']([^"']+)["']/gi)].map((match) => match[1]);
