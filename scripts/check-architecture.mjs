@@ -130,7 +130,7 @@ if (!read("index.html").includes("{% include card-grid.html %}") ||
 if (!read("about.html").includes("{% include team-grid.html %}")) report("Our Story page must use the shared team-grid include");
 const homepageData = read("_data/homepage.yml");
 const heroGalleryBlock = (homepageData.match(/hero_gallery:\s*([\s\S]*?)\n\nround_steps:/) || [])[1] || "";
-const heroCardKeys = [...heroGalleryBlock.matchAll(/^\s+- card_key:\s*([\w-]+)/gm)].map((match) => match[1]);
+const heroCardKeys = [...heroGalleryBlock.matchAll(/^[ \t]*-\s+card_key:\s*([\w-]+)/gm)].map((match) => match[1]);
 if (heroCardKeys.length !== 3 || new Set(heroCardKeys).size !== 3) {
   report("_data/homepage.yml: exactly three unique hero card keys are required");
 }
@@ -138,7 +138,7 @@ for (const key of heroCardKeys) {
   if (!cardKeys.includes(key)) report("_data/homepage.yml: hero card key is not defined in _data/cards.yml: " + key);
 }
 const roundStepsBlock = (homepageData.match(/round_steps:\s*([\s\S]*)$/) || [])[1] || "";
-const roundStepNumbers = [...roundStepsBlock.matchAll(/^\s+- number:\s*["']?(\d+)["']?/gm)].map((match) => match[1]);
+const roundStepNumbers = [...roundStepsBlock.matchAll(/^[ \t]*-\s+number:\s*["']?(\d+)["']?/gm)].map((match) => match[1]);
 if (roundStepNumbers.length !== 4 || new Set(roundStepNumbers).size !== 4) {
   report("_data/homepage.yml: exactly four uniquely numbered round steps are required");
 }
