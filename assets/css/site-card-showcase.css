@@ -1,0 +1,7 @@
+/* Reliable standalone vector card showcase. */
+.hero-product,.card-sheet-frame{margin:0;padding:11px;background:#110c08;border:1px solid rgba(222,184,119,.5);box-shadow:0 20px 50px rgba(0,0,0,.25);border-radius:4px}
+.hero-product img.image-master,.card-sheet-frame img.image-master{display:block;width:100%;height:auto;aspect-ratio:1920/1300;object-fit:contain;background:#1b120c}
+.hero-product figcaption,.card-sheet-frame figcaption{padding:10px 5px 1px;color:#c8ae83;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.image-fallback{padding:14px;background:#fff1dc;border:1px solid #b65b3d;color:#6b2d1d;font-size:.85rem}
+@media(max-width:760px){.hero-product,.card-sheet-frame{padding:7px}.hero-product img.image-master,.card-sheet-frame img.image-master{aspect-ratio:auto}}
+
