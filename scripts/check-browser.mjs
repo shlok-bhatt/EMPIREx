@@ -93,6 +93,7 @@ try {
     const serious = axeResults.violations.filter((violation) => ["critical", "serious"].includes(violation.impact));
     audit.push({
       route,
+      viewport: "desktop (1440px)",
       violations: axeResults.violations.map((v) => ({
         id: v.id,
         impact: v.impact,
@@ -136,6 +137,43 @@ try {
   }
 
   await page.setViewportSize({ width: 390, height: 844 });
+  for (const route of routes) {
+    await page.goto(pageUrl(route), { waitUntil: "domcontentloaded" });
+    const mobileAxe = await new AxeBuilder({ page })
+      .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"])
+      .analyze();
+    audit.push({
+      route,
+      viewport: "mobile (390px)",
+      violations: mobileAxe.violations.map((v) => ({
+        id: v.id,
+        impact: v.impact,
+        description: v.help,
+        nodes: v.nodes.map((node) => ({
+          target: node.target,
+          html: node.html,
+          failureSummary: node.failureSummary,
+          checks: [...node.any, ...node.all, ...node.none].map((check) => ({
+            id: check.id,
+            message: check.message,
+            data: check.data
+          }))
+        }))
+      }))
+    });
+    for (const violation of mobileAxe.violations.filter((v) => ["critical", "serious"].includes(v.impact))) {
+      addError(route + " (mobile): accessibility " + violation.impact + " — " + violation.id + " (" + violation.nodes.length + " elements)");
+    }
+  }
+
+  await page.goto(pageUrl("/"), { waitUntil: "domcontentloaded" });
+  await page.keyboard.press("Tab");
+  if (!(await page.locator(".skip-link").evaluate((element) => document.activeElement === element))) {
+    addError("Keyboard navigation: first Tab does not focus the skip link");
+  }
+  await page.keyboard.press("Enter");
+  if (!page.url().endsWith("#main-content")) addError("Keyboard navigation: skip link does not target main content");
+
   await page.goto(pageUrl("/"), { waitUntil: "domcontentloaded" });
   const menu = page.locator("#menu-toggle");
   await menu.click();
@@ -147,6 +185,10 @@ try {
   await page.goto(pageUrl("/shop/"), { waitUntil: "domcontentloaded" });
   await page.locator("[data-add-to-cart]").click();
   if (!(await page.locator("#demo-cart").evaluate((dialog) => dialog.open))) addError("Shop demo cart: dialog did not open after adding the demo item");
+  const cartAxe = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "wcag22aa"]).analyze();
+  for (const violation of cartAxe.violations.filter((v) => ["critical", "serious"].includes(v.impact))) {
+    addError("Shop demo dialog: accessibility " + violation.impact + " — " + violation.id);
+  }
   if ((await page.locator("[data-cart-quantity]").textContent())?.trim() !== "1") addError("Shop demo cart: initial quantity is incorrect");
   await page.locator("[data-quantity-increase]").click();
   if ((await page.locator("[data-cart-quantity]").textContent())?.trim() !== "2") addError("Shop demo cart: quantity control did not update");
@@ -162,7 +204,7 @@ try {
   }
 
   writeFileSync(join(screenshotDir, "accessibility-audit.json"), JSON.stringify(audit, null, 2));
-  console.log("Browser audit: " + routes.length + " routes, 6 responsive page families, 10 viewport widths, mobile-menu interaction and Shop prototype journey checked.");
+  console.log("Browser audit: " + routes.length + " routes, desktop and mobile accessibility scans, 6 responsive page families, 10 viewport widths, keyboard skip link, mobile menu and Shop prototype journey checked.");
   console.log("Accessibility findings recorded in _artifacts/phase7/accessibility-audit.json.");
 } finally {
   await browser.close();

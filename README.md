@@ -11,7 +11,7 @@ The website contains 19 published routes, including the investor-facing Shop pro
 - GitHub Pages and Jekyll
 - Semantic HTML, modular CSS and lightweight JavaScript
 - Central Jekyll data files for navigation, card families, team and product facts
-- Playwright browser checks and axe-core accessibility checks
+- Playwright browser checks and desktop/mobile axe-core accessibility checks
 - GitHub Actions validation, generated-site checks and browser screenshots
 
 No production checkout, payment provider, customer database, tracking service or account system is connected.
@@ -74,9 +74,10 @@ GitHub Actions runs:
 4. Generated-route, metadata and local-target checks.
 5. Playwright tests across all 19 routes.
 6. Responsive overflow checks at 10 viewport widths.
-7. axe-core WCAG 2.2 A/AA automated accessibility checks.
-8. Mobile navigation and Shop demo-cart interaction checks.
-9. Screenshot and accessibility-audit artifact generation.
+7. axe-core WCAG 2.2 A/AA automated accessibility checks at desktop and mobile widths.
+8. Accessibility checks of the Shop cart dialog and keyboard skip link.
+9. Mobile navigation and Shop demo-cart interaction checks.
+10. Screenshot and accessibility-audit artifact generation.
 
 Browser screenshots and the accessibility report are uploaded as a workflow artifact for review. Automated tools do not replace manual screen-reader, keyboard, real-device or production-user testing.
 
