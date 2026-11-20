@@ -8,6 +8,9 @@ primary:
   - key: cards
     label: Cards
     url: /categories/
+  - key: future-expansion
+    label: Future Expansion
+    url: /future-editions/
   - key: schools
     label: For Schools
     url: /schools/
@@ -26,13 +29,11 @@ footer:
     url: /how-to-play/
   - label: Cards
     url: /categories/
-  - label: Market Pulse
-    url: /market-pulse/
   - label: For Schools
     url: /schools/
   - label: Our Story
     url: /about/
-  - label: Future Editions
+  - label: Future Expansion
     url: /future-editions/
   - label: FAQs
     url: /faq/
