@@ -70,6 +70,8 @@ try {
     const title = await page.title();
     if (!title.trim()) addError(route + ": document title is empty");
 
+    await page.locator("img").evaluateAll((imgs) => imgs.forEach((img) => { img.loading = "eager"; }));
+    await page.waitForFunction(() => [...document.images].every((img) => img.complete), { timeout: 12000 }).catch(() => {});
     const imageIssues = await page.locator("img").evaluateAll((imgs) =>
       imgs.filter((img) => !img.complete || img.naturalWidth === 0).map((img) => img.getAttribute("src"))
     );
