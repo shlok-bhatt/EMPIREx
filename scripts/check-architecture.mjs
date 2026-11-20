@@ -123,8 +123,8 @@ if (!read("_layouts/default.html").includes("{% include header.html %}") ||
   report("_layouts/default.html: shared header/footer includes are missing");
 }
 if (!read("_layouts/card.html").includes("site.data.cards")) report("_layouts/card.html: card detail is not data-driven");
-if (!read("index.html").includes("{% include card-grid.html %}") ||
-    !read("categories.html").includes("{% include card-grid.html %}")) {
+if (!read("index.html").includes("{% include card-grid.html") ||
+    !read("categories.html").includes("{% include card-grid.html")) {
   report("Homepage and Cards page must use the shared card-grid include");
 }
 if (!read("about.html").includes("{% include team-grid.html %}")) report("Our Story page must use the shared team-grid include");
