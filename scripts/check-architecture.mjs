@@ -128,6 +128,17 @@ if (!read("index.html").includes("{% include card-grid.html %}") ||
   report("Homepage and Cards page must use the shared card-grid include");
 }
 if (!read("about.html").includes("{% include team-grid.html %}")) report("Our Story page must use the shared team-grid include");
+if (!read("index.html").includes('class_name="hero-card-grid"') ||
+    !read("categories.html").includes('class_name="cards-page-grid"') ||
+    !exists("_includes/card-showcase.html")) {
+  report("Homepage and Cards page must use the shared card-showcase include");
+}
+for (const pagePath of ["index.html", "faq.html", "terms.html"]) {
+  const page = read(pagePath);
+  if (!page.includes("site.data.site.pricing.mrp") || !page.includes("site.data.site.pricing.introductory")) {
+    report(pagePath + ": product pricing must be read from _data/site.yml");
+  }
+}
 if (!read("assets/css/brand-foundation.css").includes(".skip-link:focus")) report("Brand foundation is missing the visible keyboard skip-link style");
 
 const staticAssetExists = (urlPath) => exists(urlPath.replace(/^\//, ""));
