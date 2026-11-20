@@ -66,6 +66,7 @@ assets/css/
   site-components.css  # Supporting, accessibility and image/gallery styles
   site-future.css      # Future Editions page styles
   homepage.css         # Homepage hero, product gallery and page sections
+  product-experience.css # Phase 4 rules, card detail and Market Pulse layouts
   brand-foundation.css # Phase 1 design tokens and brand refinements
 
 styles.css             # Backwards-compatible CSS import entry point
@@ -85,8 +86,11 @@ script.js              # Navigation and image-fallback behaviour
 - **Shared page shell and metadata:** edit `_layouts/default.html` and `_includes/head.html`.
 - **Shared header/footer:** edit their matching files in `_includes/`.
 - **Page-specific content:** edit the relevant root-level HTML file while preserving its front matter and published permalink.
-- **Global styling:** edit the ordered CSS modules in `assets/css/`.
+- **Global styling:** edit the ordered CSS modules in `assets/css/`. The Phase 4 product-page experience is in `product-experience.css`; keep its position aligned between `_includes/head.html` and `styles.css`.
 - **Homepage layout and visual styles:** edit `index.html` and `assets/css/homepage.css`; keep the product artwork linked to the original card assets.
+- **How to Play and Market Pulse:** edit `how-to-play.html` and `market-pulse.html`; keep the reveal order and scoring sequence aligned with the published game rules.
+- **Cards directory:** edit `categories.html` and the reusable gallery includes in `_includes/`.
+- **Individual card-family content:** edit `_data/cards.yml`; the six detail pages are rendered by `_layouts/card.html`. Keep each card's timing, mechanics and rule note consistent with the game.
 
 The six card detail pages use `layout: card` and a `card_key` that matches an entry in `_data/cards.yml`. Their content is rendered from that single data source. The homepage hero and four-step round summary are also rendered from central data in `_data/homepage.yml`.
 

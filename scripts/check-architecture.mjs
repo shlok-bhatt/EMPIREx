@@ -123,6 +123,52 @@ if (!read("_layouts/default.html").includes("{% include header.html %}") ||
   report("_layouts/default.html: shared header/footer includes are missing");
 }
 if (!read("_layouts/card.html").includes("site.data.cards")) report("_layouts/card.html: card detail is not data-driven");
+
+const cardTemplate = read("_layouts/card.html");
+if (!cardTemplate.includes("card.mechanics") || !cardTemplate.includes("card.rule_note") || !cardTemplate.includes("card.timing")) {
+  report("_layouts/card.html: the reusable card detail template must render mechanics, timing and the key rule");
+}
+for (const block of cardBlocks) {
+  const key = (block.match(/^- key:\s*([\w-]+)/m) || [])[1] || "unknown";
+  for (const field of ["role_label:", "timing:", "mechanics:", "rule_note_title:", "rule_note:"]) {
+    if (!block.includes("  " + field)) report("_data/cards.yml: " + key + " is missing " + field);
+  }
+  const mechanicsStart = block.indexOf("  mechanics:");
+  const mechanicsEnd = block.indexOf("\n  rule_note_title:", mechanicsStart);
+  const mechanicsBlock = mechanicsStart >= 0 && mechanicsEnd > mechanicsStart ? block.slice(mechanicsStart, mechanicsEnd) : "";
+  if ((mechanicsBlock.match(/^    - /gm) || []).length < 3) report("_data/cards.yml: " + key + " must contain at least three clear mechanics");
+}
+
+const howToPage = read("how-to-play.html");
+if ((howToPage.match(/<article class="rule-step">/g) || []).length !== 8) {
+  report("how-to-play.html: the round guide must contain exactly eight ordered steps");
+}
+for (const rulePhrase of [
+  "max(0, C + E)", "three Action options from three different categories", "Ability card and keep it visible",
+  "Keep the Market Pulse card hidden until every Action has been revealed",
+  "matching Customer scoring profile", "announced before scoring",
+  "Return all three Market Pulse cards and shuffle", "After Round 7",
+  "tied, they share victory"
+]) {
+  if (!howToPage.includes(rulePhrase)) report("how-to-play.html: required game rule is missing: " + rulePhrase);
+}
+const marketPage = read("market-pulse.html");
+for (const marketPhrase of [
+  "market-pulse-a.svg", "market-pulse-b.svg", "market-pulse-c.svg",
+  "face down", "every player has revealed their Action",
+  "Customer scoring profile named by the Pulse card", "return all three Market Pulse cards and shuffle"
+]) {
+  if (!marketPage.includes(marketPhrase)) report("market-pulse.html: required selector or reveal detail is missing: " + marketPhrase);
+}
+const categoriesPage = read("categories.html");
+if (!categoriesPage.includes("six main card families") ||
+    !categoriesPage.includes("Market Pulse") ||
+    !categoriesPage.includes("{% include card-showcase.html") ||
+    !categoriesPage.includes("{% include card-grid.html")) {
+  report("categories.html: the six-family directory, original artwork showcase or Market Pulse distinction is missing");
+}
+if (!cssList.includes("product-experience.css")) report("_includes/head.html: Phase 4 product experience stylesheet is missing");
+
 if (!read("index.html").includes("{% include card-grid.html") ||
     !read("categories.html").includes("{% include card-grid.html")) {
   report("Homepage and Cards page must use the shared card-grid include");
