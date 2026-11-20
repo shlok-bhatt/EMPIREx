@@ -18,9 +18,9 @@ const read = (path) => readFileSync(join(root, path), "utf8");
 const exists = (path) => existsSync(join(root, path));
 const report = (message) => errors.push(message);
 const value = (frontMatter, key) => {
-  const match = frontMatter.match(new RegExp("^" + key + ":\s*(.*?)\s*$", "m"));
-  if (!match) return undefined;
-  return match[1].replace(/^"(.*)"$/, "$1").replace(/^'(.*)'$/, "$1");
+  const line = frontMatter.split(/\r?\n/).find((entry) => entry.startsWith(key + ":"));
+  if (!line) return undefined;
+  return line.slice(key.length + 1).trim().replace(/^"(.*)"$/, "$1").replace(/^'(.*)'$/, "$1");
 };
 const parsePage = (path) => {
   const source = read(path);
