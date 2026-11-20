@@ -123,15 +123,40 @@ if (!read("_layouts/default.html").includes("{% include header.html %}") ||
   report("_layouts/default.html: shared header/footer includes are missing");
 }
 if (!read("_layouts/card.html").includes("site.data.cards")) report("_layouts/card.html: card detail is not data-driven");
-if (!read("index.html").includes("{% include card-grid.html %}") ||
-    !read("categories.html").includes("{% include card-grid.html %}")) {
+if (!read("index.html").includes("{% include card-grid.html") ||
+    !read("categories.html").includes("{% include card-grid.html")) {
   report("Homepage and Cards page must use the shared card-grid include");
 }
 if (!read("about.html").includes("{% include team-grid.html %}")) report("Our Story page must use the shared team-grid include");
-if (!read("index.html").includes('class_name="hero-card-grid"') ||
-    !read("categories.html").includes('class_name="cards-page-grid"') ||
+const homepageData = read("_data/homepage.yml");
+const heroGalleryBlock = (homepageData.match(/hero_gallery:\s*([\s\S]*?)\n\nround_steps:/) || [])[1] || "";
+const heroCardKeys = [...heroGalleryBlock.matchAll(/^[ \t]*-\s+card_key:\s*([\w-]+)/gm)].map((match) => match[1]);
+if (heroCardKeys.length !== 3 || new Set(heroCardKeys).size !== 3) {
+  report("_data/homepage.yml: exactly three unique hero card keys are required");
+}
+for (const key of heroCardKeys) {
+  if (!cardKeys.includes(key)) report("_data/homepage.yml: hero card key is not defined in _data/cards.yml: " + key);
+}
+const roundStepsBlock = (homepageData.match(/round_steps:\s*([\s\S]*)$/) || [])[1] || "";
+const roundStepNumbers = [...roundStepsBlock.matchAll(/^[ \t]*-\s+number:\s*["']?(\d+)["']?/gm)].map((match) => match[1]);
+if (roundStepNumbers.length !== 4 || new Set(roundStepNumbers).size !== 4) {
+  report("_data/homepage.yml: exactly four uniquely numbered round steps are required");
+}
+if (!read("index.html").includes("{% include home-hero-gallery.html %}") ||
+    !read("index.html").includes("{% include home-round-steps.html %}") ||
+    !exists("_includes/home-hero-gallery.html") ||
+    !exists("_includes/home-round-steps.html")) {
+  report("Homepage must use both shared hero-gallery and round-step includes");
+}
+if (!read("categories.html").includes('class_name="cards-page-grid"') ||
     !exists("_includes/card-showcase.html")) {
-  report("Homepage and Cards page must use the shared card-showcase include");
+  report("Cards page must retain the shared card-showcase include");
+}
+if (!read("_includes/card-grid.html").includes("include.class_name")) {
+  report("Card grid include must support the homepage's product-grid variant");
+}
+if (!read("index.html").includes('class_name="category-grid home-card-grid"')) {
+  report("Homepage must use its dedicated product-grid variant");
 }
 for (const pagePath of ["index.html", "faq.html", "terms.html"]) {
   const page = read(pagePath);

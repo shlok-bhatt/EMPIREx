@@ -1,4 +1,4 @@
-<div class="category-grid" aria-label="EMPIREx card families">
+<div class="{{ include.class_name | default: 'category-grid' }}" aria-label="EMPIREx card families">
   {% for card in site.data.cards %}
     <a class="category-tile" href="{{ card.url | relative_url }}">
       <div class="tile-image">

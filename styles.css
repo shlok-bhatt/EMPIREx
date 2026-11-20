@@ -1,5 +1,6 @@
 /* Backwards-compatible CSS entry point.
    Current Jekyll layouts load the modules directly in this same order. */
-@import url("assets/css/site-core.css?v=20261120c");
-@import url("assets/css/site-components.css?v=20261120c");
-@import url("assets/css/site-future.css?v=20261120c");
+@import url("assets/css/site-core.css?v=20261120d");
+@import url("assets/css/site-components.css?v=20261120d");
+@import url("assets/css/site-future.css?v=20261120d");
+@import url("assets/css/homepage.css?v=20261120d");

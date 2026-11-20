@@ -1,0 +1,9 @@
+<ol class="home-round-grid">
+  {% for step in site.data.homepage.round_steps %}
+    <li class="home-round-card">
+      <span class="home-round-number">{{ step.number }}</span>
+      <h3>{{ step.title | escape }}</h3>
+      <p>{{ step.detail | escape }}</p>
+    </li>
+  {% endfor %}
+</ol>

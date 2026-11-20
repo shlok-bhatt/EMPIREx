@@ -1,0 +1,24 @@
+hero_gallery:
+  label: "Inside the deck"
+  caption: "Three of the six card families, each with a distinct role in the game."
+  cards:
+    - card_key: customer
+      role: "Understand who you serve"
+    - card_key: action
+      role: "Choose a business response"
+    - card_key: event
+      role: "Adapt to market change"
+
+round_steps:
+  - number: "01"
+    title: "Reveal the situation"
+    detail: "Reveal one Customer and one Event card. Shuffle the three Market Pulse cards and place one face down."
+  - number: "02"
+    title: "Choose an Action"
+    detail: "Give each player three Action options from different categories. Each player secretly selects one."
+  - number: "03"
+    title: "Reveal together"
+    detail: "All players reveal their selected Actions at the same time. Keep the Market Pulse hidden."
+  - number: "04"
+    title: "Reveal and score"
+    detail: "Reveal the Market Pulse, use its Customer profile, apply the Event and eligible bonuses, then calculate Round EP."

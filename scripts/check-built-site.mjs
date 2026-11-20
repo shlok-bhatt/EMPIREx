@@ -35,6 +35,23 @@ for (const route of routes) {
   if (!html.includes('aria-label="Main navigation"')) fail(route + ": shared primary navigation missing");
 }
 
+
+const homePath = outputFileFor("/");
+if (existsSync(homePath)) {
+  const homeHtml = readFileSync(homePath, "utf8");
+  const count = (pattern) => (homeHtml.match(pattern) || []).length;
+  if (count(/<h1\b/gi) !== 1) fail("Home page: expected exactly one H1 heading");
+  if (count(/class="home-feature-card"/g) !== 3) fail("Home page: expected three featured card links");
+  if (count(/class="home-round-card"/g) !== 4) fail("Home page: expected four round-step cards");
+  if (count(/class="home-fact"/g) !== 4) fail("Home page: expected four product facts");
+  if (count(/class="home-audience-card"/g) !== 3) fail("Home page: expected three audience pathways");
+  if (count(/class="category-tile"/g) !== 6) fail("Home page: expected all six card-family tiles");
+  if (!homeHtml.includes("73.6%") || !homeHtml.includes("64 of 87")) fail("Home page: internal survey figure is missing");
+  if (!homeHtml.includes("not a representative national study")) fail("Home page: internal survey qualification is missing");
+  if (!homeHtml.includes("₹599") || !homeHtml.includes("₹549")) fail("Home page: centrally configured displayed prices are missing");
+  if (!homeHtml.includes("/EMPIREx/assets/css/homepage.css")) fail("Home page: homepage stylesheet is missing from the rendered page");
+}
+
 const localTargets = new Set();
 for (const route of routes) {
   const htmlPath = outputFileFor(route);

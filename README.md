@@ -45,14 +45,17 @@ _data/
   navigation.yml       # Primary and footer navigation
   cards.yml            # Card family content, routes and artwork
   team.yml             # Founding team information
+  homepage.yml         # Homepage hero cards and round-step content
 
 _includes/
   head.html            # Shared metadata, fonts and stylesheet loading
   header.html          # Shared wordmark and primary navigation
   footer.html          # Shared footer and links
   card-grid.html       # Data-driven card-family gallery
-  card-showcase.html   # Data-driven image showcase for the Home and Cards pages
+  card-showcase.html   # Data-driven image showcase for the Cards page
   team-grid.html       # Data-driven team profiles
+  home-hero-gallery.html # Data-driven cards featured in the homepage hero
+  home-round-steps.html # Four-step homepage round overview
 
 _layouts/
   default.html         # Shared document shell
@@ -62,6 +65,7 @@ assets/css/
   site-core.css        # Existing core site styles
   site-components.css  # Supporting, accessibility and image/gallery styles
   site-future.css      # Future Editions page styles
+  homepage.css         # Homepage hero, product gallery and page sections
   brand-foundation.css # Phase 1 design tokens and brand refinements
 
 styles.css             # Backwards-compatible CSS import entry point
@@ -76,13 +80,15 @@ script.js              # Navigation and image-fallback behaviour
 - **Card-family names, artwork, descriptions and prompts:** edit `_data/cards.yml`.
 - **Product prices:** edit the `pricing` values in `_data/site.yml`; homepage, FAQs and terms read from these shared values.
 - **Founding team names, roles and descriptions:** edit `_data/team.yml`.
+- **Homepage featured cards and round steps:** edit `_data/homepage.yml`; each hero card key must match an entry in `_data/cards.yml`.
 - **Card-family page structure:** edit `_layouts/card.html`.
 - **Shared page shell and metadata:** edit `_layouts/default.html` and `_includes/head.html`.
 - **Shared header/footer:** edit their matching files in `_includes/`.
 - **Page-specific content:** edit the relevant root-level HTML file while preserving its front matter and published permalink.
 - **Global styling:** edit the ordered CSS modules in `assets/css/`.
+- **Homepage layout and visual styles:** edit `index.html` and `assets/css/homepage.css`; keep the product artwork linked to the original card assets.
 
-The six card detail pages use `layout: card` and a `card_key` that matches an entry in `_data/cards.yml`. Their content is rendered from that single data source.
+The six card detail pages use `layout: card` and a `card_key` that matches an entry in `_data/cards.yml`. Their content is rendered from that single data source. The homepage hero and four-step round summary are also rendered from central data in `_data/homepage.yml`.
 
 ## URL and asset handling
 
