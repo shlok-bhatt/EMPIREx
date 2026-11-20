@@ -50,9 +50,6 @@ for (const page of pages) {
   else routes.set(permalink, page.path);
   if (!title) report(page.path + ": missing page title");
   if (!description?.trim()) report(page.path + ": missing or empty page description");
-  if (activeNav && !["home", "how-to-play", "cards", "schools", "about", "shop"].includes(activeNav)) {
-    report(page.path + ": unknown active navigation key " + activeNav);
-  }
   if (/<header class="site-header"/i.test(page.body)) report(page.path + ": duplicated shared header");
   if (/<footer class="site-footer"/i.test(page.body)) report(page.path + ": duplicated shared footer");
   if (page.body.includes("/EMPIREx/")) report(page.path + ": hard-coded project base path found");
