@@ -1,0 +1,47 @@
+/* Supporting layouts used by the information and contact pages */
+.pulse-letter-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pulse-letter-grid article{min-height:210px;padding:25px;background:#fffdf8;border:1px solid var(--line);text-align:center;box-shadow:0 8px 24px rgba(55,38,19,.045)}
+.pulse-letter-grid article>span{display:grid;place-items:center;width:74px;height:74px;margin:0 auto 14px;border:1px solid var(--gold);border-radius:50%;color:var(--goldDark);font:700 2.5rem var(--serif)}
+.pulse-letter-grid h3{margin:0 0 6px;color:#382719}
+.pulse-letter-grid p{margin:0;color:#75695b;font-size:.83rem}
+.text-link-row{display:flex;flex-wrap:wrap;gap:24px;margin-top:24px}
+.contact-note{margin-top:28px;padding:20px 22px;background:var(--paper2);border-left:3px solid var(--gold)}
+.contact-note>b{color:#4b3824;font:600 1.16rem var(--serif)}
+.contact-note p{margin:7px 0 0;color:#685b4d;font-size:.84rem}
+.contact-role{display:block;margin-bottom:8px;color:#765427;font:800 .62rem var(--sans);letter-spacing:.13em;text-transform:uppercase}
+.canvas-fallback{display:block;padding:28px 12px;color:#6c5e4e;text-align:center;font-size:.78rem}
+@media(max-width:820px){.pulse-letter-grid{grid-template-columns:1fr}.text-link-row{gap:12px}}
+
+/* Accessibility and image-resilience refinements */
+:focus-visible{outline:3px solid #e4c991;outline-offset:3px}
+.image-load-note{font-size:.78rem;line-height:1.5}
+.canvas-fallback{background:#f8f5ef;border:1px dashed #89612c;border-radius:3px;color:#514334}
+.image-sheet-fallback{padding:28px 18px;background:#1b120c;border:1px solid rgba(222,184,119,.35);color:#f3e3c9;text-align:center}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+/* Static high-resolution image assets */
+img.image-master{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;background:#160f0a}
+.image-fallback{margin:10px 0 0;padding:12px 14px;background:#fff2df;border:1px solid #89612c;color:#332518;font-size:.82rem;line-height:1.5}
+.image-zoom-link{display:inline-block;margin-top:10px;color:#f0d5a5;font-size:.78rem;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.card-preview-frame img.card-preview-image{display:block}
+.category-tile .tile-image img.card-preview-image{display:block}
+
+/* Reliable standalone vector card showcase. */
+.hero-product,.card-sheet-frame{margin:0;padding:11px;background:#110c08;border:1px solid rgba(222,184,119,.5);box-shadow:0 20px 50px rgba(0,0,0,.25);border-radius:4px}
+.hero-product img.image-master,.card-sheet-frame img.image-master{display:block;width:100%;height:auto;aspect-ratio:1920/1300;object-fit:contain;background:#1b120c}
+.hero-product figcaption,.card-sheet-frame figcaption{padding:10px 5px 1px;color:#c8ae83;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.image-fallback{padding:14px;background:#fff1dc;border:1px solid #b65b3d;color:#6b2d1d;font-size:.85rem}
+@media(max-width:760px){.hero-product,.card-sheet-frame{padding:7px}.hero-product img.image-master,.card-sheet-frame img.image-master{aspect-ratio:auto}}
+
+/* Direct image gallery: each card loads independently, with no nested SVG image references. */
+.hero-card-showcase{padding:16px;background:#110c08;border:1px solid rgba(222,184,119,.5);box-shadow:0 20px 50px rgba(0,0,0,.25);border-radius:4px}
+.hero-card-grid,.cards-page-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;align-items:center}
+.showcase-card{display:block;min-width:0;padding:5px;background:#efe7d9;border:1px solid rgba(222,184,119,.35);border-radius:4px;box-shadow:0 6px 14px rgba(0,0,0,.18);transition:transform .18s ease}
+.showcase-card:hover{transform:translateY(-3px)}
+.showcase-card img{display:block;width:100%;height:auto;aspect-ratio:440/765;object-fit:contain;background:#f8f5ef}
+.hero-card-showcase figcaption,.card-family-gallery figcaption{padding:11px 4px 1px;color:#c8ae83;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;font-weight:700}
+.card-family-gallery{padding:15px;background:#130e0a;border:1px solid rgba(194,151,83,.48);box-shadow:0 20px 55px rgba(32,23,15,.16);border-radius:3px}
+.cards-page-grid{gap:16px}
+.cards-page-grid .showcase-card{padding:8px}
+@media(max-width:760px){.hero-card-showcase,.card-family-gallery{padding:8px}.hero-card-grid,.cards-page-grid{gap:7px}.cards-page-grid .showcase-card{padding:4px}}
+

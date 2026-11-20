@@ -1,0 +1,7 @@
+<div class="{{ include.class_name }}" aria-label="EMPIREx six card families">
+  {% for card in site.data.cards %}
+    <a class="showcase-card" href="{{ card.image | relative_url }}?v={{ card.image_version }}" target="_blank" rel="noopener" aria-label="Open the {{ card.title | escape }} card at full size">
+      <img data-site-image src="{{ card.image | relative_url }}?v={{ card.image_version }}" alt="{{ card.image_alt | escape }}" width="440" height="765" loading="lazy" decoding="async">
+    </a>
+  {% endfor %}
+</div>

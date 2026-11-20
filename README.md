@@ -1,23 +1,115 @@
 # EMPIREx — Enterprise Card Game Website
 
-A responsive, multi-page product and enquiry website for the EMPIREx physical enterprise card game.
+A responsive, multi-page GitHub Pages website for the EMPIREx physical enterprise card game.
 
-## Pages
-- Home: product overview, learning experience, card showcase, research context, price and enquiries
-- How to Play: setup, seven rounds, scoring formula and end-of-game sequence
-- Cards: six standalone card-family previews and Market Pulse profiles
-- Individual explanations for Customer, Action, Event, Ability, Secret Goal and Business
-- Market Pulse, For Schools, Our Story, FAQs, Contact, Privacy and Website Terms
+## Technology
 
-## Card imagery
-The six main card-family previews are standalone SVG files in `assets/cards/`. Each contains its own vector artwork and text. The Home and Cards pages load each card directly as an individual image; no AVIF, nested SVG image loading, canvas, or JavaScript image assembly is required. Each individual card page also opens its own standalone SVG for full-size viewing.
+- GitHub Pages and Jekyll
+- HTML page content with YAML front matter
+- Shared Jekyll layouts, includes and data files
+- CSS modules, with a lightweight JavaScript file for navigation and image fallbacks
+- Original card artwork stored in `assets/`
 
-## Clean page URLs
-GitHub Pages uses Jekyll front matter and `_config.yml` to publish clean trailing-slash paths, such as `/how-to-play/` and `/categories/`. Internal navigation points to those clean routes.
+The site remains a static website. It does not require a front-end framework, application server, account system or checkout service.
 
-## Product information
+## Page routes
+
+| Page | Source file | Published route |
+|---|---|---|
+| Home | `index.html` | `/` |
+| How to Play | `how-to-play.html` | `/how-to-play/` |
+| Cards | `categories.html` | `/categories/` |
+| Customer | `customer.html` | `/customer/` |
+| Action | `action.html` | `/action/` |
+| Event | `event.html` | `/event/` |
+| Ability | `ability.html` | `/ability/` |
+| Secret Goal | `secret-goal.html` | `/secret-goal/` |
+| Business | `business.html` | `/business/` |
+| Market Pulse | `market-pulse.html` | `/market-pulse/` |
+| For Schools | `schools.html` | `/schools/` |
+| Our Story | `about.html` | `/about/` |
+| Future Editions | `future-editions.html` | `/future-editions/` |
+| FAQs | `faq.html` | `/faq/` |
+| Contact | `contact.html` | `/contact/` |
+| Privacy | `privacy.html` | `/privacy/` |
+| Terms | `terms.html` | `/terms/` |
+| Not found | `404.html` | `/404.html` |
+
+The published routes are preserved by each page's `permalink` front matter.
+
+## Repository architecture
+
+```text
+_data/
+  site.yml             # Brand/site-wide text and asset version
+  navigation.yml       # Primary and footer navigation
+  cards.yml            # Card family content, routes and artwork
+  team.yml             # Founding team information
+
+_includes/
+  head.html            # Shared metadata, fonts and stylesheet loading
+  header.html          # Shared wordmark and primary navigation
+  footer.html          # Shared footer and links
+  card-grid.html       # Data-driven card-family gallery
+  card-showcase.html   # Data-driven image showcase for the Home and Cards pages
+  team-grid.html       # Data-driven team profiles
+
+_layouts/
+  default.html         # Shared document shell
+  card.html            # Shared card-family detail template
+
+assets/css/
+  site-core.css        # Existing core site styles
+  site-components.css  # Supporting, accessibility and image/gallery styles
+  site-future.css      # Future Editions page styles
+  brand-foundation.css # Phase 1 design tokens and brand refinements
+
+styles.css             # Backwards-compatible CSS import entry point
+script.js              # Navigation and image-fallback behaviour
+```
+
+## Where to make changes
+
+- **Primary navigation:** edit `_data/navigation.yml`.
+- **Footer links:** edit the footer list in `_data/navigation.yml`.
+- **Brand name, tagline, disclaimer and asset version:** edit `_data/site.yml`.
+- **Card-family names, artwork, descriptions and prompts:** edit `_data/cards.yml`.
+- **Product prices:** edit the `pricing` values in `_data/site.yml`; homepage, FAQs and terms read from these shared values.
+- **Founding team names, roles and descriptions:** edit `_data/team.yml`.
+- **Card-family page structure:** edit `_layouts/card.html`.
+- **Shared page shell and metadata:** edit `_layouts/default.html` and `_includes/head.html`.
+- **Shared header/footer:** edit their matching files in `_includes/`.
+- **Page-specific content:** edit the relevant root-level HTML file while preserving its front matter and published permalink.
+- **Global styling:** edit the ordered CSS modules in `assets/css/`.
+
+The six card detail pages use `layout: card` and a `card_key` that matches an entry in `_data/cards.yml`. Their content is rendered from that single data source.
+
+## URL and asset handling
+
+- Internal page and asset links in page content use `{{ site.baseurl }}` so the project works at the configured GitHub Pages subpath.
+- Shared templates use Jekyll's `relative_url` and `absolute_url` filters.
+- Canonical URLs are generated from the published page URL.
+- Navigation, cards and team information are rendered from `_data/` rather than duplicated in page markup.
+- CSS module order is defined in `_includes/head.html`. Keep it aligned with the compatibility imports in `styles.css`.
+- Bump `asset_version` in `_data/site.yml` when a changed asset needs a cache-busting URL.
+
+## Product and policy information
+
 - Displayed individual price: ₹599 MRP and ₹549 introductory selling price.
-- Confirm current availability and purchase arrangements directly with the team.
-- No online checkout or payment collection is enabled.
+- Availability and purchase arrangements must be confirmed directly with the team.
+- The website does not provide online checkout or payment collection.
 - The survey result (64/87; 73.6%) is an internal project survey, not a representative national estimate.
 - No Cambridge International endorsement or affiliation is claimed.
+- Future editions are concepts under consideration unless a page explicitly confirms availability.
+
+## Maintenance principles
+
+1. Keep public permalinks stable unless a redirect plan is prepared.
+2. Update central data files instead of duplicating shared content.
+3. Preserve product rules and pricing accuracy; do not introduce unverified claims.
+4. Keep CSS modules in the defined load order.
+5. Check navigation, image paths, metadata and mobile layouts after content or architecture changes.
+
+## Automated checks
+
+Pull requests and pushes to `main` run the Architecture Checks workflow. It validates the page/front-matter set, unique permalinks, central navigation and card data, referenced card assets, CSS module order, and shared-layout structure. The workflow then builds the Jekyll site with the project base URL and checks the generated routes, metadata, shared landmarks, and local links/assets.

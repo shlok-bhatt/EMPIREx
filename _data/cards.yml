@@ -1,0 +1,79 @@
+- key: customer
+  number: "01"
+  title: Customer
+  url: /customer/
+  image: /assets/customer-senior-citizens.webp
+  image_version: "20261120h"
+  image_alt: "EMPIREx Customer card featuring a senior-citizen customer group."
+  tagline: Know who you are serving.
+  page_title: "Customer Cards | EMPIREx"
+  description: "Customer card role and original artwork in the EMPIREx enterprise card game."
+  hero_copy: "The Customer card sets the customer group for the round. The active Customer scoring profile shows how well each Action category fits that group. Customer scores are 0, 1, 3 or 5 EP."
+  detail_copy: "The Customer card sets the customer group for the round. The active Customer scoring profile shows how well each Action category fits that group. Customer scores are 0, 1, 3 or 5 EP."
+  detail_extra: "A score of exactly 5 before the Event modifier is a Perfect Match. It does not give extra EP by itself, but it may count towards a relevant Secret Goal."
+  prompt: "Which business decision best fits this customer's needs?"
+- key: action
+  number: "02"
+  title: Action
+  url: /action/
+  image: /assets/action-original.webp
+  image_version: "20261120e"
+  image_alt: "Original EMPIREx Action card artwork."
+  tagline: Choose a practical business decision.
+  page_title: "Action Cards | EMPIREx"
+  description: "Action card role and original artwork in the EMPIREx enterprise card game."
+  hero_copy: "Each player receives three Action options from three different categories and secretly chooses one. All selected Actions are revealed together. The chosen category determines the Customer score lookup and which Event, Business or Ability effects may apply."
+  detail_copy: "Each player receives three Action options from three different categories and secretly chooses one. All selected Actions are revealed together. The chosen category determines the Customer score lookup and which Event, Business or Ability effects may apply."
+  prompt: "Which available action offers the strongest response?"
+- key: event
+  number: "03"
+  title: Event
+  url: /event/
+  image: /assets/event-original.webp
+  image_version: "20261120e"
+  image_alt: "Original EMPIREx Event card artwork."
+  tagline: Respond to changing market conditions.
+  page_title: "Event Cards | EMPIREx"
+  description: "Event card role and original artwork in the EMPIREx enterprise card game."
+  hero_copy: "An Event card introduces a market situation that may affect the score for an Action category. The modifier shown for a category is +1, −1 or 0. The Inflation example gives +1 EP to Finance, −1 EP to Sales & Promotions and no change to other Action categories."
+  detail_copy: "An Event card introduces a market situation that may affect the score for an Action category. The modifier shown for a category is +1, −1 or 0. The Inflation example gives +1 EP to Finance, −1 EP to Sales & Promotions and no change to other Action categories."
+  prompt: "How should the business adapt when the market changes?"
+- key: ability
+  number: "04"
+  title: Ability
+  url: /ability/
+  image: /assets/ability-original.webp
+  image_version: "20261120e"
+  image_alt: "Original EMPIREx Ability card artwork."
+  tagline: Use a special capability at the right moment.
+  page_title: "Ability Cards | EMPIREx"
+  description: "Ability card role and original artwork in the EMPIREx enterprise card game."
+  hero_copy: "An Ability card gives a player a special advantage linked to two eligible Action categories. When the chosen Action is in either eligible category, announce the Ability before scoring, add +2 EP, and turn the card sideways. This bonus can be used once per game."
+  detail_copy: "An Ability card gives a player a special advantage linked to two eligible Action categories. When the chosen Action is in either eligible category, announce the Ability before scoring, add +2 EP, and turn the card sideways. This bonus can be used once per game."
+  prompt: "Is this the right round to use your one-time advantage?"
+- key: secret-goal
+  number: "05"
+  title: Secret Goal
+  url: /secret-goal/
+  image: /assets/secret-goal-original.webp
+  image_version: "20261120e"
+  image_alt: "Original EMPIREx Secret Goal card artwork."
+  tagline: Work towards a hidden objective.
+  page_title: "Secret Goal Cards | EMPIREx"
+  description: "Secret Goal card role and original artwork in the EMPIREx enterprise card game."
+  hero_copy: "Each player receives one Secret Goal at the start of the game and keeps it private while playing. After Round 7, reveal the Goal. If its stated condition is complete, add +8 EP once. The Marketing Master example requires Marketing Actions in at least two different rounds."
+  detail_copy: "Each player receives one Secret Goal at the start of the game and keeps it private while playing. After Round 7, reveal the Goal. If its stated condition is complete, add +8 EP once. The Marketing Master example requires Marketing Actions in at least two different rounds."
+  prompt: "Can you complete your hidden objective without revealing it?"
+- key: business
+  number: "06"
+  title: Business
+  url: /business/
+  image: /assets/business-fashion.webp
+  image_version: "20261120e"
+  image_alt: "Original EMPIREx Business card artwork showing the Fashion business example."
+  tagline: Build around a business speciality.
+  page_title: "Business Cards | EMPIREx"
+  description: "Business card role and original artwork in the EMPIREx enterprise card game."
+  hero_copy: "A Business card gives each player a business identity and a named speciality. When the Action category selected in a round matches the speciality on the Business card, add +1 EP for that round. The Fashion example shown in the card sheet has Marketing as its speciality."
+  detail_copy: "A Business card gives each player a business identity and a named speciality. When the Action category selected in a round matches the speciality on the Business card, add +1 EP for that round. The Fashion example shown in the card sheet has Marketing as its speciality."
+  prompt: "Can you use your business speciality to gain an advantage?"
