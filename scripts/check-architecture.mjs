@@ -18,13 +18,13 @@ const read = (path) => readFileSync(join(root, path), "utf8");
 const exists = (path) => existsSync(join(root, path));
 const report = (message) => errors.push(message);
 const value = (frontMatter, key) => {
-  const match = frontMatter.match(new RegExp("^" + key + ":\\s*(.*?)\\s*$", "m"));
+  const match = frontMatter.match(new RegExp("^" + key + ":\s*(.*?)\s*$", "m"));
   if (!match) return undefined;
   return match[1].replace(/^"(.*)"$/, "$1").replace(/^'(.*)'$/, "$1");
 };
 const parsePage = (path) => {
   const source = read(path);
-  const match = source.match(/^---\\s*\\r?\\n([\\s\\S]*?)\\r?\\n---\\s*(?:\\r?\\n|$)/);
+  const match = source.match(/^---\s*\r?\n([\s\S]*?)\r?\n---\s*(?:\r?\n|$)/);
   if (!match) {
     report(path + ": missing YAML front matter");
     return { path, source, body: "", frontMatter: "" };
@@ -64,12 +64,12 @@ const config = read("_config.yml");
 if (!config.includes('baseurl: "/EMPIREx"') || !config.includes("permalink: pretty")) report("_config.yml: GitHub Pages base URL or pretty permalinks are incorrect");
 const site = read("_data/site.yml");
 if (!/asset_version:\s*["'][^"']+["']/.test(site)) report("_data/site.yml: asset version is missing");
-if (!/mrp:\s*["']₹\\d+["']/.test(site) || !/introductory:\s*["']₹\\d+["']/.test(site)) report("_data/site.yml: central product prices are missing");
-if (!/introductory_value:\s*\\d+/.test(site)) report("_data/site.yml: numeric demo price is missing");
+if (!/mrp:\s*["']₹\d+["']/.test(site) || !/introductory:\s*["']₹\d+["']/.test(site)) report("_data/site.yml: central product prices are missing");
+if (!/introductory_value:\s*\d+/.test(site)) report("_data/site.yml: numeric demo price is missing");
 const navigation = read("_data/navigation.yml");
-const primaryBlock = (navigation.match(/primary:\\s*([\\s\\S]*?)\\n\\nfooter:/) || [])[1] || "";
-const primaryKeys = [...primaryBlock.matchAll(/^[ \\t]*-\\s+key:\\s*([\\w-]+)/gm)].map((match) => match[1]);
-for (const url of [...navigation.matchAll(/^\\s+url:\\s*(\\/[^\\s]+)/gm)].map((match) => match[1])) {
+const primaryBlock = (navigation.match(/primary:\s*([\s\S]*?)\n\nfooter:/) || [])[1] || "";
+const primaryKeys = [...primaryBlock.matchAll(/^[ \t]*-\s+key:\s*([\w-]+)/gm)].map((match) => match[1]);
+for (const url of [...navigation.matchAll(/^\s+url:\s*(\/[^\s]+)/gm)].map((match) => match[1])) {
   if (!routes.has(url)) report("_data/navigation.yml: unpublished route " + url);
 }
 for (const page of pages) {
@@ -80,21 +80,21 @@ for (const page of pages) {
 const cardData = read("_data/cards.yml");
 const cardBlocks = cardData.split(/(?=^- key: )/m).filter((block) => block.startsWith("- key: "));
 const cards = cardBlocks.map((block) => ({
-  key: (block.match(/^- key:\\s*([\\w-]+)/m) || [])[1],
-  url: (block.match(/^  url:\\s*(\\/[^\\s]+)/m) || [])[1],
-  image: (block.match(/^  image:\\s*(\\/[^\\s]+)/m) || [])[1]
+  key: (block.match(/^- key:\s*([\w-]+)/m) || [])[1],
+  url: (block.match(/^  url:\s*(\/[^\s]+)/m) || [])[1],
+  image: (block.match(/^  image:\s*(\/[^\s]+)/m) || [])[1]
 }));
 if (cards.length !== 6 || new Set(cards.map((card) => card.key)).size !== 6) report("_data/cards.yml: exactly six unique card families are required");
 for (const card of cards) {
   if (!routes.has(card.url)) report("_data/cards.yml: missing card route " + card.url);
-  if (!card.image || !exists(card.image.replace(/^\\//, ""))) report("_data/cards.yml: missing card artwork for " + card.key);
+  if (!card.image || !exists(card.image.replace(/^\//, ""))) report("_data/cards.yml: missing card artwork for " + card.key);
 }
 const team = read("_data/team.yml");
 if ((team.match(/^- name:/gm) || []).length !== 3) report("_data/team.yml: expected three founding team records");
 
 const head = read("_includes/head.html");
 const cssFiles = (head.match(/assign css_files = "([^"]+)"/) || [])[1]?.split(",") || [];
-const imports = [...read("styles.css").matchAll(/@import url\\("assets\\/css\\/([^?"]+)/g)].map((match) => match[1]);
+const imports = [...read("styles.css").matchAll(/@import url\("assets\/css\/([^?"]+)/g)].map((match) => match[1]);
 if (JSON.stringify(cssFiles) !== JSON.stringify(imports)) report("styles.css and _includes/head.html CSS order must match exactly");
 for (const css of [...cssFiles, "brand-foundation.css"]) {
   const path = join("assets/css", css);
@@ -134,8 +134,8 @@ const shop = read("shop.html");
 for (const phrase of ["permalink: /shop/", "store_demo: true", "Investor demonstration only", "data-add-to-cart", "demo-cart", "checkout-preview", "No order has been placed", "Not collected in this prototype"]) {
   if (!shop.includes(phrase)) report("Shop prototype is missing a required non-transactional element: " + phrase);
 }
-if (/<form\\b|<input\\b|<select\\b|<textarea\\b/i.test(shop)) report("Shop prototype must not collect user data through form fields");
-if (!read("store-demo.js").includes("let quantity = 0") || /localStorage|sessionStorage|fetch\\s*\\(|XMLHttpRequest|https?:\\/\\//i.test(read("store-demo.js"))) {
+if (/<form\b|<input\b|<select\b|<textarea\b/i.test(shop)) report("Shop prototype must not collect user data through form fields");
+if (!read("store-demo.js").includes("let quantity = 0") || /localStorage|sessionStorage|fetch\s*\(|XMLHttpRequest|https?:\/\//i.test(read("store-demo.js"))) {
   report("Store demo must remain temporary in-memory state with no network or storage calls");
 }
 if (read("store-demo.js").includes("window.location") || read("store-demo.js").includes("location.href")) report("Store demo must not redirect to an external transaction");
@@ -160,11 +160,11 @@ if (!packageJson.devDependencies?.playwright || !packageJson.devDependencies?.["
 
 for (const page of pages) {
   const body = page.body;
-  const tags = [...body.matchAll(/<img\\b[^>]*>/gi)].map((match) => match[0]);
-  for (const tag of tags) if (!/\\balt=["'][^"']*["']/i.test(tag)) report(page.path + ": image without alt attribute");
-  for (const tag of [...body.matchAll(/<a\\b[^>]*target=["']_blank["'][^>]*>/gi)].map((match) => match[0])) {
-    const rel = (tag.match(/\\brel=["']([^"']*)["']/i) || [])[1] || "";
-    if (!/(?:^|\\s)noopener(?:\\s|$)/i.test(rel)) report(page.path + ": target=_blank link must include rel=noopener");
+  const tags = [...body.matchAll(/<img\b[^>]*>/gi)].map((match) => match[0]);
+  for (const tag of tags) if (!/\balt=["'][^"']*["']/i.test(tag)) report(page.path + ": image without alt attribute");
+  for (const tag of [...body.matchAll(/<a\b[^>]*target=["']_blank["'][^>]*>/gi)].map((match) => match[0])) {
+    const rel = (tag.match(/\brel=["']([^"']*)["']/i) || [])[1] || "";
+    if (!/(?:^|\s)noopener(?:\s|$)/i.test(rel)) report(page.path + ": target=_blank link must include rel=noopener");
   }
 }
 
