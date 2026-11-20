@@ -33,7 +33,7 @@ layout: default
       <p class="card-role-copy">{{ card.detail_copy | escape }}</p>
       <ol class="card-mechanics-list">
         {% for item in card.mechanics %}
-        <li><span>{{ forloop.index | prepend: "0" | slice: -2, 2 }}</span><p>{{ item | escape }}</p></li>
+        <li><span>{{ forloop.index | prepend: "0" }}</span><p>{{ item | escape }}</p></li>
         {% endfor %}
       </ol>
       <div class="prompt-panel">
