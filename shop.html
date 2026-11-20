@@ -1,0 +1,208 @@
+---
+layout: default
+permalink: /shop/
+title: "Shop EMPIREx | Product Presentation and Demo Checkout"
+description: "Explore the EMPIREx physical enterprise card game, its six card families and the investor-only demonstration of a proposed purchase journey."
+active_nav: shop
+theme_color: "#211811"
+og_title: "Shop EMPIREx — Product Presentation"
+og_description: "Explore the physical EMPIREx enterprise card game and preview the proposed shopping experience. Demonstration only; no orders or payments."
+store_demo: true
+store_product: true
+hide_shop_promo: true
+---
+<div class="shop-page" data-shop-demo data-unit-price="{{ site.data.site.pricing.introductory_value }}">
+  <div class="demo-ribbon" role="status">
+    <span class="demo-ribbon-mark" aria-hidden="true"></span>
+    <p><strong>Investor demonstration only.</strong> This storefront is a visual prototype. It does not accept orders, collect customer details or process payments.</p>
+  </div>
+
+  <section class="shop-hero">
+    <div class="container shop-hero-grid">
+      <div class="shop-hero-copy">
+        <p class="eyebrow">The EMPIREx product</p>
+        <h1>Make business<br><em>decisions tangible.</em></h1>
+        <p class="shop-hero-lead">{{ site.data.product.description }}</p>
+        <div class="shop-price-row">
+          <div><span>Displayed introductory price</span><strong>{{ site.data.site.pricing.introductory }}</strong></div>
+          <div><span>Displayed MRP</span><s>{{ site.data.site.pricing.mrp }}</s></div>
+        </div>
+        <p class="shop-price-note">Displayed figures are carried over from the current site configuration. Confirm approved pricing and availability with the team before any real purchase arrangement.</p>
+        <div class="shop-hero-actions">
+          <button class="button button-gold" type="button" data-add-to-cart>Add to demo cart <span aria-hidden="true">↗</span></button>
+          <a class="button button-outline" href="#product-details">Explore the product</a>
+        </div>
+        <div class="shop-trust-notes">
+          <span><b>Physical</b> card game</span>
+          <span><b>13–17</b> intended age range</span>
+          <span><b>7</b> game rounds</span>
+        </div>
+      </div>
+      <div class="shop-product-art" aria-label="Original EMPIREx card artwork presentation">
+        <div class="shop-art-topline"><span>EMPIREx / PRODUCT 001</span><span>ORIGINAL CARD ART</span></div>
+        <div class="shop-art-stage">
+          <img class="shop-art-back" src="{{ '/assets/empirex-card-back.webp' | relative_url }}" alt="EMPIREx card-back artwork" width="440" height="765">
+          <img class="shop-art-card shop-art-card-a" src="{{ '/assets/customer-senior-citizens.webp' | relative_url }}" alt="Customer family original card artwork" width="440" height="765">
+          <img class="shop-art-card shop-art-card-b" src="{{ '/assets/action-original.webp' | relative_url }}" alt="Action family original card artwork" width="440" height="765">
+          <img class="shop-art-card shop-art-card-c" src="{{ '/assets/event-original.webp' | relative_url }}" alt="Event family original card artwork" width="440" height="765">
+        </div>
+        <p class="shop-art-caption">Original card artwork shown as a visual preview, not a photograph of the final packaged product.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-benefit-strip" aria-label="Product overview">
+    <div class="container">
+      <div><strong>06</strong><span>Main card families</span></div>
+      <div><strong>03</strong><span>Market Pulse selectors</span></div>
+      <div><strong>07</strong><span>Rounds in a standard game</span></div>
+      <div><strong>EP</strong><span>Enterprise Points scoring</span></div>
+    </div>
+  </section>
+
+  <section class="section-pad shop-details-section" id="product-details">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="eyebrow">The product experience</p><h2>One table.<br><em>Many decisions.</em></h2></div>
+        <p>EMPIREx is designed around a sequence of business situations and player choices. Each card family has a distinct role in the seven-round experience.</p>
+      </div>
+      <div class="shop-details-grid">
+        <div class="shop-detail-copy">
+          <h3>What makes up the game?</h3>
+          <p>Six main card families shape the round, player advantages and hidden objectives. Market Pulse A, B and C form a separate selector set that identifies the Customer scoring profile for a round.</p>
+          <div class="shop-family-list">
+            {% for card in site.data.cards %}
+            <a href="{{ card.url | relative_url }}" class="shop-family-row">
+              <span>{{ card.number }}</span>
+              <div><b>{{ card.title }}</b><small>{{ card.tagline }}</small></div>
+              <span aria-hidden="true">↗</span>
+            </a>
+            {% endfor %}
+          </div>
+          <a class="text-link" href="{{ '/categories/' | relative_url }}">Explore the full card catalogue ↗</a>
+        </div>
+        <aside class="shop-spec-panel">
+          <p class="eyebrow">Published product facts</p>
+          <h3>At a glance</h3>
+          <dl>
+            <div><dt>Format</dt><dd>{{ site.data.product.format }}</dd></div>
+            <div><dt>Intended age</dt><dd>{{ site.data.product.age_range }}</dd></div>
+            <div><dt>Game structure</dt><dd>{{ site.data.product.game_rounds }} rounds</dd></div>
+            <div><dt>Main card families</dt><dd>Six</dd></div>
+            <div><dt>Scoring system</dt><dd>Enterprise Points (EP)</dd></div>
+            <div><dt>Use</dt><dd>Face-to-face play and discussion</dd></div>
+          </dl>
+          <p class="shop-spec-note">Final packaged quantities, card dimensions, materials, packaging and recommended player count must be verified against the production version before being published as specifications.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad shop-gallery-section">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="eyebrow">A closer look</p><h2>Designed for<br><em>active decisions.</em></h2></div>
+        <p>These are the original digital card designs from the current project files. Final physical-product photographs should replace or supplement these previews when available.</p>
+      </div>
+      <div class="shop-gallery">
+        {% for card in site.data.cards %}
+        <a href="{{ card.image | relative_url }}?v={{ card.image_version }}" target="_blank" rel="noopener" aria-label="Open full-size {{ card.title }} card artwork">
+          <img src="{{ card.image | relative_url }}?v={{ card.image_version }}" alt="{{ card.image_alt | escape }}" width="440" height="765" loading="lazy" decoding="async">
+          <span>{{ card.title }} <b aria-hidden="true">↗</b></span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad section-dark shop-how-section">
+    <div class="container shop-how-grid">
+      <div><p class="eyebrow">How the experience unfolds</p><h2>Seven rounds.<br><em>One evolving market.</em></h2><p>Players respond to customer needs, choose an Action, adapt to Event modifiers and use the Market Pulse selector before calculating Enterprise Points.</p><a class="button button-gold" href="{{ '/how-to-play/' | relative_url }}">Read the complete game guide ↗</a></div>
+      <div class="shop-round-list">
+        <div><span>01</span><p><b>Read the situation</b><small>Reveal the Customer and Event.</small></p></div>
+        <div><span>02</span><p><b>Choose your response</b><small>Select one Action from three options.</small></p></div>
+        <div><span>03</span><p><b>Reveal together</b><small>Show the decisions before Market Pulse.</small></p></div>
+        <div><span>04</span><p><b>Calculate the result</b><small>Use the selected Customer profile and bonuses.</small></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-pad shop-checkout-section" id="checkout-preview">
+    <div class="container">
+      <div class="section-heading">
+        <div><p class="eyebrow">Investor experience prototype</p><h2>A proposed path<br><em>from deck to checkout.</em></h2></div>
+        <p>This is a demonstration of how a future online purchase journey could be presented. No real checkout, customer form, payment or order submission is connected.</p>
+      </div>
+      <div class="checkout-preview-grid">
+        <div class="checkout-preview-main">
+          <div class="checkout-step-heading"><span>01</span><div><b>Customer and delivery details</b><small>Layout demonstration — no details are collected.</small></div></div>
+          <div class="checkout-demo-fields">
+            <div class="checkout-demo-field"><span>Full name</span><b>Not collected in this prototype</b></div>
+            <div class="checkout-demo-field"><span>Email address</span><b>Not collected in this prototype</b></div>
+            <div class="checkout-demo-field"><span>Delivery address</span><b>Not collected in this prototype</b></div>
+            <div class="checkout-demo-field"><span>PIN code</span><b>Not collected in this prototype</b></div>
+          </div>
+          <div class="checkout-step-heading"><span>02</span><div><b>Payment presentation</b><small>Illustrative options only — no payment method is active.</small></div></div>
+          <div class="checkout-payment-options" aria-label="Illustrative payment methods">
+            <span>UPI · Preview</span><span>Card · Preview</span><span>Net banking · Preview</span>
+          </div>
+          <div class="checkout-demo-warning"><b>Demonstration mode</b><p>These interface elements are visual examples. They cannot accept input, send information or start a transaction.</p></div>
+        </div>
+        <aside class="checkout-summary">
+          <p class="eyebrow">Demo cart summary</p>
+          <h3>EMPIREx deck</h3>
+          <div class="checkout-summary-line"><span>Quantity</span><b data-checkout-quantity>0</b></div>
+          <div class="checkout-summary-line"><span>Displayed unit price</span><b>{{ site.data.site.pricing.introductory }}</b></div>
+          <div class="checkout-summary-line checkout-summary-total"><span>Illustrative subtotal</span><strong data-checkout-total>₹0</strong></div>
+          <p class="checkout-summary-note">No delivery, tax or other charges are calculated in this demonstration.</p>
+          <button class="button button-gold button-wide" type="button" data-review-demo>Review demo summary</button>
+          <p class="checkout-summary-foot">Reviewing this summary does not place an order.</p>
+        </aside>
+      </div>
+      <div class="demo-review-result" data-demo-review hidden aria-live="polite">
+        <span class="demo-review-icon" aria-hidden="true">✓</span>
+        <div><p class="eyebrow">Prototype review complete</p><h3>This is a demonstration only.</h3><p data-review-copy>No order has been placed. No customer details or payment information have been collected or transmitted.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="shop-parent-note">
+    <div class="container">
+      <details class="hindi-product-note">
+        <summary>माता-पिता के लिए संक्षिप्त जानकारी</summary>
+        <div lang="hi">
+          <p><strong>EMPIREx</strong> विद्यार्थियों के लिए बनाया गया एक भौतिक बिज़नेस और एंटरप्राइज़ कार्ड गेम है। इसमें खिलाड़ी ग्राहकों की ज़रूरतों को समझते हैं, बिज़नेस से जुड़े निर्णय चुनते हैं और बदलती बाज़ार परिस्थितियों के अनुसार अपनी रणनीति बनाते हैं।</p>
+          <p>यह गेम लगभग 13–17 वर्ष के विद्यार्थियों के लिए बनाया गया है और पढ़ाई के साथ एक अतिरिक्त अभ्यास गतिविधि के रूप में उपयोग किया जा सकता है। यह शिक्षक, पाठ्यक्रम या कक्षा शिक्षण का विकल्प नहीं है।</p>
+          <p>इस वेबसाइट पर दिखाई गई खरीद प्रक्रिया केवल प्रदर्शन के लिए है। अभी यहाँ से ऑर्डर या भुगतान नहीं किया जा सकता। कीमत और उपलब्धता की पुष्टि टीम से करें।</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <dialog class="demo-cart-dialog" id="demo-cart" aria-labelledby="demo-cart-title">
+    <div class="demo-cart-panel">
+      <div class="demo-cart-heading">
+        <div><p class="eyebrow">Investor prototype</p><h2 id="demo-cart-title">Your demo cart.</h2></div>
+        <button class="demo-cart-close" type="button" aria-label="Close demo cart" data-cart-close>×</button>
+      </div>
+      <div class="demo-cart-product">
+        <img src="{{ '/assets/empirex-card-back.webp' | relative_url }}" alt="EMPIREx card-back artwork" width="440" height="765">
+        <div><b>EMPIREx Enterprise Card Game</b><span>Physical card game · Demo item</span><strong>{{ site.data.site.pricing.introductory }}</strong></div>
+      </div>
+      <div class="demo-cart-quantity">
+        <span>Quantity</span>
+        <div class="quantity-controls">
+          <button type="button" aria-label="Decrease quantity" data-quantity-decrease>−</button>
+          <output data-cart-quantity aria-live="polite">0</output>
+          <button type="button" aria-label="Increase quantity" data-quantity-increase>+</button>
+        </div>
+      </div>
+      <div class="demo-cart-total"><span>Illustrative subtotal</span><strong data-cart-total>₹0</strong></div>
+      <p class="demo-cart-notice">Prototype only. The cart exists in temporary page memory and is cleared when the page is refreshed or closed.</p>
+      <div class="demo-cart-actions">
+        <button class="button button-gold button-wide" type="button" data-continue-preview>Continue to checkout preview</button>
+        <button class="demo-cart-remove" type="button" data-cart-remove>Remove demo item</button>
+      </div>
+    </div>
+  </dialog>
+</div>

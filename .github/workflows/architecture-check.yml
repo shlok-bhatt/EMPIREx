@@ -1,4 +1,4 @@
-name: EMPIREx architecture checks
+name: EMPIREx flagship quality checks
 
 on:
   pull_request:
@@ -11,18 +11,40 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: empirex-quality-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   validate:
-    name: Validate Jekyll architecture and rendered site
+    name: Validate, build and browser-test the flagship site
     runs-on: ubuntu-latest
+    timeout-minutes: 25
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Check JavaScript syntax
-        run: node --check script.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
 
-      - name: Check source architecture
+      - name: Check JavaScript syntax
+        run: |
+          node --check script.js
+          node --check store-demo.js
+          node --check scripts/check-architecture.mjs
+          node --check scripts/check-built-site.mjs
+          node --check scripts/check-browser.mjs
+
+      - name: Install browser test dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Install Chromium for browser tests
+        run: npx playwright install --with-deps chromium
+
+      - name: Check source architecture and product claims
         run: node scripts/check-architecture.mjs
 
       - name: Install Jekyll
@@ -34,5 +56,17 @@ jobs:
       - name: Build the GitHub Pages site
         run: jekyll build --baseurl "/EMPIREx"
 
-      - name: Validate generated routes, layout and links
+      - name: Validate generated pages, metadata and local targets
         run: node scripts/check-built-site.mjs _site
+
+      - name: Run browser, responsive and accessibility checks
+        run: npm run check:browser -- _site
+
+      - name: Upload visual and accessibility evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: empirex-phase-7-browser-evidence
+          path: _artifacts/phase7/
+          if-no-files-found: warn
+          retention-days: 14

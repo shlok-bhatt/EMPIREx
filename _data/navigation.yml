@@ -8,38 +8,37 @@ primary:
   - key: cards
     label: Cards
     url: /categories/
-  - key: market-pulse
-    label: Market Pulse
-    url: /market-pulse/
   - key: schools
     label: For Schools
     url: /schools/
   - key: about
     label: Our Story
     url: /about/
-  - key: contact
-    label: "Enquire ↗"
-    url: /contact/
+  - key: shop
+    label: Shop
+    url: /shop/
     cta: true
 
 footer:
+  - label: Shop EMPIREx
+    url: /shop/
   - label: How to Play
     url: /how-to-play/
   - label: Cards
     url: /categories/
-  - label: Future Editions
-    url: /future-editions/
   - label: Market Pulse
     url: /market-pulse/
   - label: For Schools
     url: /schools/
   - label: Our Story
     url: /about/
+  - label: Future Editions
+    url: /future-editions/
   - label: FAQs
     url: /faq/
+  - label: Contact
+    url: /contact/
   - label: Privacy
     url: /privacy/
   - label: Terms
     url: /terms/
-  - label: Contact
-    url: /contact/

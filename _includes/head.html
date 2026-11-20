@@ -7,16 +7,50 @@
 <meta property="og:title" content="{{ page.og_title | default: page.title | default: site.title | escape }}">
 <meta property="og:description" content="{{ page.og_description | default: page.description | default: site.description | escape }}">
 <meta property="og:url" content="{{ page.url | absolute_url }}">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="{{ '/assets/empirex-social.svg' | absolute_url }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="EMPIREx — Build Smart. Think Fast. Rule the Market.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ page.og_title | default: page.title | default: site.title | escape }}">
+<meta name="twitter:description" content="{{ page.og_description | default: page.description | default: site.description | escape }}">
+<meta name="twitter:image" content="{{ '/assets/empirex-social.svg' | absolute_url }}">
 {% if page.noindex %}<meta name="robots" content="noindex,follow">{% endif %}
 <title>{{ page.title | default: site.title | escape }}</title>
 <link rel="canonical" href="{{ page.url | absolute_url }}">
 <link rel="icon" href="{{ '/favicon.svg' | relative_url }}?v={{ site.data.site.asset_version }}">
-{% assign css_files = "site-core.css,site-components.css,site-future.css,homepage.css,product-experience.css,supporting-pages.css,technical-refinements.css" | split: "," %}
+{% assign css_files = "site-core.css,site-components.css,site-future.css,homepage.css,product-experience.css,supporting-pages.css,technical-refinements.css,flagship.css" | split: "," %}
 {% for css_file in css_files %}<link rel="stylesheet" href="{{ '/assets/css/' | append: css_file | relative_url }}?v={{ site.data.site.asset_version }}">{% endfor %}
 <link rel="stylesheet" href="{{ '/assets/css/brand-foundation.css' | relative_url }}?v={{ site.data.site.asset_version }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
 <script src="{{ '/script.js' | relative_url }}?v={{ site.data.site.asset_version }}" defer></script>
+{% if page.store_demo %}<script src="{{ '/store-demo.js' | relative_url }}?v={{ site.data.site.asset_version }}" defer></script>{% endif %}
+{% if page.store_product %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": {{ site.data.product.name | jsonify }},
+  "description": {{ site.data.product.description | jsonify }},
+  "category": {{ site.data.product.category | jsonify }},
+  "image": {{ '/assets/empirex-social.svg' | absolute_url | jsonify }},
+  "brand": {
+    "@type": "Brand",
+    "name": "EMPIREx"
+  }
+}
+</script>
+{% else %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ site.data.site.name | jsonify }},
+  "url": {{ '/' | absolute_url | jsonify }},
+  "description": {{ site.description | jsonify }}
+}
+</script>
+{% endif %}
 {% if page.extra_head %}{{ page.extra_head }}{% endif %}

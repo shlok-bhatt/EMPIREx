@@ -1,135 +1,85 @@
-# EMPIREx — Enterprise Card Game Website
+# EMPIREx — Flagship Product Website
 
-A responsive, multi-page GitHub Pages website for the EMPIREx physical enterprise card game.
+A responsive, Jekyll-powered product website and non-transactional investor demonstration for the EMPIREx physical enterprise card game.
+
+## Published experience
+
+The website contains 19 published routes, including the investor-facing Shop prototype. The Shop demonstrates a product page, temporary in-memory demo cart and checkout-review interface. It does not accept orders, collect customer details or process payments.
 
 ## Technology
 
 - GitHub Pages and Jekyll
-- HTML page content with YAML front matter
-- Shared Jekyll layouts, includes and data files
-- CSS modules, with a lightweight JavaScript file for navigation and image fallbacks
-- Original card artwork stored in `assets/`
+- Semantic HTML, modular CSS and lightweight JavaScript
+- Central Jekyll data files for navigation, card families, team and product facts
+- Playwright browser checks and axe-core accessibility checks
+- GitHub Actions validation, generated-site checks and browser screenshots
 
-The site remains a static website. It does not require a front-end framework, application server, account system or checkout service.
+No production checkout, payment provider, customer database, tracking service or account system is connected.
 
 ## Page routes
 
-| Page | Source file | Published route |
-|---|---|---|
-| Home | `index.html` | `/` |
-| How to Play | `how-to-play.html` | `/how-to-play/` |
-| Cards | `categories.html` | `/categories/` |
-| Customer | `customer.html` | `/customer/` |
-| Action | `action.html` | `/action/` |
-| Event | `event.html` | `/event/` |
-| Ability | `ability.html` | `/ability/` |
-| Secret Goal | `secret-goal.html` | `/secret-goal/` |
-| Business | `business.html` | `/business/` |
-| Market Pulse | `market-pulse.html` | `/market-pulse/` |
-| For Schools | `schools.html` | `/schools/` |
-| Our Story | `about.html` | `/about/` |
-| Future Editions | `future-editions.html` | `/future-editions/` |
-| FAQs | `faq.html` | `/faq/` |
-| Contact | `contact.html` | `/contact/` |
-| Privacy | `privacy.html` | `/privacy/` |
-| Terms | `terms.html` | `/terms/` |
-| Not found | `404.html` | `/404.html` |
+| Page | Published route |
+|---|---|
+| Home | `/` |
+| Shop / product presentation | `/shop/` |
+| How to Play | `/how-to-play/` |
+| Cards | `/categories/` |
+| Customer | `/customer/` |
+| Action | `/action/` |
+| Event | `/event/` |
+| Ability | `/ability/` |
+| Secret Goal | `/secret-goal/` |
+| Business | `/business/` |
+| Market Pulse | `/market-pulse/` |
+| For Schools | `/schools/` |
+| Our Story | `/about/` |
+| Future Editions | `/future-editions/` |
+| FAQs | `/faq/` |
+| Contact | `/contact/` |
+| Privacy | `/privacy/` |
+| Terms | `/terms/` |
+| Not found | `/404.html` |
 
-The published routes are preserved by each page's `permalink` front matter.
+## Source of truth
 
-## Repository architecture
+- `_data/site.yml`: brand, asset version and displayed prices.
+- `_data/product.yml`: confirmed public product facts and specification boundary.
+- `_data/navigation.yml`: primary and footer navigation.
+- `_data/cards.yml`: the six main card-family descriptions, routes and artwork.
+- `_data/team.yml`: founding team roles.
+- `_data/homepage.yml`: homepage featured cards and round steps.
 
-```text
-_data/
-  site.yml             # Brand/site-wide text and asset version
-  navigation.yml       # Primary and footer navigation
-  cards.yml            # Card family content, routes and artwork
-  team.yml             # Founding team information
-  homepage.yml         # Homepage hero cards and round-step content
+Do not invent physical card counts, packaging, materials, dimensions, player count, playing time, delivery terms, availability, endorsements or educational outcomes. Verify those details against the final production version before publication.
 
-_includes/
-  head.html            # Shared metadata, fonts and stylesheet loading
-  header.html          # Shared wordmark and primary navigation
-  footer.html          # Shared footer and links
-  card-grid.html       # Data-driven card-family gallery
-  card-showcase.html   # Data-driven image showcase for the Cards page
-  team-grid.html       # Data-driven team profiles
-  home-hero-gallery.html # Data-driven cards featured in the homepage hero
-  home-round-steps.html # Four-step homepage round overview
+## Design architecture
 
-_layouts/
-  default.html         # Shared document shell
-  card.html            # Shared card-family detail template
+- Existing brand foundation: espresso, ivory, antique gold, DM Serif Display and Manrope.
+- CSS modules are loaded in order in `_includes/head.html` and mirrored in `styles.css`.
+- `flagship.css` is the final responsive refinement layer.
+- `_layouts/default.html` provides the shared shell and Shop pathway.
+- `_layouts/card.html` renders the six data-driven card pages.
+- `shop.html` provides a prototype-only product and purchase journey.
+- `store-demo.js` uses temporary in-memory state only. It has no network, storage or payment integration.
 
-assets/css/
-  site-core.css        # Existing core site styles
-  site-components.css  # Supporting, accessibility and image/gallery styles
-  site-future.css      # Future Editions page styles
-  homepage.css         # Homepage hero, product gallery and page sections
-  product-experience.css # Phase 4 rules, card detail and Market Pulse layouts
-  supporting-pages.css  # Phase 5 schools, story, FAQs, contact and policy layouts
-  technical-refinements.css # Phase 6 accessibility and progressive-enhancement overrides
-  brand-foundation.css # Phase 1 design tokens and brand refinements
+## Investor prototype safety
 
-styles.css             # Backwards-compatible CSS import entry point
-script.js              # Navigation and image-fallback behaviour
-```
+The Shop is visibly labelled as an investor demonstration. Its cart state is temporary and resets on reload. Checkout fields are non-interactive visual placeholders. There are no real transactions, customer data submissions, order creation, payment calls or external payment links. Do not remove those safeguards unless a separately reviewed production-commerce project is authorised and implemented.
 
-## Where to make changes
+## Quality checks
 
-- **Primary navigation:** edit `_data/navigation.yml`.
-- **Footer links:** edit the footer list in `_data/navigation.yml`.
-- **Brand name, tagline, disclaimer and asset version:** edit `_data/site.yml`.
-- **Card-family names, artwork, descriptions and prompts:** edit `_data/cards.yml`.
-- **Product prices:** edit the `pricing` values in `_data/site.yml`; homepage, FAQs and terms read from these shared values.
-- **Founding team names, roles and descriptions:** edit `_data/team.yml`.
-- **Homepage featured cards and round steps:** edit `_data/homepage.yml`; each hero card key must match an entry in `_data/cards.yml`.
-- **Card-family page structure:** edit `_layouts/card.html`.
-- **Shared page shell and metadata:** edit `_layouts/default.html` and `_includes/head.html`; canonical links, social metadata, font loading and CSS/JS assets are managed there.
-- **Shared header/footer:** edit their matching files in `_includes/`.
-- **Page-specific content:** edit the relevant root-level HTML file while preserving its front matter and published permalink.
-- **Global styling:** edit the ordered CSS modules in `assets/css/`. Keep `_includes/head.html` and `styles.css` imports in the same order. The Phase 4 product-page experience is in `product-experience.css`; keep its position aligned between `_includes/head.html` and `styles.css`.
-- **Homepage layout and visual styles:** edit `index.html` and `assets/css/homepage.css`; keep the product artwork linked to the original card assets.
-- **How to Play and Market Pulse:** edit `how-to-play.html` and `market-pulse.html`; keep the reveal order and scoring sequence aligned with the published game rules.
-- **For Schools:** edit `schools.html`; describe classroom use as supplementary and do not imply institutional pricing or availability is confirmed.
-- **Our Story:** edit `about.html` and `_data/team.yml`; keep team roles and responsibilities aligned with the central team data.
-- **Future concepts:** edit `future-editions.html`; keep all future ideas clearly labelled as concepts, not products currently for sale.
-- **FAQs and contact:** edit `faq.html` and `contact.html`; keep prices centralised and use the published team email links.
-- **Privacy and terms:** edit `privacy.html` and `terms.html` when the website's hosting, external services, contact method or product arrangements change.
-- **Not found page:** edit `404.html`; keep its helpful route links aligned with published page permalinks.
-- **Navigation behaviour and image fallbacks:** edit `script.js`; preserve the no-JavaScript navigation fallback and keyboard-close behaviour.
-- **Technical checks:** update `.github/workflows/architecture-check.yml` and the `scripts/check-*.mjs` files whenever a new build or quality requirement is introduced.
-- **Cards directory:** edit `categories.html` and the reusable gallery includes in `_includes/`.
-- **Individual card-family content:** edit `_data/cards.yml`; the six detail pages are rendered by `_layouts/card.html`. Keep each card's timing, mechanics and rule note consistent with the game.
+GitHub Actions runs:
+1. JavaScript syntax validation.
+2. Source architecture and content checks.
+3. Jekyll production build.
+4. Generated-route, metadata and local-target checks.
+5. Playwright tests across all 19 routes.
+6. Responsive overflow checks at 10 viewport widths.
+7. axe-core WCAG 2.2 A/AA automated accessibility checks.
+8. Mobile navigation and Shop demo-cart interaction checks.
+9. Screenshot and accessibility-audit artifact generation.
 
-The six card detail pages use `layout: card` and a `card_key` that matches an entry in `_data/cards.yml`. Their content is rendered from that single data source. The homepage hero and four-step round summary are also rendered from central data in `_data/homepage.yml`.
+Browser screenshots and the accessibility report are uploaded as a workflow artifact for review. Automated tools do not replace manual screen-reader, keyboard, real-device or production-user testing.
 
-## URL and asset handling
+## Before a real product launch
 
-- Internal page and asset links in page content use `{{ site.baseurl }}` so the project works at the configured GitHub Pages subpath.
-- Shared templates use Jekyll's `relative_url` and `absolute_url` filters.
-- Canonical URLs are generated from the published page URL.
-- Navigation, cards and team information are rendered from `_data/` rather than duplicated in page markup.
-- CSS module order is defined in `_includes/head.html`. Keep it aligned with the compatibility imports in `styles.css`.
-- Bump `asset_version` in `_data/site.yml` when a changed asset needs a cache-busting URL.
-
-## Product and policy information
-
-- Displayed individual price: ₹599 MRP and ₹549 introductory selling price.
-- Availability and purchase arrangements must be confirmed directly with the team.
-- The website does not provide online checkout or payment collection.
-- The survey result (64/87; 73.6%) is an internal project survey, not a representative national estimate.
-- No Cambridge International endorsement or affiliation is claimed.
-- Future editions are concepts under consideration unless a page explicitly confirms availability.
-
-## Maintenance principles
-
-1. Keep public permalinks stable unless a redirect plan is prepared.
-2. Update central data files instead of duplicating shared content.
-3. Preserve product rules and pricing accuracy; do not introduce unverified claims.
-4. Keep CSS modules in the defined load order.
-5. Check navigation, image paths, metadata and mobile layouts after content or architecture changes.
-
-## Automated checks
-
-Pull requests and pushes to `main` run the Architecture Checks workflow. It validates the page/front-matter set, unique permalinks, central navigation and card data, supporting-page sections, card assets, CSS module order, shared-layout structure, JavaScript syntax, page metadata, image alternative text and safe external-link attributes. The workflow then builds the Jekyll site with the project base URL and checks the generated routes, metadata, page-specific content, shared landmarks, and local links/assets.
+Confirm the final product specification, physical pack contents, approved price, availability, delivery and returns arrangements, and genuine product photographs. Update the privacy and terms pages if hosting, external services or data collection changes. The current Shop must remain a clearly labelled non-transactional prototype until a real commerce implementation is separately approved.
