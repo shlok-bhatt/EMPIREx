@@ -33,8 +33,67 @@ for (const route of routes) {
   if (!html.includes(canonical)) fail(route + ": canonical URL does not include the configured base URL");
   if (!html.includes('<link rel="stylesheet"')) fail(route + ": stylesheet links missing");
   if (!html.includes('aria-label="Main navigation"')) fail(route + ": shared primary navigation missing");
+
+  const headingCount = (html.match(/<h1\b/gi) || []).length;
+  if (headingCount !== 1) fail(route + ": expected exactly one H1 heading, found " + headingCount);
+
+  const description = html.match(/<meta name="description" content="([^"]*)"/i);
+  if (!description || !description[1].trim()) fail(route + ": SEO description is missing or empty");
+
+  const canonicalTags = [...html.matchAll(/<link rel="canonical" href="([^"]+)"\s*\/?\s*>/gi)];
+  if (canonicalTags.length !== 1) fail(route + ": expected exactly one canonical link");
+  else if (canonicalTags[0][1] !== canonical) fail(route + ": canonical link does not match the published route");
+
+  for (const metadata of [
+    /<meta property="og:title" content="[^"]+"/i,
+    /<meta property="og:description" content="[^"]+"/i,
+    /<meta property="og:url" content="[^"]+"/i,
+    /<meta name="twitter:card" content="summary"/i,
+    /<meta name="theme-color" content="[^"]+"/i
+  ]) {
+    if (!metadata.test(html)) fail(route + ": required social or browser metadata is missing");
+  }
+
+  const imageTags = [...html.matchAll(/<img\b[^>]*>/gi)].map((match) => match[0]);
+  for (const imageTag of imageTags) {
+    if (!/\balt="[^"]*"/i.test(imageTag)) fail(route + ": an image is missing its alt attribute");
+  }
+
+  const blankTargetLinks = [...html.matchAll(/<a\b[^>]*target="_blank"[^>]*>/gi)].map((match) => match[0]);
+  for (const linkTag of blankTargetLinks) {
+    const rel = (linkTag.match(/\brel="([^"]*)"/i) || [])[1] || "";
+    if (!/(?:^|\s)noopener(?:\s|$)/i.test(rel)) {
+      fail(route + ": a new-tab link is missing rel=noopener");
+    }
+  }
+
+  if (!html.includes('id="menu-toggle"') ||
+      !html.includes('aria-controls="primary-nav"') ||
+      !html.includes('aria-expanded="false"')) {
+    fail(route + ": accessible mobile-navigation controls are incomplete");
+  }
+  if (!html.includes("/EMPIREx/assets/css/technical-refinements.css")) {
+    fail(route + ": Phase 6 technical stylesheet is missing");
+  }
+  if (!html.includes("/EMPIREx/script.js?v=")) fail(route + ": versioned site script is missing");
 }
 
+
+
+const technicalCssPath = join(outputDir, "assets", "css", "technical-refinements.css");
+if (!existsSync(technicalCssPath)) fail("Generated technical stylesheet is missing");
+const scriptPath = join(outputDir, "script.js");
+if (!existsSync(scriptPath)) fail("Generated site script is missing");
+const technicalCss = existsSync(technicalCssPath) ? readFileSync(technicalCssPath, "utf8") : "";
+if ((technicalCss.match(/{/g) || []).length !== (technicalCss.match(/}/g) || []).length) {
+  fail("Generated technical stylesheet has unbalanced braces");
+}
+const script = existsSync(scriptPath) ? readFileSync(scriptPath, "utf8") : "";
+for (const feature of ['root.classList.add("js")', 'event.key === "Escape"', "window.matchMedia"]) {
+  if (!script.includes(feature)) fail("Generated site script is missing " + feature);
+}
+const errorPage = readFileSync(outputFileFor("/404.html"), "utf8");
+if (!/name="robots" content="noindex,follow"/i.test(errorPage)) fail("404 page must remain noindex");
 
 const homePath = outputFileFor("/");
 if (existsSync(homePath)) {
