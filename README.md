@@ -10,9 +10,9 @@ A responsive, multi-page product and enquiry website for the EMPIREx physical en
 - Market Pulse, For Schools, Our Story, FAQs, Contact, Privacy and Website Terms
 
 ## Card imagery
-The current card-sheet fallback is stored in assets/card-sheet-parts as six text fragments containing the supplied AVIF artwork. The website script first checks for a full-resolution image asset and falls back to the existing card sheet if it is not available. Six card-family previews are rendered from the source artwork at its native crop resolution; the artwork and printed details are not recreated or changed. To enable the 4K-first path, add assets/empirex-card-showcase-4k.avif (3840 × 2160) to the repository.
+The current site uses direct static image files instead of canvas rendering or base64 fragments. It expects the full 3840 × 2160 master at `assets/empirex-card-showcase-4k.png` and six lossless card previews under `assets/cards/`. The previews are extracted from the exact master image at native pixel resolution; no card artwork or text is redrawn. To enable the 4K-first path, add assets/empirex-card-showcase-4k.avif (3840 × 2160) to the repository.
 
-## Required product image assets\nThe site expects `assets/empirex-card-showcase-4k.png` and `assets/cards/customer.png`, `action.png`, `event.png`, `ability.png`, `secret-goal.png`, and `business.png`. These files are supplied in the `EMPIREx-4K-image-assets.zip` asset pack.\n\n## Local preview
+## Required product image assets\nThe site expects `assets/empirex-card-showcase-4k.png` and `assets/cards/customer.png`, `action.png`, `event.png`, `ability.png`, `secret-goal.png`, and `business.png`. These files are supplied in the `EMPIREx-4K-image-assets.zip` asset pack.\n\n## Required image files\nThe website image paths are supplied in `EMPIREx-4K-image-assets.zip`. Merge the included `assets/` folder into the repository root without renaming files. The site uses relative paths so the same paths work under the GitHub Pages project URL.\n\n## Local preview
 Serve the repository root over HTTP and open index.html. The product-sheet loader uses relative fetch requests; opening the HTML file directly with a file URL will prevent those requests from working.
 
 ## GitHub Pages
