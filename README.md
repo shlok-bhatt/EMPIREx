@@ -67,6 +67,7 @@ assets/css/
   site-future.css      # Future Editions page styles
   homepage.css         # Homepage hero, product gallery and page sections
   product-experience.css # Phase 4 rules, card detail and Market Pulse layouts
+  supporting-pages.css  # Phase 5 schools, story, FAQs, contact and policy layouts
   brand-foundation.css # Phase 1 design tokens and brand refinements
 
 styles.css             # Backwards-compatible CSS import entry point
@@ -89,6 +90,12 @@ script.js              # Navigation and image-fallback behaviour
 - **Global styling:** edit the ordered CSS modules in `assets/css/`. The Phase 4 product-page experience is in `product-experience.css`; keep its position aligned between `_includes/head.html` and `styles.css`.
 - **Homepage layout and visual styles:** edit `index.html` and `assets/css/homepage.css`; keep the product artwork linked to the original card assets.
 - **How to Play and Market Pulse:** edit `how-to-play.html` and `market-pulse.html`; keep the reveal order and scoring sequence aligned with the published game rules.
+- **For Schools:** edit `schools.html`; describe classroom use as supplementary and do not imply institutional pricing or availability is confirmed.
+- **Our Story:** edit `about.html` and `_data/team.yml`; keep team roles and responsibilities aligned with the central team data.
+- **Future concepts:** edit `future-editions.html`; keep all future ideas clearly labelled as concepts, not products currently for sale.
+- **FAQs and contact:** edit `faq.html` and `contact.html`; keep prices centralised and use the published team email links.
+- **Privacy and terms:** edit `privacy.html` and `terms.html` when the website's hosting, external services, contact method or product arrangements change.
+- **Not found page:** edit `404.html`; keep its helpful route links aligned with published page permalinks.
 - **Cards directory:** edit `categories.html` and the reusable gallery includes in `_includes/`.
 - **Individual card-family content:** edit `_data/cards.yml`; the six detail pages are rendered by `_layouts/card.html`. Keep each card's timing, mechanics and rule note consistent with the game.
 
@@ -122,4 +129,4 @@ The six card detail pages use `layout: card` and a `card_key` that matches an en
 
 ## Automated checks
 
-Pull requests and pushes to `main` run the Architecture Checks workflow. It validates the page/front-matter set, unique permalinks, central navigation and card data, referenced card assets, CSS module order, and shared-layout structure. The workflow then builds the Jekyll site with the project base URL and checks the generated routes, metadata, shared landmarks, and local links/assets.
+Pull requests and pushes to `main` run the Architecture Checks workflow. It validates the page/front-matter set, unique permalinks, central navigation and card data, supporting-page sections, card assets, CSS module order, and shared-layout structure. The workflow then builds the Jekyll site with the project base URL and checks the generated routes, metadata, page-specific content, shared landmarks, and local links/assets.
