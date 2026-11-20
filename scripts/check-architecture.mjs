@@ -291,7 +291,7 @@ if (!head.includes('<link rel="canonical" href="{{ page.url | absolute_url }}">'
 for (const feature of [
   'root.classList.add("js")',
   'event.key === "Escape"',
-  'event.target.closest("a")',
+  'target.closest("a")',
   'window.matchMedia',
   'img.complete && img.naturalWidth === 0',
   'setAttribute("aria-live", "polite")'
