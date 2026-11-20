@@ -204,9 +204,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #9b
 .demo-review-result h3{margin:0 0 8px;color:#24442d}
 .demo-review-result p:not(.eyebrow){margin:0;color:#405845;font-size:.82rem}
 .demo-review-result .eyebrow{margin-bottom:7px;color:#315c3c}
-.shop-parent-note{padding:0 0 60px;background:#f8f5ef}
+.shop-parent-note{padding:20px 0 4px;background:#f8f5ef}
 .hindi-product-note{max-width:900px;margin-inline:auto;padding:19px 22px;background:#f0e8dc;border:1px solid #ded2bf}
-.hindi-product-note summary{color:#302418;font-weight:800;cursor:pointer}
+.hindi-product-note summary{display:flex;justify-content:space-between;align-items:center;gap:16px;color:#302418;font-weight:800;cursor:pointer}
 .hindi-product-note div{max-width:760px;padding-top:16px;color:#574b3e;line-height:1.9}
 .hindi-product-note p{margin-bottom:10px}
 .demo-cart-dialog{width:min(520px,calc(100% - 28px));max-width:none;max-height:min(90vh,820px);padding:0;border:1px solid rgba(197,155,93,.58);background:#f8f5ef;color:#2b2118;box-shadow:0 30px 90px rgba(0,0,0,.42)}
@@ -416,4 +416,19 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #9b
 
 .future-section-dark .section-heading h2 em {
   color: #e4c991;
+}
+
+
+/* Make the Hindi parent guide easy to find from the product introduction. */
+.shop-parent-shortcut {
+  display: inline-flex;
+  margin-top: 13px;
+  color: #f0d6a7;
+  font-size: .78rem;
+  font-weight: 800;
+  text-underline-offset: 4px;
+}
+.shop-parent-shortcut:hover { color: #fff1dc; }
+@media (max-width: 560px) {
+  .hindi-product-note summary { align-items: flex-start; flex-direction: column; gap: 4px; }
 }
