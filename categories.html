@@ -1,14 +1,84 @@
 ---
 layout: default
 permalink: /categories/
-title: "Cards and Card Categories | EMPIREx"
-description: "Explore the complete EMPIREx card sheet and six individual card-family previews."
+title: "EMPIREx Cards | Six Card Families and Market Pulse"
+description: "Explore the six EMPIREx card families, view original card artwork and understand the separate Market Pulse selector."
 active_nav: cards
 theme_color: "#211811"
-og_title: "Cards and Card Categories"
-og_description: "Explore the complete EMPIREx card sheet and six individual card-family previews."
+og_title: "Explore the EMPIREx Card Families"
+og_description: "See all six card families and how they work together during the seven-round game."
 ---
-<section class="page-hero"><div class="container"><p class="eyebrow">Explore the product</p><h1>The EMPIREx <em>cards.</em></h1><p class="hero-lead">The gallery below presents all six main card families. Each card is shown from its original artwork and can be opened separately for a closer look.</p></div></section>
-<section class="section-pad card-sheet-section"><div class="container"><figure class="card-sheet-frame card-family-gallery">{% include card-showcase.html class_name="cards-page-grid" %}<figcaption>Six EMPIREx card families · select any card to open it at full size</figcaption></figure></div></section>
-<section class="section-pad"><div class="container"><div class="section-heading"><div><p class="eyebrow">Six card families</p><h2>Every card has<br><em>a part to play.</em></h2></div><p>Explore each family individually. Its preview comes from the card sheet above and its page explains the role it has during a round.</p></div>{% include card-grid.html %}</div></section>
-<section class="section-pad"><div class="container"><div class="future-link-banner"><div><p class="eyebrow">Coming soon</p><h2>Explore the future of EMPIREx.</h2><p>Discover planned concept packs, India &amp; State editions, subject editions, digital simulation and school experiences.</p></div><a class="button button-gold" href="{{ site.baseurl }}/future-editions/">View future editions ↗</a></div></div></section><section class="section-pad section-dark"><div class="container pulse-callout"><div><p class="eyebrow">Also included</p><h2>Market Pulse<br><em>A · B · C</em></h2><p>Three profile-selector cards determine which Customer scoring profile is used in a round. One is drawn face down and revealed only after all players reveal their Actions.</p><a class="text-link" href="{{ site.baseurl }}/market-pulse/">Explore Market Pulse ↗</a></div><div class="pulse-grid"><article class="pulse-card"><img data-site-image src="{{ site.baseurl }}/assets/market-pulse-a.svg?v=20261120d" alt="Market Pulse A card" loading="lazy" decoding="async"><h3>Profile A</h3></article><article class="pulse-card"><img data-site-image src="{{ site.baseurl }}/assets/market-pulse-b.svg?v=20261120d" alt="Market Pulse B card" loading="lazy" decoding="async"><h3>Profile B</h3></article><article class="pulse-card"><img data-site-image src="{{ site.baseurl }}/assets/market-pulse-c.svg?v=20261120d" alt="Market Pulse C card" loading="lazy" decoding="async"><h3>Profile C</h3></article></div></div></section>
+<section class="page-hero product-cards-hero">
+  <div class="container">
+    <p class="eyebrow">Explore the product</p>
+    <h1>The EMPIREx <em>cards.</em></h1>
+    <p class="hero-lead">Six main card families shape the decisions, challenges and objectives in the game. Explore the original artwork, then open any family to understand its role during a round.</p>
+    <div class="guide-hero-facts">
+      <span><b>06</b> main card families</span>
+      <span><b>03</b> Market Pulse selectors</span>
+      <span><b>07</b> rounds of play</span>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad card-sheet-section">
+  <div class="container">
+    <div class="section-heading">
+      <div><p class="eyebrow">Original card artwork</p><h2>One game.<br><em>Six card families.</em></h2></div>
+      <p>Select any artwork to open the full-resolution card image in a new tab. Use the directory below to read about each card's purpose and rules.</p>
+    </div>
+    <figure class="card-sheet-frame card-family-gallery">
+      {% include card-showcase.html class_name="cards-page-grid" %}
+      <figcaption>Customer · Action · Event · Ability · Secret Goal · Business</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="section-pad card-directory-section">
+  <div class="container">
+    <div class="section-heading">
+      <div><p class="eyebrow">Browse by role</p><h2>Every card has<br><em>a part to play.</em></h2></div>
+      <p>Open a family to see when it is used, what it changes and the key rule to remember. The six families are listed in the order shown on the card sheet.</p>
+    </div>
+    <div class="card-directory-intro">
+      <span>01—06</span>
+      <p>Choose a card family to explore its mechanics and original design.</p>
+    </div>
+    {% include card-grid.html %}
+  </div>
+</section>
+
+<section class="section-pad section-dark pulse-callout-section">
+  <div class="container pulse-callout pulse-callout-enhanced">
+    <div>
+      <p class="eyebrow">A separate scoring selector</p>
+      <h2>Market Pulse<br><em>A · B · C</em></h2>
+      <p>Market Pulse is a separate three-card selector used with the six main card families. One Pulse card is drawn face down; after every player reveals an Action, it is turned over to identify the Customer scoring profile for that round.</p>
+      <a class="text-link" href="{{ '/market-pulse/' | relative_url }}">Explore how Market Pulse works ↗</a>
+    </div>
+    <div class="pulse-grid">
+      <article class="pulse-card pulse-selector-card">
+        <img data-site-image src="{{ site.baseurl }}/assets/market-pulse-a.svg?v={{ site.data.site.asset_version }}" alt="Market Pulse A selector card" loading="lazy" decoding="async">
+        <h3>Profile A</h3>
+        <p>Selects Customer scoring profile A.</p>
+      </article>
+      <article class="pulse-card pulse-selector-card">
+        <img data-site-image src="{{ site.baseurl }}/assets/market-pulse-b.svg?v={{ site.data.site.asset_version }}" alt="Market Pulse B selector card" loading="lazy" decoding="async">
+        <h3>Profile B</h3>
+        <p>Selects Customer scoring profile B.</p>
+      </article>
+      <article class="pulse-card pulse-selector-card">
+        <img data-site-image src="{{ site.baseurl }}/assets/market-pulse-c.svg?v={{ site.data.site.asset_version }}" alt="Market Pulse C selector card" loading="lazy" decoding="async">
+        <h3>Profile C</h3>
+        <p>Selects Customer scoring profile C.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section-pad">
+  <div class="container future-link-banner">
+    <div><p class="eyebrow">Keep exploring</p><h2>See the game in action.</h2><p>Follow the seven-round sequence to understand when each card is revealed, selected or scored.</p></div>
+    <a class="button button-gold" href="{{ '/how-to-play/' | relative_url }}">Read how to play ↗</a>
+  </div>
+</section>
