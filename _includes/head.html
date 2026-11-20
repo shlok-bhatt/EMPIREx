@@ -18,7 +18,7 @@
 {% if page.noindex %}<meta name="robots" content="noindex,follow">{% endif %}
 <title>{{ page.title | default: site.title | escape }}</title>
 <link rel="canonical" href="{{ page.url | absolute_url }}">
-<link rel="icon" href="{{ '/favicon.svg' | relative_url }}?v={{ site.data.site.asset_version }}">
+<link rel="icon" type="image/svg+xml" href="{{ '/favicon.svg' | relative_url }}?v={{ site.data.site.asset_version }}">
 {% assign css_files = "site-core.css,site-components.css,site-future.css,homepage.css,product-experience.css,supporting-pages.css,technical-refinements.css,brand-foundation.css,flagship.css" | split: "," %}
 {% for css_file in css_files %}<link rel="stylesheet" href="{{ '/assets/css/' | append: css_file | relative_url }}?v={{ site.data.site.asset_version }}">{% endfor %}
 <link rel="preconnect" href="https://fonts.googleapis.com">
