@@ -36,3 +36,8 @@ In repository Settings → Pages, choose Deploy from a branch, select `main` and
 - No online checkout or payment collection is enabled.
 - The survey result (64/87; 73.6%) is an internal project survey, not a representative national estimate.
 - No Cambridge International endorsement or affiliation is claimed.
+
+
+## Artwork resolution note
+
+The current committed showcase at `assets/empirex-card-showcase.avif` is 1,627 × 915 pixels. The individual card SVGs crop and enlarge regions of this image for consistent display; they do not add source detail or constitute native 4K artwork. Replace the source showcase with a genuinely higher-resolution export before describing the website artwork as 4K.
